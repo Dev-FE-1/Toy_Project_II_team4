@@ -17,8 +17,5 @@
 
 ## 리포지토리 구분
 
-- 개발 리포지토리
-  [GitHub - Dev-FE-1/Toy_Project_II_team4: Toy_Project_II_team4, 팀4 리포지토리](https://github.com/Dev-FE-1/Toy_Project_II_team4)
-
-- 배포 리포지토리
-  [GitHub - ToyProjectIIteam4/ToyProjectIIteam4_deploy](https://github.com/ToyProjectIIteam4/ToyProjectIIteam4_deploy)
+🔍 개발 리포지토리:
+<br/>[GitHub - Dev-FE-1/Toy_Project_II_team4: Toy_Project_II_team4, 팀4 리포지토리](https://github.com/Dev-FE-1/Toy_Project_II_team4)
