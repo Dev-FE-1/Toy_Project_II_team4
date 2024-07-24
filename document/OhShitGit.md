@@ -1,12 +1,12 @@
 # Oh Shit Git!? 깃 실수 해결 백서
+
 [Oh Shit, Git!?!](https://ohshitgit.com/)
 
 ![](https://i.imgur.com/3R9iaYo.jpeg)
 
+Git은 어렵습니다. 망치는 것은 쉽지만 실수를 고치는 방법을 알아내는 것은 빌어먹을 불가능합니다. Git 문서에는 문제를 해결하기 위해 *알아야 할 항목의 이름을 이미 알고 있지 않는 한* 혼란에서 벗어나는 방법을 검색할 수 없는 닭고기와 달걀 문제가 있습니다 .
 
-Git은 어렵습니다. 망치는 것은 쉽지만 실수를 고치는 방법을 알아내는 것은 빌어먹을 불가능합니다. Git 문서에는 문제를 해결하기 위해 _알아야 할 항목의 이름을 이미 알고 있지 않는 한_ 혼란에서 벗어나는 방법을 검색할 수 없는 닭고기와 달걀 문제가 있습니다 .
-
-그래서 여기에 내가 겪었던 몇 가지 나쁜 상황과 결국 어떻게 그 상황에서 벗어날 수 있었는지 _간단한 영어로 설명합니다_ .
+그래서 여기에 내가 겪었던 몇 가지 나쁜 상황과 결국 어떻게 그 상황에서 벗어날 수 있었는지 *간단한 영어로 설명합니다* .
 
 ## [아 젠장, 내가 뭔가 크게 잘못했는데, git에게 마법의 타임머신이 있다고 말해주세요!?!](https://ohshitgit.com/#magic-time-machine)
 
@@ -91,7 +91,7 @@ git reset HEAD~ --hard
 git diff --staged
 ```
 
-̅\_(ツ)_/̅ 아래에 파일을 저장하세요. (예, 이것이 버그가 아닌 기능이라는 것은 알지만, 이런 일이 처음 발생하면 존나 당황스럽고 명확하지 않습니다!)
+̅\_(ツ)\_/̅ 아래에 파일을 저장하세요. (예, 이것이 버그가 아닌 기능이라는 것은 알지만, 이런 일이 처음 발생하면 존나 당황스럽고 명확하지 않습니다!)
 
 ## [아 젠장, 5개 정도 전의 커밋을 실행 취소해야 해요!](https://ohshitgit.com/#undo-a-commit)
 
@@ -148,32 +148,34 @@ git clean -d --force
 ```
 
 ## 마지막 커밋 이후의 모든 변경 사항 취소하기
+
 ```
 git clean -fd
 git restore .
 ```
 
 ## 특정 원격 브랜치 가져오기
+
 ```
 git switch -c <local-branch-name> origin/<remote-branch-name>
 ```
 
 ## main브랜치를 default branch로 바꾸기
+
 - 기본 브랜치 를 main으로 변경
+
 ```bash
 git config --global init.defaultBranch main
 ```
-
 
 ## git pull --force 강제 pull 하는 방법
 
 ```bash
 git add .
-git stash 
+git stash
 git stash drop
 git pull
 ```
-
 
 ## 커밋 내역 합치는 방법, 커밋 메시지 수정 방법
 
@@ -194,5 +196,3 @@ git rebase -i --root
 4. **rebase 완료하기**
 
 새로운 커밋 메시지를 작성하고 텍스트 에디터를 종료하면 rebase가 완료됩니다. 이제 `git log`를 실행하면 선택한 이전 커밋들이 하나의 커밋으로 합쳐진 것을 확인할 수 있습니다.
-
-

@@ -1,0 +1,19 @@
+# Ignore artifacts:
+build
+coverage
+
+# Ignore all HTML files:
+**/*.html
+
+# node module
+node_modules
+scripts/workshop-setup.js
+
+# document, config 폴더
+document/
+.config/
+
+# .github
+.github/
+
+.firebaserc
