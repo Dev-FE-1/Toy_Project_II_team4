@@ -11,8 +11,12 @@
     "lint:prettier": "prettier . --write --ignore-unknown"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.4",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "styled-components": "^6.1.12"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
@@ -26,6 +30,7 @@
     "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-react-refresh": "^0.4.7",
     "prettier": "3.3.3",
+    "sass": "^1.77.8",
     "typescript": "^5.2.2",
     "vite": "^5.3.4"
   }
