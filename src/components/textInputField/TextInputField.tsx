@@ -1,0 +1,51 @@
+import TextField from '@mui/material/TextField';
+import { SxProps, Theme } from '@mui/material/styles';
+
+interface TextInputFieldProps {
+  label?: string; // 타이틀
+  variant?: 'standard' | 'filled' | 'outlined';
+  defaultValue?: string; // 기본값
+  error?: boolean; // 에러 필드인지의 유무
+  helperText?: string; // 하단 추가 메세지 (보통 에러 메세지)
+  width?: string; // 입력 필드 넓이
+  noValidate?: boolean; //form의 기본 브라우저 유효성 검사를 비활성화
+  autoComplete?: string; //자동 완성 기능
+  sx?: SxProps<Theme>; //텍스트 입력 필드 스타일
+}
+
+export default function TextInputField({
+  label = 'Label',
+  variant = 'standard',
+  defaultValue = '',
+  error = false,
+  helperText = '',
+  width = '25ch',
+  sx = {},
+}: TextInputFieldProps) {
+  return (
+    <TextField
+      error={error}
+      id="custom-input-text-field"
+      label={label}
+      defaultValue={defaultValue}
+      helperText={helperText}
+      variant={variant}
+      sx={{ width: width, m: 1, ...sx }}
+    />
+  );
+}
+
+// 텍스트 입력 필드 컴포넌트 사용방법
+{
+  /*
+  1. import TextInputField from './components/textInputField/TextInputField';
+
+  2. <TextInputField
+label="Username"
+variant="outlined"
+defaultValue="John Doe"
+error={true}
+helperText="Username is required"
+width="30ch"
+/> */
+}
