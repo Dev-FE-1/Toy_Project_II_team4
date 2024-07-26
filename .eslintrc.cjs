@@ -4,12 +4,14 @@ module.exports = {
   extends: [
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react-hooks/recommended',
+    'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', '**/*.html', '.config/', '.github/', 'document/'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', '@typescript-eslint/eslint-plugin'],
+  plugins: ['react-refresh', 'prettier', '@typescript-eslint/eslint-plugin'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
