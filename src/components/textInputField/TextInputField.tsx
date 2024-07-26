@@ -1,5 +1,4 @@
 import TextField from '@mui/material/TextField';
-import { SxProps, Theme } from '@mui/material/styles';
 
 interface TextInputFieldProps {
   label?: string; // 타이틀
@@ -10,7 +9,6 @@ interface TextInputFieldProps {
   width?: string; // 입력 필드 넓이
   noValidate?: boolean; //form의 기본 브라우저 유효성 검사를 비활성화
   autoComplete?: string; //자동 완성 기능
-  sx?: SxProps<Theme>; //텍스트 입력 필드 스타일
 }
 
 export default function TextInputField({
@@ -19,8 +17,6 @@ export default function TextInputField({
   defaultValue = '',
   error = false,
   helperText = '',
-  width = '25ch',
-  sx = {},
 }: TextInputFieldProps) {
   return (
     <TextField
@@ -30,12 +26,13 @@ export default function TextInputField({
       defaultValue={defaultValue}
       helperText={helperText}
       variant={variant}
-      sx={{ width: width, m: 1, ...sx }}
     />
   );
 }
 
 // 텍스트 입력 필드 컴포넌트 사용방법
+// 현재 텍스트 입력 필드 사용 페이지는 로그인 페이지에 달력 일정 추가 시, 제목 정도로 보입니다.
+// 따라서 현재 지정한 속성들 중 불필요한 내용들이 많아보이나, 혹시 모르니 유지하고 추후 삭제하겠습니다.
 {
   /*
   1. import TextInputField from './components/textInputField/TextInputField';

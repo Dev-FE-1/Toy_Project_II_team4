@@ -1,0 +1,29 @@
+==Release notes for LINE Seed Sans==
+
+Compiler of release notes: Dalton Maag
+Designer: LINE VX Design & Dalton Maag Ltd & Sandoll Inc
+Designer URL: www.lycorp.co.jp
+
+Release date: 2023-09-07
+
+Change log:
+- v1.003: Add Trademark, Update Copyright, Designer and Designer URL.
+- v1.002: Update License Description and URL
+- v1.001: Rename all files to "LINE Seed Sans"
+- v1.000: This is the first release.
+
+Basic information
+1 Font name: LINE Seed Sans
+2 TrueType Version record: 1.003
+3 Regional package: Latin
+4 Supported scripts: Latin
+5 Number of glyphs: 176
+6 Weights/Styles: Thin, Regular, Bold, ExtraBold, Heavy
+7 Usage: Text and Display
+
+Technology
+1 File formats: The files have been delivered in the TrueType-based and in PostScript-based OpenType format, for use in all major Operating Systems: TTF; OTF. Also as TTF for use in apps, and in web font format: WOFF; WOFF2; EOT.
+2 Embedding settings: Editing of the document is allowed (editable mode), subsetting is allowed.
+3 Hinting information: The glyphs are manually hinted for optimized rasterization in Microsoft ClearType or for other LCD devices. The icons (camera, chat, envelope, LINEtimeline, music, phone, search, shopping, smile, speaker, user, LINEApp) and logos (LINEWordmark, LINECopyright) are not hinted.
+4 Default numerals: Proportional.
+5 PUAs are assigned to the following glyphs: LINEApp E001, LINEWordmark E002, LINECopyright E003

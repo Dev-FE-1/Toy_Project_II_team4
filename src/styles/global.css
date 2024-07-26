@@ -1,3 +1,21 @@
+@font-face {
+  font-family: 'LINE Seed Sans KR';
+  src:
+    url('/fonts/LINE-Seed-Sans-KR.woff2') format('woff2'),
+    url('/fonts/LINE-Seed-Sans-KR.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url('/fonts/LINE-Seed-Sans.woff2') format('woff2'),
+    url('/fonts/LINE-Seed-Sans.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   /* Font system */
   --font-family-primary: 'LINE Seed Sans KR', 'LINE Seed Sans', sans-serif;
@@ -19,8 +37,8 @@
   --font-pri: #333333;
   --font-sec: #9fa1ab;
 
-  --border-pri: #9A9A9A;
-  --border-pri: #EEEEEE;
+  --border-pri: #9a9a9a;
+  --border-sec: #eeeeee;
 }
 
 html {
@@ -32,12 +50,18 @@ body {
 }
 
 /* Heading styles */
-h1,.h1,
-h2,.h2,
-h3,.h3,
-h4,.h4,
-h5,.h5,
-h6,.h6 {
+h1,
+.h1,
+h2,
+.h2,
+h3,
+.h3,
+h4,
+.h4,
+h5,
+.h5,
+h6,
+.h6 {
   font-family: var(--font-family-primary);
 }
 
