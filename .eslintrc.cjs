@@ -1,16 +1,15 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2021: true },
   extends: [
     'eslint:recommended',
-    // 'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended',
     'plugin:@typescript-eslint/recommended-requiring-type-checking',
     'plugin:react-hooks/recommended',
-    // 'plugin:prettier/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs', '**/*.html', '.config/', '.github/', 'document/'],
   parser: '@typescript-eslint/parser',
-  plugins: ['react-refresh', 'prettier'],
+  plugins: ['react-refresh', '@typescript-eslint/eslint-plugin'],
   parserOptions: {
     ecmaVersion: 'latest',
     sourceType: 'module',
@@ -19,5 +18,7 @@ module.exports = {
   },
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    '@typescript-eslint/no-explicit-any': 'error',
+    '@typescript-eslint/no-inferrable-types': 'error',
   },
 };

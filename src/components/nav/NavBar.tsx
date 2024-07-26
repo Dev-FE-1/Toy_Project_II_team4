@@ -1,54 +1,43 @@
-import AppBar from '@mui/material/AppBar';
-import Toolbar from '@mui/material/Toolbar';
 import NavButton from './NavButton';
 import HomeIcon from '@mui/icons-material/Home';
-import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
+import PaymentsIcon from '@mui/icons-material/Payments';
+import * as Styled from './NavBar.style';
+
 const pages = [
   {
     name: '홈',
-    icon: HomeIcon,
+    icon: <HomeIcon />,
   },
   {
     name: '급여정산',
-    icon: AttachMoneyIcon,
+    icon: <PaymentsIcon />,
   },
   {
     name: '정정신청',
-    icon: EditNoteIcon,
+    icon: <EditNoteIcon />,
   },
   {
     name: '캘린더',
-    icon: CalendarMonthIcon,
+    icon: <CalendarMonthIcon />,
   },
   {
-    name: '마이페이지',
-    icon: AccountCircleIcon,
+    name: 'My',
+    icon: <AccountCircleIcon />,
   },
 ];
 
-export default function ResponsiveAppBar() {
+export default function NavBar() {
   return (
-    <AppBar
-      position="static"
-      sx={{
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-      }}
-    >
-      <Toolbar
-        sx={{
-          display: 'flex',
-          justifyContent: 'space-between',
-        }}
-        disableGutters
-      >
+    <Styled.MyAppBar>
+      <Styled.MyToolbar>
         {pages.map((page) => (
-          <NavButton key={page.name} page={page.name} icon={page.icon} />
+          <NavButton key={page.name} name={page.name} Icon={page.icon} />
         ))}
-      </Toolbar>
-    </AppBar>
+      </Styled.MyToolbar>
+    </Styled.MyAppBar>
   );
 }
