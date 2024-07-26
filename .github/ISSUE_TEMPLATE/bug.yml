@@ -2,7 +2,7 @@ name: 🐞 Bug
 description: 버그가 발생했나요?
 title: '[Bug] '
 labels: ['🐞 BugFix']
-projects: []
+projects: ["Dev-FE-1/18"]
 assignees:
   -
 body:
@@ -19,7 +19,7 @@ body:
       label: 💻 버그 시뮬레이션
       description: 버그를 발견한 상황을 단계별로 작성해 주세요.
     validations:
-      required: true
+      required: false
   - type: textarea
     id: bug-log
     attributes:
