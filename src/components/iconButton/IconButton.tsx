@@ -8,7 +8,7 @@ type IconBtnProps = {
   icontype: 'delete' | 'close' | 'logout' | 'download' | 'edit'
 }
 
-export default function SIconButton({icontype}: IconBtnProps) {
+export default function IconBtn({icontype}: IconBtnProps) {
   switch(icontype){
     case 'delete':
       return (
