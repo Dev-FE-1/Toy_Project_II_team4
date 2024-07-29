@@ -14,7 +14,7 @@ export const MUIButton = styled(Button)`
   min-width: 0;
   &:hover,
   &:active {
-    background-color: #ffb987;
+    background-color: var(--color-pri);
     color: #fff;
   }
   color: #333;
