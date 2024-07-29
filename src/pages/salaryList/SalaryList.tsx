@@ -1,5 +1,5 @@
 import SelectBox from "../../components/selectBox/SelectBox";
-import SButton from "../../components/button/Button";
+import Btn from "../../components/button/Button";
 import dayjs from "dayjs";
 
 import * as Styled from './SalaryList.style';
@@ -18,6 +18,10 @@ const PayData = [
 ]
 PayData.sort((a,b) => b.id-a.id)
 
+const ApplicationBtn = () =>{
+    console.log('클릭 클릭')
+}
+
 export default function SalaryList(){
     return(
     <Styled.Salary>
@@ -25,13 +29,13 @@ export default function SalaryList(){
     <Styled.Grayline/>
         <Styled.SalaryCardBox>
             <h2>
-                <Styled.Orangetxt>2024년 07월 </Styled.Orangetxt>
+                <Styled.Orangetxt>{dayjs('2024-07-25').format('YYYY년 MM월 ')}</Styled.Orangetxt>
             급여 명세서
             </h2>
-                <h5>
+                <h4>
                 <p>정정 신청 기간입니다.</p>
                 <p><Styled.Orangetxt>23일</Styled.Orangetxt>까지 신청해주세요.</p>
-                </h5>
+                </h4>
         </Styled.SalaryCardBox>
     <Styled.YearSelect>
     <SelectBox 
@@ -44,12 +48,15 @@ export default function SalaryList(){
     {PayData.map((el)=>
         (<Styled.ListCardBox key={el.id}>
             <Styled.List>
-            {el.title} 
-            <p>{el.date}</p> 
+            <span className="title">{el.title}</span>
+            <span className="date">{el.date}</span>
             </Styled.List>
+            <Styled.Btn>
             {el.state ? 
-            <SButton size='sm' label='신청가능'/> : 
-            <SButton btntype='disabled' size='sm' label='disable'/> }
+            <Btn round ='true' label='신청가능' onClick={ApplicationBtn}/> : 
+            <Btn round='true' disabled label='지급완료'/> 
+            }
+            </Styled.Btn>
             </Styled.ListCardBox>))}
     </Styled.Salary>
     )

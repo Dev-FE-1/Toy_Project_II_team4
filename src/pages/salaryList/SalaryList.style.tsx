@@ -1,7 +1,20 @@
 import styled from "styled-components";
 
 export const YearSelect = styled.div`
-  width:7%;
+  width:5%;
+  min-width:20%;
+
+  & > div > div > div {
+    height: 40px;
+    min-height: 1.4375em;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    outline:none;
+  }
+  & .MuiOutlinedInput-notchedOutline {
+    border: none;
+  }
 `;
 
 export const Salary = styled.div`
@@ -15,6 +28,7 @@ export const Grayline = styled.div`
 
 export const Orangetxt = styled.span`
   color:var(--color-pri);
+  font-weight:(--font-weight-semibold);
 `;
 
 export const SalaryCardBox = styled.div`
@@ -27,21 +41,40 @@ export const SalaryCardBox = styled.div`
   margin: 2rem auto;
   text-align:center;
   box-sizing:border-box;
+
+  & > h4{
+    font-weight:var(--font-weight-semibold);
+    line-height:1.4rem;
+  }
 `;
 
 export const ListCardBox = styled.div`
   background-color: #fff;
   color:var(--color-black);
   padding: 1.5rem;
-  margin-bottom: 1rem;
   border-radius:0.5rem;
   border: 1px solid var(--border-sec);
-  margin: 2rem auto;
+  margin: 1rem auto;
   display:flex;
-  flex-grow:1;
-  max-height:35px;
+  max-height:2.3rem;
   justify-content:space-between;
-  cursor:pointer;
+  //cursor:pointer;
 `;
 
-export const List = styled.div``;
+export const List = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  & > .title {
+    font-weight: var(--font-weight-semibold);
+    font-size: 1.2rem;
+  }
+  & > .date {
+    font-size: 10px;
+    color: var(--color-gray);
+  }
+`;
+
+export const Btn = styled.div`
+  margin:auto 0;
+`;
