@@ -1,15 +1,19 @@
 import * as Styled from './NavButton.style';
+import { Outlet, Link } from 'react-router-dom';
 
 interface NavButtonProps {
   name: string;
   Icon: React.ReactElement;
+  link: string;
 }
 
-export default function NavButton({ name, Icon }: NavButtonProps) {
+export default function NavButton({ name, Icon, link }: NavButtonProps) {
   return (
     <Styled.MUIButton key={name}>
-      <Styled.IconWrapper>{Icon}</Styled.IconWrapper>
-      <Styled.TextBox>{name}</Styled.TextBox>
+      <Styled.LinkRoute to={`${link}`}>
+        <Styled.IconWrapper>{Icon}</Styled.IconWrapper>
+        <Styled.TextBox>{name}</Styled.TextBox>
+      </Styled.LinkRoute>
     </Styled.MUIButton>
   );
 }
