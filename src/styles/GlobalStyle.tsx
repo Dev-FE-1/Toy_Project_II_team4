@@ -1,5 +1,6 @@
 import { GlobalStyles } from '@mui/material';
 import './fonts.css';
+import { Height } from '@mui/icons-material';
 
 export default function GlobalStyle() {
   return (
@@ -71,6 +72,11 @@ export default function GlobalStyle() {
           fontSize: '1.2rem',
           lineHeight: '1.8rem',
           fontWeight: 'var(--font-weight-medium)',
+        },
+        a: {
+          display: 'inline-block',
+          textDecoration: 'none',
+          color: 'inherit',
         },
       }}
     />
