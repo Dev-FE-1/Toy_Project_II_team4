@@ -1,102 +1,67 @@
 import Heading from '../../components/pageTitle/Heading';
 import Btn from '../../components/button/Button';
-import IconBtn from '../../components/iconButton/IconButton';
-import { AccordionSummary, AccordionDetails } from '@mui/material';
-import { ExpandMore } from '@mui/icons-material';
+import AccordionList from '../../components/salaryAdjustment/AccordionList';
+import BasicModal from '../../components/modal/BasicModal';
+import SelectBox from '../../components/selectBox/SelectBox';
+
 import * as styled from './TempSalaryAdjustment.style';
+import SDataPicker from '../../components/datepicker/DatePicker';
+
+const datas = [
+  {
+    title: '04월 급여명세서/경비누락',
+    details: { date: '2024.04.25', state: '결재대기', note: '비고', reason: '반려사유 입니다.' },
+  },
+  {
+    title: '03월 급여명세서/경비누락',
+    details: { date: '2024.03.25', state: '결재완료', note: '비고', reason: '반려사유 입니다.' },
+  },
+  {
+    title: '02월 급여명세서/경비누락',
+    details: { date: '2024.02.25', state: '반려', note: '비고', reason: '반려사유 입니다.' },
+  },
+  {
+    title: '01월 급여명세서/경비누락',
+    details: { date: '2024.01.25', state: '결재완료', note: '비고', reason: '반려사유 입니다.' },
+  },
+];
 
 function SalaryAdjustment() {
+  const onAdjustment = () => {
+    alert('asa');
+  };
   return (
     <styled.Wrapper>
-      <Heading title="정정신청" />
+      <Heading title="정정 내역" />
       <styled.BtnArea>
-        <Btn label="정정신청" size="sm" />
+        <Btn label="정정신청" btnsize="md" onClick={onAdjustment} />
       </styled.BtnArea>
-      <styled.SAccordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore fontSize="large" />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <styled.Title>
-            <div className="title-wrap">
-              <p className="title">03월 급여명세서/경비누락</p>
-              <span className="date">2024.07.28</span>
-            </div>
-            <styled.Schip label="결재대기" size="small" />
-          </styled.Title>
-          <div className="icons">
-            <IconBtn icontype="edit" />
-            <IconBtn icontype="delete" />
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul>
-            <li>결재 상태 : 대기</li>
-            <li>신청일: 2023.03.25</li>
-            <li>신청 내용: 경비누락</li>
-            <li>반려 사유:</li>
-          </ul>
-        </AccordionDetails>
-      </styled.SAccordion>
+      {datas.map((data) => (
+        <AccordionList title={data.title} details={data.details} />
+      ))}
 
-      <styled.SAccordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore fontSize="large" />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <styled.Title>
-            <div className="title-wrap">
-              <p className="title">02월 급여명세서/주말근무</p>
-              <span className="date">2024.07.28</span>
-            </div>
-            <styled.Schip label="결재완료" size="small" />
-          </styled.Title>
-          <div className="icons">
-            <IconBtn icontype="edit" />
-            <IconBtn icontype="delete" />
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul>
-            <li>결재 상태 : 승인</li>
-            <li>신청일: 2023.03.25</li>
-            <li>신청 내용: 경비누락</li>
-            <li>반려 사유:</li>
-          </ul>
-        </AccordionDetails>
-      </styled.SAccordion>
+      <BasicModal>
+        <styled.ModalWrapper>
+          <Heading title="급여 정정신청" />
+          <h3>03월 급여 정정 신청</h3>
+          <SelectBox
+            labelId="labelCate"
+            id="cate"
+            label="카테고리"
+            menuItems={[
+              { text: '주말 / 공휴일 근무 수당', value: 'cate1' },
+              { text: '야간 근무 수당(22:00-06:00)', value: 'cate2' },
+              { text: '연차 누락', value: 'cate3' },
+              { text: '경비 처리', value: 'cate4' },
+            ]}
+          />
 
-      <styled.SAccordion>
-        <AccordionSummary
-          expandIcon={<ExpandMore fontSize="large" />}
-          aria-controls="panel1-content"
-          id="panel1-header"
-        >
-          <styled.Title>
-            <div className="title-wrap">
-              <p className="title">01월 급여명세서/경비누락</p>
-              <span className="date">2024.07.28</span>
-            </div>
-            <styled.Schip label="반려" size="small" />
-          </styled.Title>
-          <div className="icons">
-            <IconBtn icontype="edit" />
-            <IconBtn icontype="delete" />
-          </div>
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul>
-            <li>결재 상태 : 대기</li>
-            <li>신청일: 2023.03.25</li>
-            <li>신청 내용: 경비누락</li>
-            <li>반려 사유:</li>
-          </ul>
-        </AccordionDetails>
-      </styled.SAccordion>
+          <styled.STextInput label="제목" variant="outlined" />
+
+          <SDataPicker dateType="range" />
+        </styled.ModalWrapper>
+      </BasicModal>
     </styled.Wrapper>
   );
 }
-
 export default SalaryAdjustment;

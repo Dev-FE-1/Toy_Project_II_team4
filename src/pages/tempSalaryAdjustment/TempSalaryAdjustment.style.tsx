@@ -1,4 +1,5 @@
 import { Accordion, Chip } from '@mui/material';
+import TextInputField from '../../components/textInputField/TextInputField';
 import styled from '@emotion/styled';
 
 export const Wrapper = styled.div`
@@ -62,4 +63,12 @@ export const Schip = styled(Chip)`
   .MuiChip-label {
     font-size: 1.2rem;
   }
+`;
+
+export const ModalWrapper = styled.div`
+  width: 100%;
+`;
+
+export const STextInput = styled(TextInputField)`
+  margin-top: '50px';
 `;
