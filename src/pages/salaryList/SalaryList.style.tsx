@@ -18,7 +18,9 @@ export const YearSelect = styled.div`
 `;
 
 export const Salary = styled.div`
-  background-color:var(--color-white);
+  & > h2 {
+  text-align:left;
+  }
 `;
 
 export const Grayline = styled.div`
@@ -32,7 +34,6 @@ export const Orangetxt = styled.span`
 `;
 
 export const SalaryCardBox = styled.div`
-  background-color: #fff;
   color:var(--color-black);
   padding: 1rem;
   margin-bottom: 1rem;
@@ -48,16 +49,18 @@ export const SalaryCardBox = styled.div`
   }
 `;
 
-export const ListCardBox = styled.div`
-  background-color: #fff;
+export const ListCardBox = styled.div<{state:boolean}>`
   color:var(--color-black);
   padding: 1.5rem;
   border-radius:0.5rem;
-  border: 1px solid var(--border-sec);
   margin: 1rem auto;
   display:flex;
   max-height:2.3rem;
   justify-content:space-between;
+  border:${(props)=>props.state ? 
+    '1px solid var(--color-pri)' : 
+    '1px solid var(--border-sec)'
+  };
   //cursor:pointer;
 `;
 
@@ -72,6 +75,7 @@ export const List = styled.div`
   & > .date {
     font-size: 10px;
     color: var(--color-gray);
+    text-align:left;
   }
 `;
 

@@ -1,7 +1,7 @@
 import SelectBox from "../../components/selectBox/SelectBox";
 import Btn from "../../components/button/Button";
 import dayjs from "dayjs";
-
+import Heading from "../../components/pageTitle/Heading";
 import * as Styled from './SalaryList.style';
 
 const years = [
@@ -26,7 +26,7 @@ const ApplicationBtn = () =>{
 export default function SalaryList(){
     return(
     <Styled.Salary>
-    <h2>급여내역</h2>
+    <Heading title="급여내역"/>
     <Styled.Grayline/>
         <Styled.SalaryCardBox>
             <h2>
@@ -47,7 +47,7 @@ export default function SalaryList(){
     />
     </Styled.YearSelect>
     {PayData.map((el)=>
-        (<Styled.ListCardBox key={el.id}>
+        (<Styled.ListCardBox key={el.id} state={el.state}>
             <Styled.List>
             <span className="title">{el.title}</span>
             <span className="date">{el.date}</span>

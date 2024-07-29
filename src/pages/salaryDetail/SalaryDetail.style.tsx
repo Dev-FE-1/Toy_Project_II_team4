@@ -4,8 +4,14 @@ export const Header = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding: 1rem;
+  padding-bottom:2rem;
   max-height:35px;
+  box-sizing:border-box;
+
+  .css-i4bv87-MuiSvgIcon-root{
+    width:3rem;
+    height:3.5rem;
+  }
 `;
 
 export const Listline = styled.div`
@@ -19,6 +25,7 @@ export const Thinline = styled.div`
 `;
 
 export const LSection = styled.div`
+
 display: flex;
 align-items:center;
 gap: 1rem; 
@@ -33,22 +40,25 @@ gap: 1rem;
 export const Container = styled.div`
   text-align:center;
   font-size:1.6rem;
-  .name {
-    font-weight:
+
+  .bold {
+    font-weight:var(--font-weight-bold);
   }
   & > div {
     background: linear-gradient(180deg, var(--color-pri), #9FA1AB);
     color: var(--color-white);
     padding-bottom:5rem;
-    margin:0 3px;
   }
 `
 export const ItemWrapper = styled.div`
   display:flex;
   justify-content: space-between;
-  padding-top:0.7rem;
   font-weight:var(--font-weight-bold);
 
+  .pay{
+    padding-top:1rem;
+    font-size:1.2rem;
+  }
   .pay > h5,
   .pay > h3{
   font-weight:var(--font-weight-bold);
@@ -72,5 +82,20 @@ export const Info = styled.div`
 `;
 
 export const Movemonth = styled.div`
-  height:40px;
-`
+  height:30px;
+  margin-top:1.3rem;
+
+  .css-i4bv87-MuiSvgIcon-root{
+      height:0.8em;
+  }
+
+  .up-date{
+    font-weight:var(--font-weight-bold);
+    font-size:1.3rem;
+    margin:0 5px;
+
+    .css-i4bv87-MuiSvgIcon-root{
+      height:0.7em;
+    }
+  }
+`;
