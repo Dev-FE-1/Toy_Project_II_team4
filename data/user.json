@@ -1,3 +1,16 @@
 {
-  "id": "1"
+  "name": "Jihoon Lee",
+  "team": "Marketing",
+  "introduce": "Jihoon is responsible for managing all email communications and marketing campaigns.",
+  "info": [
+    {
+      "content": "jihoon@sajo.com"
+    },
+    {
+      "content": "010-1234-1234"
+    },
+    {
+      "content": "블루핑크"
+    }
+  ]
 }

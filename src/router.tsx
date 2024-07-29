@@ -1,8 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import Dashboard from './pages/Dashboard';
+import Dashboard from './pages/Dashboard/Dashboard.tsx';
 import TempSalaryAdjustment from './pages/tempSalaryAdjustment/TempSalaryAdjustment';
 import { navbarLinks } from './components/nav/navLinks.tsx';
+import Calendar from './pages/Calendar/Calendar.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -24,7 +25,7 @@ export const router = createBrowserRouter([
       },
       {
         path: navbarLinks.calendar.link,
-        element: <h1>캘린더 컴포넌트</h1>,
+        element: <Calendar />,
       },
       {
         path: navbarLinks.myPage.link,
