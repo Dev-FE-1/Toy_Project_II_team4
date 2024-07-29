@@ -37,7 +37,7 @@ const SalaryData: SalaryDataItem[] = [
   }
 ];
 
-function ListWrapper({ details }: { details: SalaryDetailItem[] }) {
+const ListWrapper = ({ details }: { details: SalaryDetailItem[] }) => {
   return (
     <>
       {details.map((item, index) => (
@@ -47,10 +47,10 @@ function ListWrapper({ details }: { details: SalaryDetailItem[] }) {
         </Styled.ListWrapper>
       ))}
     </>
-  );
+  );  
 }
 
-function SalaryDetail() {
+export default function SalaryDetail() {
   return (
     <>
       <Styled.Header>
@@ -63,8 +63,8 @@ function SalaryDetail() {
           <IconBtn icontype="download"/>
         </Styled.RSection>
       </Styled.Header>
-			<Styled.Listline/>
-			<Styled.Movemonth></Styled.Movemonth>
+      <Styled.Listline/>
+      <Styled.Movemonth></Styled.Movemonth>
       <Styled.Container>
         {SalaryData.map((el) => (
           <CardBox key={el.id}>
@@ -91,5 +91,3 @@ function SalaryDetail() {
     </>
   );
 }
-
-export default SalaryDetail;

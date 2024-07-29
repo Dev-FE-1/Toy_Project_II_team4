@@ -20,6 +20,7 @@ PayData.sort((a,b) => b.id-a.id)
 
 const ApplicationBtn = () =>{
     console.log('클릭 클릭')
+    console.log('이 부분 props로 아이디 받고 navigate salary-detail처리')
 }
 
 export default function SalaryList(){
