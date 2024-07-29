@@ -1,6 +1,6 @@
 # Toy_Project_II_team4
 
-> SAJO ENT 엔터테이먼트 회사의 직원들을 위한 급여 관리와 스케줄 관리를 위한 모바일 웹앱 만들기 프로젝트
+> SAJO ENT 엔터테이먼트 회사의 직원들을 위한 급여와 스케줄 관리 모바일 웹앱
 
 ![사조엔터](https://github.com/user-attachments/assets/7820e264-8a5a-4cac-a0f6-e5740ef70f62)
 
