@@ -1,0 +1,80 @@
+/* --LINE Seed Sans KR--*/
+
+/* Regular weight */
+@font-face {
+  font-family: 'LINE Seed Sans KR';
+  src:
+    url(./fonts/lineSeedKR/woff2/LINESeedKR-Rg.woff2) format('woff2'),
+    url(./fonts/lineSeedKR/woff/LINESeedKR-R.woff) format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+/* Bold weight */
+@font-face {
+  font-family: 'LINE Seed Sans KR';
+  src:
+    url(./fonts/lineSeedKR/woff2/LINESeedKR-Bd.woff2) format('woff2'),
+    url(./fonts/lineSeedKR/woff/LINESeedKR-Bd.woff) format('woff');
+  font-weight: bold;
+  font-display: swap;
+}
+/* Thin weight */
+@font-face {
+  font-family: 'LINE Seed Sans KR';
+  src:
+    url(./fonts/lineSeedKR/woff2/LINESeedKR-Th.woff2) format('woff2'),
+    url(./fonts/lineSeedKR/woff/LINESeedKR-Th.woff) format('woff');
+  font-weight: thin;
+  font-display: swap;
+}
+
+/* --LINE Seed Sans--*/
+
+/* Regular weight */
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url(./fonts/lineSeed/woff/LINESeedSans_W_Rg.woff) format('woff2'),
+    url(./fonts/lineSeed/woff/LINESeedSans_W_Rg.woff) format('woff');
+  font-weight: normal;
+  font-display: swap;
+}
+/* Thin weight */
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url(./fonts/lineSeed/woff/LINESeedSans_W_Th.woff) format('woff2'),
+    url(./fonts/lineSeed/woff/LINESeedSans_W_Th.woff) format('woff');
+  font-weight: thin;
+  font-display: swap;
+}
+
+/* Bold weight */
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url(./fonts/lineSeed/woff/LINESeedSans_W_Bd.woff) format('woff2'),
+    url(./fonts/lineSeed/woff2/LINESeedSans_W_Bd.woff2) format('woff');
+  font-weight: bold;
+  font-display: swap;
+}
+
+/* Extra Bold weight */
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url(./fonts/lineSeed/woff/LINESeedSans_W_XBd.woff) format('woff2'),
+    url(./fonts/lineSeed/woff2/LINESeedSans_W_XBd.woff2) format('woff');
+  font-weight: 800;
+  font-display: swap;
+}
+
+/* Boldest weight */
+@font-face {
+  font-family: 'LINE Seed Sans';
+  src:
+    url(./fonts/lineSeed/woff/LINESeedSans_W_He.woff) format('woff2'),
+    url(./fonts/lineSeed/woff2/LINESeedSans_W_He.woff2) format('woff');
+  font-weight: 900;
+  font-display: swap;
+}
