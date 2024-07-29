@@ -21,7 +21,8 @@ export const MUIButton = styled(Button)`
 `;
 
 export const TextBox = styled(Box)`
-  font-size: 12px;
+  font-size: 14px;
+  font-weight: bold;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -37,6 +38,6 @@ export const IconWrapper = styled(Box)`
   align-items: center;
   margin-bottom: 4px;
   & svg {
-    font-size: 2rem;
+    font-size: 4rem;
   }
 `;
