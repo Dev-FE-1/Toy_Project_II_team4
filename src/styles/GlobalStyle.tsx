@@ -1,4 +1,5 @@
 import { GlobalStyles } from '@mui/material';
+import './fonts.css';
 
 export default function GlobalStyle() {
   return (
@@ -29,11 +30,13 @@ export default function GlobalStyle() {
           '--border-pri': '#9a9a9a',
           '--border-sec': '#eeeeee',
         },
+        '*': {
+          fontFamily: 'var(--font-family-primary)',
+        },
         html: {
           fontSize: '10px',
         },
         body: {
-          fontFamily: 'var(--font-family-primary)',
           fontWeight: 400,
         },
         'h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6': {
