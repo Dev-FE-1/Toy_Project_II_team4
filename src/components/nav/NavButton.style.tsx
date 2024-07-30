@@ -2,7 +2,7 @@ import { styled as muiStyled } from '@mui/material/styles';
 import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import { Outlet, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export const MUIButton = muiStyled(Button)`
   display: flex;
@@ -14,6 +14,7 @@ export const MUIButton = muiStyled(Button)`
   flex: 1;
   height: 80px;
   min-width: 0;
+  
   &:hover,
   &:active {
     background-color: var(--color-pri);
