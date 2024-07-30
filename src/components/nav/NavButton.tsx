@@ -1,5 +1,4 @@
 import * as Styled from './NavButton.style';
-import { Outlet, Link } from 'react-router-dom';
 
 interface NavButtonProps {
   name: string;

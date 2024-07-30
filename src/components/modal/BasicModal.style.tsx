@@ -1,9 +1,9 @@
 import Box from '@mui/material/Box';
-import { styled } from '@mui/material/styles';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
 
-export const ModalContent = styled(Box)`
-  display: flex;
-  width: 100%;
+export const ModalMobileWrapper = styled.div`
+  width: 100vw;
   height: 100vh;
   position: fixed;
   top: 50%;
@@ -13,25 +13,16 @@ export const ModalContent = styled(Box)`
   background-color: #fff;
 `;
 
-export const ModalChildrenContent = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 20px;
-`;
-
-export const Wrapper = styled(Box)`
-  padding-bottom: 10px;
-  width: 100%;
-`;
-
-export const closeButton = styled(Box)`
+export const CloseButton = muiStyled(Box)`
   position: absolute;
-  top: 20px;
-  right: 20px;
-  width: 20px;
-  height: 20px;
+  z-index: 1;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
   cursor: pointer;
+  & svg {
+    width: 100%;
+    height: 100%;
+  }
 `;
