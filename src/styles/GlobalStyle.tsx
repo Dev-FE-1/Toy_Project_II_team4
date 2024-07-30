@@ -78,6 +78,9 @@ export default function GlobalStyle() {
           textDecoration: 'none',
           color: 'inherit',
         },
+        label: {
+          fontFamily: 'var(--font-family-primary)',
+        },
       }}
     />
   );

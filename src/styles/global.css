@@ -1,24 +1,6 @@
-@font-face {
-  font-family: 'LINE Seed Sans KR';
-  font-weight: normal;
-  font-style: normal;
-  src:
-    url('/fonts/LINE-Seed-Sans-KR.woff2') format('woff2'),
-    url('/fonts/LINE-Seed-Sans-KR.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'LINE Seed Sans';
-  font-weight: normal;
-  font-style: normal;
-  src:
-    url('/fonts/LINE-Seed-Sans.woff2') format('woff2'),
-    url('/fonts/LINE-Seed-Sans.woff') format('woff');
-}
-
 :root {
   /* Font system */
-  --font-family-primary: 'LINE Seed Sans KR', 'LINE Seed Sans', sans-serif;
+  --font-family-primary: 'SUIT', sans-serif;
   --font-weight-bold: 700;
   --font-weight-semibold: 600;
   --font-weight-medium: 500;

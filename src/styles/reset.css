@@ -89,7 +89,6 @@ video {
   padding: 0;
   border: 0;
   font-size: 100%;
-  font: inherit;
   vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
@@ -107,6 +106,11 @@ nav,
 section {
   display: block;
 }
+
+* {
+  font-family: var(--font-family-primary) !important;
+}
+
 /* HTML5 hidden-attribute fix for newer browsers */
 *[hidden] {
   display: none;
@@ -133,4 +137,11 @@ q:after {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
 }
