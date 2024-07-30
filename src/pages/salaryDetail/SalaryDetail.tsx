@@ -1,13 +1,10 @@
-import React, { useState } from "react";
 import Btn from "../../components/button/Button";
 import IconBtn from "../../components/iconButton/IconButton";
-import * as Styled from './SalaryDetail.style';
+import * as Styled from './SalaryDeatil.style';
 import Heading from "../../components/Heading/Heading";
-import CardBox from "../../components/cardBox/CardBox";
-import dayjs, { Dayjs } from "dayjs";
-import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import ChevronRightIcon from '@mui/icons-material/ChevronRight';
-import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
+import dayjs from "dayjs";
+import SalaryCard from "./SalaryCard";
+import MoveMonth from "./MoveMonth";
 
 interface SalaryDetailItem {
   label: string;
@@ -54,16 +51,6 @@ const ListWrapper = ({ details }: { details: SalaryDetailItem[] }) => {
 }
 
 export default function SalaryDetail() {
-  const [currentMonth, setCurrentMonth] = useState<Dayjs>(dayjs('2024-07-25'));
-
-  const handlePrevMonth = () => {
-    setCurrentMonth(currentMonth.subtract(1, 'month'));
-  };
-
-  const handleNextMonth = () => {
-    setCurrentMonth(currentMonth.add(1, 'month'));
-  };
-
   return (
     <>
       <Styled.Header>
@@ -72,42 +59,26 @@ export default function SalaryDetail() {
           <Heading title="급여명세서" />
         </Styled.LSection>
         <Styled.RSection>
-          <Btn label='정정신청' />
+          <Btn size="lg" label='정정신청' />
           <IconBtn icontype="download" />
         </Styled.RSection>
       </Styled.Header>
       <Styled.Listline />
-      <Styled.Movemonth>
-        <ChevronLeftIcon onClick={handlePrevMonth} style={{ cursor: 'pointer' }} />
-        <span className="up-date">
-          {currentMonth.format('YYYY.MM')}
-          <CalendarTodayIcon />
-        </span>
-        <ChevronRightIcon onClick={handleNextMonth} style={{ cursor: 'pointer' }} />
-      </Styled.Movemonth>
-      <Styled.Container>
-        {SalaryData.map((el) => (
-          <CardBox key={el.id}>
-            <span className="bold">{el.name}</span> 님의 노고에 감사드립니다.
-            <hr />
-            <Styled.ItemWrapper>
-              <div className="pay"><h5>실수령액</h5></div>
-              <div className="pay"><h3>{el.realpay}원</h3></div>
-            </Styled.ItemWrapper>
-            <hr />
-            <Styled.ItemWrapper>
-              <div className="pay">급여지급일</div>
-              <div className="pay">{el.payday}</div>
-            </Styled.ItemWrapper>
-          </CardBox>
-        ))}
-      </Styled.Container>
+      <MoveMonth/>
       {SalaryData.map((el) => (
-        <Styled.Info key={el.id}>
-          <Styled.Listline />
-          <ListWrapper details={el.details} />
-          <Styled.Listline />
-        </Styled.Info>
+        <div key={el.id}>
+          <SalaryCard
+            id={el.id} 
+            name={el.name} 
+            realpay={el.realpay} 
+            payday={el.payday}
+          />
+          <Styled.Info>
+            <Styled.Listline />
+            <ListWrapper details={el.details} />
+            <Styled.Listline />
+          </Styled.Info>
+        </div>
       ))}
     </>
   );
