@@ -1,11 +1,10 @@
 import Btn from '../../components/button/Button';
-import AccordionList from '../../components/salaryAdjustment/AccordionList';
+import AccordionList from './AccordionList';
 import BasicModal from '../../components/modal/BasicModal';
 import SelectBox from '../../components/selectBox/SelectBox';
-import TextInputField from '../../components/textInputField/TextInputField';
-
-import * as styled from './TempSalaryAdjustment.style';
+import * as styled from './SalaryAdjustment.style';
 import SDataPicker from '../../components/datepicker/DatePicker';
+import TextInputField from '../../components/textInputField/TextInputField';
 
 const datas = [
   {
@@ -36,8 +35,8 @@ function SalaryAdjustment() {
       <styled.BtnArea>
         <Btn label="정정신청" btnsize="md" onClick={onAdjustment} />
       </styled.BtnArea>
-      {datas.map((data) => (
-        <AccordionList title={data.title} details={data.details} />
+      {datas.map((data, i) => (
+        <AccordionList key={i} title={data.title} details={data.details} />
       ))}
 
       <BasicModal>
@@ -55,7 +54,7 @@ function SalaryAdjustment() {
               { text: '경비 처리', value: 'cate4' },
             ]}
           />
-          <styled.STextInputField label="제목" variant="outlined" />
+          <TextInputField label="제목" variant="outlined" />
 
           <SDataPicker dateType="range" />
         </styled.ModalWrapper>

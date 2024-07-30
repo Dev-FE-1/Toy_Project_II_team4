@@ -1,7 +1,7 @@
-import IconBtn from '../iconButton/IconButton';
+import IconBtn from '../../components/iconButton/IconButton';
 import { AccordionSummary, AccordionDetails } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
-import * as styled from '../../pages/tempSalaryAdjustment/TempSalaryAdjustment.style';
+import * as styled from './SalaryAdjustment.style';
 
 function AccordionList({ title, details }: AccordionListProps) {
   return (

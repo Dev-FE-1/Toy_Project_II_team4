@@ -1,6 +1,7 @@
 import { Accordion, Chip } from '@mui/material';
 import TextInputField from '../../components/textInputField/TextInputField';
-import styled from '@emotion/styled';
+import styled from 'styled-components';
+import { styled as muiStyled } from '@mui/material/styles';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;
@@ -22,7 +23,7 @@ export const BtnArea = styled.div`
   }
 `;
 
-export const SAccordion = styled(Accordion)`
+export const SAccordion = muiStyled(Accordion)`
   .MuiAccordionSummary-content {
     display: flex;
     justify-content: space-between;
@@ -50,7 +51,7 @@ export const AccordionTitle = styled.div`
   }
 `;
 
-export const Schip = styled(Chip)`
+export const Schip = muiStyled(Chip)`
   & {
     margin-left: 1rem;
     margin-top: -3px;
@@ -82,5 +83,3 @@ export const ModalTitle = styled.h2`
   text-align: center;
   font-weight: bold;
 `;
-
-export const STextInputField = styled(TextInputField)``;
