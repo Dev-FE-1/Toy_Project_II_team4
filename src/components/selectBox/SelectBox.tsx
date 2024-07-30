@@ -14,7 +14,9 @@ function SelectBox({ labelId, id, label, menuItems }: SelectBoxProps) {
   return (
     <Box>
       <FormControl fullWidth>
-        <InputLabel id={labelId}>{label}</InputLabel>
+        <InputLabel id={labelId} htmlFor={id}>
+          {label}
+        </InputLabel>
         <Select labelId={labelId} id={id} value={selected} label={label} onChange={handleChange}>
           {menuItems.map((item, i) => (
             <MenuItem key={i} value={item.value}>
