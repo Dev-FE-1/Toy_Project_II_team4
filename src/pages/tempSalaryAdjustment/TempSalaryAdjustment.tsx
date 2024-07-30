@@ -1,4 +1,4 @@
-import Heading from '../../components/pageTitle/Heading';
+import Heading from '../../components/Heading/Heading';
 import Btn from '../../components/button/Button';
 import AccordionList from '../../components/salaryAdjustment/AccordionList';
 import BasicModal from '../../components/modal/BasicModal';

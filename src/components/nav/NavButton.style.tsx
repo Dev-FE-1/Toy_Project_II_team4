@@ -1,8 +1,10 @@
-import { styled } from '@mui/material/styles';
+import { styled as muiStyled } from '@mui/material/styles';
+import styled from 'styled-components';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import { Outlet, Link } from 'react-router-dom';
 
-export const MUIButton = styled(Button)`
+export const MUIButton = muiStyled(Button)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,7 +22,7 @@ export const MUIButton = styled(Button)`
   color: #333;
 `;
 
-export const TextBox = styled(Box)`
+export const TextBox = muiStyled(Box)`
   font-size: 14px;
   font-weight: bold;
   text-align: center;
@@ -32,7 +34,7 @@ export const TextBox = styled(Box)`
   font-weight: 600;
 `;
 
-export const IconWrapper = styled(Box)`
+export const IconWrapper = muiStyled(Box)`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -40,4 +42,15 @@ export const IconWrapper = styled(Box)`
   & svg {
     font-size: 4rem;
   }
+`;
+
+export const LinkRoute = styled(Link)`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: absolute;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
 `;
