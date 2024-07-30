@@ -35,21 +35,23 @@ export const Orangetxt = styled.span`
 
 export const SalaryCardBox = styled.div`
   color:var(--color-black);
-  padding: 1rem;
-  margin-bottom: 1rem;
+  padding: 2rem;
+  margin: 1rem;
   border-radius:0.8rem;
   border: 3px solid var(--color-pri);
   margin: 2rem auto;
   text-align:center;
   box-sizing:border-box;
 
-  & > h4{
+  h2{
+    line-height:5rem;
+  }
+  h4{
     font-weight:var(--font-weight-semibold);
-    line-height:1.4rem;
   }
 `;
 
-export const ListCardBox = styled.div<{state:boolean}>`
+export const ListCardBox = styled.div<{state:string}>`
   color:var(--color-black);
   padding: 1.5rem;
   border-radius:0.5rem;
@@ -57,7 +59,7 @@ export const ListCardBox = styled.div<{state:boolean}>`
   display:flex;
   max-height:2.3rem;
   justify-content:space-between;
-  border:${(props)=>props.state ? 
+  border:${(props)=>props.state === 'true' ? 
     '1px solid var(--color-pri)' : 
     '1px solid var(--border-sec)'
   };

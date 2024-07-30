@@ -3,6 +3,7 @@ import Btn from "../../components/button/Button";
 import dayjs from "dayjs";
 import Heading from "../../components/Heading/Heading";
 import * as Styled from './SalaryList.style';
+import { useNavigate } from "react-router-dom";
 
 const years = [
   { value: '2021', text: '2021' },
@@ -12,18 +13,19 @@ const years = [
 ];
 
 const PayData = [
-  {id: 1, title: '05월 급여명세서', date:dayjs('2024-05-25').format('YYYY.MM.DD'), state:false},
-  {id: 2, title: '06월 급여명세서', date:dayjs('2024-06-25').format('YYYY.MM.DD'), state:false},
-  {id: 3, title: '07월 급여명세서', date:dayjs('2024-07-25').format('YYYY.MM.DD'), state:true}
+  {id: 1, title: '05월 급여명세서', date:dayjs('2024-05-25').format('YYYY.MM.DD'), state:'false'},
+  {id: 2, title: '06월 급여명세서', date:dayjs('2024-06-25').format('YYYY.MM.DD'), state:'false'},
+  {id: 3, title: '07월 급여명세서', date:dayjs('2024-07-25').format('YYYY.MM.DD'), state:'true'}
 ]
 PayData.sort((a,b) => b.id-a.id)
 
-const ApplicationBtn = () =>{
-  console.log('클릭 클릭')
-  console.log('이 부분 props로 아이디 받고 navigate salary-detail처리')
-}
-
 export default function SalaryList(){
+  const navigate = useNavigate()
+
+  const handleApplicationBtn = (id:number) => {
+    navigate(`/salary-detail/${id}`)
+  }
+
   return(
     <Styled.Salary>
       <Heading title="급여내역"/>
@@ -50,8 +52,8 @@ export default function SalaryList(){
             <span className="date">{el.date}</span>
             </Styled.List>
             <Styled.Btn>
-            {el.state ? 
-            <Btn round ='true' label='신청가능' onClick={ApplicationBtn}/> : 
+            {el.state === 'true' ? 
+            <Btn round ='true' label='신청가능' onClick={()=>{handleApplicationBtn(el.id)}}/> : 
             <Btn round='true' disabled label='지급완료'/> 
             }
             </Styled.Btn>

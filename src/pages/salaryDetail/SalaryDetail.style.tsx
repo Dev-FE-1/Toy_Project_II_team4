@@ -4,8 +4,6 @@ export const Header = styled.div`
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding-bottom:2rem;
-  max-height:35px;
   box-sizing:border-box;
 
   .css-i4bv87-MuiSvgIcon-root{
@@ -25,7 +23,6 @@ export const Thinline = styled.div`
 `;
 
 export const LSection = styled.div`
-
 display: flex;
 align-items:center;
 gap: 1rem; 
@@ -84,6 +81,7 @@ export const Info = styled.div`
 export const Movemonth = styled.div`
   height:30px;
   margin-top:1.3rem;
+  text-align:center;
 
   .css-i4bv87-MuiSvgIcon-root{
       height:0.8em;
