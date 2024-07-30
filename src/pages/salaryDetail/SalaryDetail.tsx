@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Btn from "../../components/button/Button";
 import IconBtn from "../../components/iconButton/IconButton";
 import * as Styled from './SalaryDetail.style';
-import Heading from "../../components/pageTitle/Heading";
+import Heading from "../../components/Heading/Heading";
 import CardBox from "../../components/cardBox/CardBox";
 import dayjs, { Dayjs } from "dayjs";
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
