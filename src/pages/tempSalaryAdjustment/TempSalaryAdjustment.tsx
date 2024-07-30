@@ -1,8 +1,8 @@
-import Heading from '../../components/Heading/Heading';
 import Btn from '../../components/button/Button';
 import AccordionList from '../../components/salaryAdjustment/AccordionList';
 import BasicModal from '../../components/modal/BasicModal';
 import SelectBox from '../../components/selectBox/SelectBox';
+import TextInputField from '../../components/textInputField/TextInputField';
 
 import * as styled from './TempSalaryAdjustment.style';
 import SDataPicker from '../../components/datepicker/DatePicker';
@@ -32,7 +32,7 @@ function SalaryAdjustment() {
   };
   return (
     <styled.Wrapper>
-      <Heading title="정정 내역" />
+      <styled.PageTitle>정정내역</styled.PageTitle>
       <styled.BtnArea>
         <Btn label="정정신청" btnsize="md" onClick={onAdjustment} />
       </styled.BtnArea>
@@ -42,8 +42,8 @@ function SalaryAdjustment() {
 
       <BasicModal>
         <styled.ModalWrapper>
-          <Heading title="급여 정정신청" />
-          <h3>03월 급여 정정 신청</h3>
+          <styled.PageTitle>급여 정정신청</styled.PageTitle>
+          <styled.ModalTitle>03월 급여 정정 신청</styled.ModalTitle>
           <SelectBox
             labelId="labelCate"
             id="cate"
@@ -55,8 +55,7 @@ function SalaryAdjustment() {
               { text: '경비 처리', value: 'cate4' },
             ]}
           />
-
-          <styled.STextInput label="제목" variant="outlined" />
+          <styled.STextInputField label="제목" variant="outlined" />
 
           <SDataPicker dateType="range" />
         </styled.ModalWrapper>

@@ -12,13 +12,13 @@ function AccordionList({ title, details }: AccordionListProps) {
           aria-controls="panel1-content"
           id="panel1-header"
         >
-          <styled.Title>
+          <styled.AccordionTitle>
             <div className="title-wrap">
               <p className="title">{title}</p>
               <span className="date">{details.date}</span>
             </div>
             <styled.Schip label={details.state} size="small" />
-          </styled.Title>
+          </styled.AccordionTitle>
           <div className="icons">
             <IconBtn icontype="edit" />
             <IconBtn icontype="delete" />

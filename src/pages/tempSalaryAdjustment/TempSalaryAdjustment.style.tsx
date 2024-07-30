@@ -6,10 +6,16 @@ export const Wrapper = styled.div`
   font-size: 1.5rem;
 `;
 
+export const PageTitle = styled.h1`
+  padding: 1rem;
+  /* margin-bottom: 2rem; */
+  border-bottom: 1px solid #ddd;
+`;
+
 export const BtnArea = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-bottom: 2rem;
+  margin: 2rem 0;
   .MuiButton-root {
     width: 10rem;
     font-size: 1.5rem;
@@ -26,17 +32,18 @@ export const SAccordion = styled(Accordion)`
     text-align: left;
   }
   .MuiAccordionDetails-root ul li {
-    margin-bottom: 10px;
+    margin-bottom: 1rem;
   }
 `;
 
-export const Title = styled.div`
+export const AccordionTitle = styled.div`
   display: flex;
   .title-wrap {
     text-align: left;
   }
   p {
-    margin-bottom: 5px;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
   }
   .date {
     color: var(--font-sec);
@@ -67,8 +74,13 @@ export const Schip = styled(Chip)`
 
 export const ModalWrapper = styled.div`
   width: 100%;
+  max-width: 600px;
 `;
 
-export const STextInput = styled(TextInputField)`
-  margin-top: '50px';
+export const ModalTitle = styled.h2`
+  padding: 3rem 0;
+  text-align: center;
+  font-weight: bold;
 `;
+
+export const STextInputField = styled(TextInputField)``;
