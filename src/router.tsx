@@ -1,6 +1,6 @@
 import { createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
-import Dashboard from './pages/Dashboard/Dashboard.tsx';
+import Dashboard from './pages/Dashboard/Dashboard';
 import TempSalaryAdjustment from './pages/tempSalaryAdjustment/TempSalaryAdjustment';
 import { navbarLinks } from './components/nav/navLinks.tsx';
 import Calendar from './pages/Calendar/Calendar.tsx';
