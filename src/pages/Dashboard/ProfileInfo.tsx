@@ -1,14 +1,13 @@
-import * as Styled from './ProfileList.styled';
+import * as Styled from './ProfileInfo.styled';
 
 interface CardInfoProps {
-  key: number;
   content: string;
   Icon: React.ReactElement;
 }
 
-export default function ProfileInfo({ key, content, Icon }: CardInfoProps) {
+export default function ProfileInfo({ content, Icon }: CardInfoProps) {
   return (
-    <Styled.ProfileInfoWrapper key={key}>
+    <Styled.ProfileInfoWrapper>
       <Styled.ProfileInfoIcon>{Icon}</Styled.ProfileInfoIcon>
       <Styled.ProfileInfoContent>{content}</Styled.ProfileInfoContent>
     </Styled.ProfileInfoWrapper>
