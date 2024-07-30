@@ -1,3 +1,4 @@
+import './reset.css';
 import { GlobalStyles } from '@mui/material';
 import './fonts.css';
 import { Height } from '@mui/icons-material';
