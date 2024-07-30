@@ -1,6 +1,6 @@
 import TextField from '@mui/material/TextField';
 
-interface TextInputFieldProps {
+export interface TextInputFieldProps {
   label?: string; // 타이틀
   variant?: 'standard' | 'filled' | 'outlined';
   defaultValue?: string; // 기본값
