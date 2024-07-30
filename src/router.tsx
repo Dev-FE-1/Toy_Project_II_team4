@@ -2,7 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import App from './App.tsx';
 import Dashboard from './pages/Dashboard/Dashboard';
 import TempSalaryAdjustment from './pages/tempSalaryAdjustment/TempSalaryAdjustment';
+import SalaryList from './pages/salaryList/SalaryList.tsx';
 import { navbarLinks } from './components/nav/navLinks.tsx';
+import SalaryDetail from './pages/salaryDetail/SalaryDetail.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -16,7 +18,7 @@ export const router = createBrowserRouter([
       },
       {
         path: navbarLinks.payments.link,
-        element: <h1>급여 정산 페이지 컴포넌트</h1>,
+        element: <SalaryList />,
       },
       {
         path: navbarLinks.adjustSalary.link,
@@ -29,6 +31,10 @@ export const router = createBrowserRouter([
       {
         path: navbarLinks.myPage.link,
         element: <h1>마이페이지 컴포넌트</h1>,
+      },
+      {
+        path: '/salary-detail/:id',
+        element: <SalaryDetail />
       },
     ],
   },
