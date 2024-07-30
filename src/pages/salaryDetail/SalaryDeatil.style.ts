@@ -34,34 +34,6 @@ align-items:center;
 gap: 1rem; 
 `;
 
-export const Container = styled.div`
-  text-align:center;
-  font-size:1.6rem;
-
-  .bold {
-    font-weight:var(--font-weight-bold);
-  }
-  & > div {
-    background: linear-gradient(180deg, var(--color-pri), #9FA1AB);
-    color: var(--color-white);
-    padding-bottom:5rem;
-  }
-`
-export const ItemWrapper = styled.div`
-  display:flex;
-  justify-content: space-between;
-  font-weight:var(--font-weight-bold);
-
-  .pay{
-    padding-top:1rem;
-    font-size:1.2rem;
-  }
-  .pay > h5,
-  .pay > h3{
-  font-weight:var(--font-weight-bold);
-  }
-`;
-
 export const ListWrapper = styled.div<{ type?:string }>`
   display:flex;
   justify-content: space-between;
@@ -76,24 +48,4 @@ export const ListWrapper = styled.div<{ type?:string }>`
 
 export const Info = styled.div`
   margin-top:2.3rem;
-`;
-
-export const Movemonth = styled.div`
-  height:30px;
-  margin-top:1.3rem;
-  text-align:center;
-
-  .css-i4bv87-MuiSvgIcon-root{
-      height:0.8em;
-  }
-
-  .up-date{
-    font-weight:var(--font-weight-bold);
-    font-size:1.3rem;
-    margin:0 5px;
-
-    .css-i4bv87-MuiSvgIcon-root{
-      height:0.7em;
-    }
-  }
 `;
