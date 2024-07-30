@@ -7,6 +7,7 @@ function CardBox({ children }: CardBoxProps) {
 
 interface CardBoxProps {
   children: ReactNode;
+  className?: string;
 }
 
 export default CardBox;
