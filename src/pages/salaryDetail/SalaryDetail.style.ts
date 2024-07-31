@@ -38,10 +38,10 @@ export const ListWrapper = styled.div<{ type?:string }>`
   display:flex;
   justify-content: space-between;
   gap: 1rem;
-  padding:1rem;
+  padding:1.4rem 1rem;
 
   div{
-    font-size: ${props => props.type === 'main' ? '1rem' : '0.875rem'};
+    font-size: ${props => props.type === 'main' ? '1.4rem' : '1.2rem'};
     font-weight: ${props => props.type === 'main' ? 'bold' : 'normal'};
   }
 `;
