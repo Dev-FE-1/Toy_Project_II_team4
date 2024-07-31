@@ -55,7 +55,6 @@ function SalaryAdjustment() {
             ]}
           />
           <TextInputField label="제목" variant="outlined" />
-
           <SDataPicker dateType="range" />
         </styled.ModalWrapper>
       </BasicModal>
