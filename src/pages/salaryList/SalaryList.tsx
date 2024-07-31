@@ -4,6 +4,7 @@ import dayjs from "dayjs";
 import Heading from "../../components/Heading/Heading";
 import * as Styled from './SalaryList.style';
 import { useNavigate } from "react-router-dom";
+import NoticeCard from "./NoticeCard";
 
 const years = [
   { value: '2021', text: '2021' },
@@ -19,45 +20,50 @@ const PayData = [
 ]
 PayData.sort((a,b) => b.id-a.id)
 
+const firstPayData = PayData[0]
+const originDate = dayjs(firstPayData.date,'YYYY.MM.DD')
+const finalDate = originDate.format('YYYY년 MM월 ')
+const finalDay = originDate.subtract(2,'day').format('DD일')
+
 export default function SalaryList(){
   const navigate = useNavigate()
 
   const handleApplicationBtn = (id:number) => {
-    navigate(`/salary-detail/${id}`)
-  }
+    if(PayData.find((item) => item.id === id)){
+      navigate(`/salary-detail/${id}`)
+      }else{
+        console.error('급여 명세서가 없습니다.')
+      }
+    }
 
   return(
     <Styled.Salary>
       <Heading title="급여내역"/>
       <Styled.Grayline/>
-        <Styled.SalaryCardBox>
-          <h2><Styled.Orangetxt>{dayjs('2024-07-25').format('YYYY년 MM월 ')}</Styled.Orangetxt>급여 명세서</h2>
-            <h4>
-              <p>정정 신청 기간입니다.</p>
-              <p><Styled.Orangetxt>23일</Styled.Orangetxt>까지 신청해주세요.</p>
-            </h4>
-        </Styled.SalaryCardBox>
-    <Styled.YearSelect>
-    <SelectBox 
-    labelId="SalaryYear" 
-    id="year-select" 
-    label="year" 
-    menuItems={years}
-    />
-    </Styled.YearSelect>
-    {PayData.map((el)=>
-        (<Styled.ListCardBox key={el.id} state={el.state}>
+      <NoticeCard date={finalDate} day={finalDay}/>
+        <Styled.YearSelect>
+        <SelectBox 
+          labelId="SalaryYear" 
+          id="year-select" 
+          label="year" 
+          menuItems={years}
+        />
+      </Styled.YearSelect>
+        {PayData.map((el)=>
+          (<Styled.ListCardBox key={el.id} $state={el.state} 
+            onClick={()=>{handleApplicationBtn(el.id)}}>
             <Styled.List>
             <span className="title">{el.title}</span>
             <span className="date">{el.date}</span>
             </Styled.List>
             <Styled.Btn>
-            {el.state === 'true' ? 
-            <Btn round ='true' label='신청가능' onClick={()=>{handleApplicationBtn(el.id)}}/> : 
-            <Btn round='true' disabled label='지급완료'/> 
-            }
+              {el.state === 'true' ? 
+              <Btn round ='true' label='신청가능'/> 
+              : 
+              <Btn round='true' disabled label='지급완료'/> 
+              }
             </Styled.Btn>
-            </Styled.ListCardBox>))}
+        </Styled.ListCardBox>))}
     </Styled.Salary>
     )
 }
