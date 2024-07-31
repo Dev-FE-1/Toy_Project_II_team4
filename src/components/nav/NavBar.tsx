@@ -4,12 +4,12 @@ import { navbarItems } from './navLinks';
 
 export default function NavBar() {
   return (
-    <Styled.MyAppBar>
+    <Styled.NavBarWrapper>
       <Styled.MyToolbar>
         {navbarItems.map((page) => (
           <NavButton key={page.name} name={page.name} Icon={page.icon} link={page.link} />
         ))}
       </Styled.MyToolbar>
-    </Styled.MyAppBar>
+    </Styled.NavBarWrapper>
   );
 }

@@ -1,16 +1,18 @@
-import { styled } from '@mui/material/styles';
-import Toolbar from '@mui/material/Toolbar';
-import AppBar from '@mui/material/AppBar';
+import styled from 'styled-components';
 
-export const MyAppBar = styled(AppBar)`
+export const NavBarWrapper = styled.nav`
   position: fixed;
-  top: calc(100% - 80px);
-  width: 100vw;
-  /* max-width: 560px; */
-  height: 80px;
+  max-width: 568px;
+  margin: 0 auto;
+  padding: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 80px; // NavBar의 실제 높이에 맞게 조정
+  border-top: 1px solid var(--border-sec);
 `;
 
-export const MyToolbar = styled(Toolbar)`
+export const MyToolbar = styled.div`
   display: flex;
   justify-content: space-between;
   background-color: #ffff;

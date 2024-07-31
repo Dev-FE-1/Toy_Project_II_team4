@@ -36,17 +36,13 @@ export default function GlobalStyle() {
         },
         html: {
           fontSize: '10px',
-          height: '100vh',
           backgroundColor: '#eeeeee', // 페이지 전체 배경색을 빨간색으로 설정
         },
         body: {
           fontWeight: 400,
           maxWidth: '568px',
           margin: '0 auto',
-          height: '100vh',
           backgroundColor: 'var(--color-white)',
-          padding: '8px',
-          paddingBottom: '80px',
         },
         '#root': {
           minHeight: '100vh', // root 요소가 최소한 뷰포트 높이만큼 차지하도록 설정
