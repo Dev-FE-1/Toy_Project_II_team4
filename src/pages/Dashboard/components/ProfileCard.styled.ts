@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { CardBox } from '../../components/cardBox/CardBox.style';
+import { CardBox } from '../../../components/cardBox/CardBox.style';
 
 export const ProfileCard = styled(CardBox)`
   height: 19.5rem;
