@@ -41,7 +41,7 @@ export const IconWrapper = muiStyled(Box)`
   align-items: center;
   margin-bottom: 4px;
   & svg {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 `;
 

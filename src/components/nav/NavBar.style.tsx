@@ -8,7 +8,7 @@ export const NavBarWrapper = styled.nav`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 80px; // NavBar의 실제 높이에 맞게 조정
+  height: 80px; 
   border-top: 1px solid var(--border-sec);
 `;
 

@@ -4,7 +4,7 @@ import SalaryList from '../pages/salaryList/SalaryList.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
 import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
 import Calendar from '../pages/Calendar/Calendar.tsx';
-import { navbarLinks } from '../components/nav/navLinks.tsx';
+import { navbarLinks } from '../components/nav/NavLinks.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
 
 export const router = createBrowserRouter([
