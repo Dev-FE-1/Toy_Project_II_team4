@@ -29,7 +29,6 @@ export default function SDataPicker({dateType, ...props}:pickerProps){
               slotProps={DTPstyle} 
               value={startDate}
               onChange={(newvalue) => setStartDate(newvalue)}
-
               {...props}/>
             <Separator>-</Separator>
             <DatePicker 
