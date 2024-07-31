@@ -1,6 +1,7 @@
 import { Accordion, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
+import { CloseButtonStyle, ModalWrapperStyle } from '../../components/modal/BasicModal.style';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;
@@ -73,8 +74,7 @@ export const Schip = muiStyled(Chip)`
 `;
 
 export const ModalWrapper = styled.div`
-  width: 100%;
-  max-width: 600px;
+  ${ModalWrapperStyle}
 `;
 
 export const ModalTitle = styled.h2`
