@@ -28,30 +28,7 @@ export const Grayline = styled.div`
   height:0.08px;
 `;
 
-export const Orangetxt = styled.span`
-  color:var(--color-pri);
-  font-weight:(--font-weight-semibold);
-`;
-
-export const SalaryCardBox = styled.div`
-  color:var(--color-black);
-  padding: 2rem;
-  margin: 1rem;
-  border-radius:0.8rem;
-  border: 3px solid var(--color-pri);
-  margin: 2rem auto;
-  text-align:center;
-  box-sizing:border-box;
-
-  h2{
-    line-height:5rem;
-  }
-  h4{
-    font-weight:var(--font-weight-semibold);
-  }
-`;
-
-export const ListCardBox = styled.div<{state:string}>`
+export const ListCardBox = styled.div<{$state:string}>`
   color:var(--color-black);
   padding: 1.5rem;
   border-radius:0.5rem;
@@ -59,11 +36,17 @@ export const ListCardBox = styled.div<{state:string}>`
   display:flex;
   max-height:2.3rem;
   justify-content:space-between;
-  border:${(props)=>props.state === 'true' ? 
+  border:${({$state})=> $state === 'true' ? 
     '1px solid var(--color-pri)' : 
     '1px solid var(--border-sec)'
   };
-  //cursor:pointer;
+  cursor:pointer;
+  & > div> .MuiButton-root {
+    pointer-events: none;
+    &:hover {
+      pointer-events: none;
+    }
+  }
 `;
 
 export const List = styled.div`
