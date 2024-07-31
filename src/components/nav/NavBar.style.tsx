@@ -6,6 +6,7 @@ export const MyAppBar = styled(AppBar)`
   position: fixed;
   top: calc(100% - 80px);
   width: 100vw;
+  /* max-width: 560px; */
   height: 80px;
 `;
 

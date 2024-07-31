@@ -1,11 +1,11 @@
 import { createBrowserRouter } from 'react-router-dom';
-import App from './App.tsx';
-import Dashboard from './pages/Dashboard/Dashboard';
-import SalaryList from './pages/salaryList/SalaryList.tsx';
-import SalaryAdjustment from './pages/salaryAdjustment/SalaryAdjustment.tsx';
-import { navbarLinks } from './components/nav/navLinks.tsx';
-import SalaryDetail from './pages/salaryDetail/SalaryDetail.tsx';
-import Calendar from './pages/Calendar/Calendar.tsx';
+import App from '../App.tsx';
+import Dashboard from '../pages/Dashboard/Dashboard.tsx';
+import SalaryList from '../pages/salaryList/SalaryList.tsx';
+import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
+import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
+import Calendar from '../pages/Calendar/Calendar.tsx';
+import { navbarLinks } from '../components/nav/navLinks.tsx';
 
 export const router = createBrowserRouter([
   {
