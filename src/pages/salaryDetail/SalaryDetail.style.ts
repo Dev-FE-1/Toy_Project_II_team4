@@ -23,15 +23,15 @@ export const Thinline = styled.div`
 `;
 
 export const LSection = styled.div`
-display: flex;
-align-items:center;
-gap: 1rem; 
+  display: flex;  
+  align-items:center;
+  gap: 1rem; 
 `;
 
 export const RSection = styled.div`
-display: flex;
-align-items:center;
-gap: 1rem; 
+  display: flex;
+  align-items:center;
+  gap: 1rem; 
 `;
 
 export const ListWrapper = styled.div<{ type?:string }>`
@@ -39,7 +39,7 @@ export const ListWrapper = styled.div<{ type?:string }>`
   justify-content: space-between;
   gap: 1rem;
   padding:1.4rem 1rem;
-
+  
   div{
     font-size: ${props => props.type === 'main' ? '1.4rem' : '1.2rem'};
     font-weight: ${props => props.type === 'main' ? 'bold' : 'normal'};

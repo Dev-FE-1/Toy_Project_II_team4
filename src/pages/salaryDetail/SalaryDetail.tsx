@@ -7,6 +7,9 @@ import dayjs from "dayjs";
 import SalaryCard from "./SalaryCard";
 import MoveMonth from "./MoveMonth";
 import ListWrapper from "./ListWrapper";
+import jsPDF from "jspdf";
+import html2canvas from "html2canvas";
+import React, { useRef } from "react";
 
 interface SalaryDetailItem {
   label: string;
@@ -66,13 +69,14 @@ const SalaryData: SalaryDataItem[] = [
     ]
   }
 ];
-
 SalaryData.sort((a,b)=>b.id-a.id)
+
 
 export default function SalaryDetail() {
   const navigate = useNavigate()
   const { id } = useParams<{ id: string }>();
   const detailData = id ? SalaryData.find(data => data.id === parseInt(id)) : undefined
+  const detailRef = useRef<HTMLDivElement>(null)
 
   if (!detailData) {
     return <div>급여 명세서가 없습니다.</div>;
@@ -82,10 +86,24 @@ export default function SalaryDetail() {
     navigate('/payments')
   }
 
-  const handleDownload = () =>{
-
+  const handleDownload = () => {
+    if(detailRef.current){
+      html2canvas(detailRef.current).then(canvas => {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF();
+        const imgProps = pdf.getImageProperties(imgData);
+        const pdfWidth = pdf.internal.pageSize.getWidth();
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+        pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+        pdf.save(`${detailData.name}_${detailData.payday.slice(5, 7)}월_급여명세서.pdf`);
+      }).catch(console.error);
+    }
   }
   
+  const handleDownloadClick = () => {
+    handleDownload();
+  }
+
   return (
     <>
       <Styled.Header>
@@ -95,12 +113,12 @@ export default function SalaryDetail() {
         </Styled.LSection>
         <Styled.RSection>
           <Btn size="lg" label='정정신청' />
-          <IconBtn icontype="download" onClick={handleDownload} />
+          <IconBtn icontype="download" onClick={handleDownloadClick} />
         </Styled.RSection>
       </Styled.Header>
       <Styled.Listline />
+      <div key={detailData.id} ref={detailRef}>
       <MoveMonth id = {detailData.id} date={detailData.payday}/>
-      <div key={detailData.id}>
         <SalaryCard
           id={detailData.id} 
           name={detailData.name} 
