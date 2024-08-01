@@ -1,52 +1,38 @@
 import Heading from '../../components/Heading/Heading';
 import ProfileCard from './components/ProfileCard';
 import CalendarCard from './components/CalendarCard';
-import SalaryStatementCard from './components/SalaryStatementCard';
-import styled from 'styled-components';
+import NoticeCard from '../salaryList/NoticeCard';
+import dayjs from 'dayjs';
+import ListOutlinedIcon from '@mui/icons-material/ListOutlined';
+import { useNavigate } from 'react-router-dom';
 
 function Dashboard() {
+  const originDate = dayjs('2024-03-25');
+  const finalDate = originDate.format('YYYY년 MM월 ');
+  const finalDay = originDate.subtract(0, 'day').format('DD일');
+  const navigate = useNavigate();
+
+  const goToSalaryPage = () => navigate(`/salary-detail/3`);
+
   return (
     <>
       <Heading title="대시보드" />
       <ProfileCard />
       <CalendarCard />
-      <SalaryStatementCard />
-      <SalaryCardBox>
-        <h2>
-          <Orangetxt>2023년 07월</Orangetxt>급여 명세서
-        </h2>
-        <h4>
-          <p>정정 신청 기간입니다.</p>
-          <p>
-            <Orangetxt>23일</Orangetxt>까지 신청해주세요.
-          </p>
-        </h4>
-      </SalaryCardBox>
+      <NoticeCard
+        date={finalDate}
+        day={finalDay}
+        button={true}
+        label={
+          <h5>
+            <ListOutlinedIcon />
+            급여명세서 조회
+          </h5>
+        }
+        onClick={goToSalaryPage}
+      />
     </>
   );
 }
 
 export default Dashboard;
-
-export const Orangetxt = styled.span`
-  color: var(--color-pri);
-  font-weight: (--font-weight-semibold);
-`;
-
-export const SalaryCardBox = styled.div`
-  color: var(--color-black);
-  padding: 2rem;
-  margin: 1rem;
-  border-radius: 0.8rem;
-  border: 3px solid var(--color-pri);
-  margin: 2rem auto;
-  text-align: center;
-  box-sizing: border-box;
-
-  h2 {
-    line-height: 5rem;
-  }
-  h4 {
-    font-weight: var(--font-weight-semibold);
-  }
-`;

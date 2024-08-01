@@ -1,11 +1,10 @@
-import NavBar from './components/nav/NavBar';
-import { Outlet } from 'react-router-dom';
+import { RouterProvider } from 'react-router-dom';
+import { router } from './router/router.tsx';
 
 function App() {
   return (
     <>
-      <Outlet />
-      <NavBar />
+      <RouterProvider router={router} />
     </>
   );
 }

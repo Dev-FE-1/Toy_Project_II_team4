@@ -41,7 +41,7 @@ export const IconWrapper = muiStyled(Box)`
   align-items: center;
   margin-bottom: 4px;
   & svg {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 `;
 
@@ -52,6 +52,4 @@ export const LinkRoute = styled(Link)`
   position: absolute;
   text-decoration: none;
   color: inherit;
-  width: 100%;
-  height: 100%;
 `;
