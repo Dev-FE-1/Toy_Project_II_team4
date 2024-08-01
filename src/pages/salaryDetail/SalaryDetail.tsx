@@ -118,7 +118,7 @@ export default function SalaryDetail() {
       </Styled.Header>
       <Styled.Listline />
       <div key={detailData.id} ref={detailRef}>
-      <MoveMonth id = {detailData.id} date={detailData.payday}/>
+      <MoveMonth id = {detailData.id} date={detailData.payday} salaryData={SalaryData}/>
         <SalaryCard
           id={detailData.id} 
           name={detailData.name} 
