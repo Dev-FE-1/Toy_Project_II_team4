@@ -6,38 +6,42 @@ import { DatePickerProps } from '@mui/x-date-pickers';
 import { Dayjs } from 'dayjs';
 import { useState } from 'react';
 
-type pickerProps = DatePickerProps<Dayjs, false>& {
-  dateType : 'single' | 'range'
-}
+type pickerProps = DatePickerProps<Dayjs, false> & {
+  dateType: 'single' | 'range';
+};
 
-export default function SDataPicker({dateType, ...props}:pickerProps){
-  const [startDate, setStartDate] = useState<Dayjs | null>(null)
-  const [endDate, setEndDate] = useState<Dayjs | null>(null)
+export default function SDataPicker({ dateType, ...props }: pickerProps) {
+  const [startDate, setStartDate] = useState<Dayjs | null>(null);
+  const [endDate, setEndDate] = useState<Dayjs | null>(null);
 
-  switch(dateType){
+  switch (dateType) {
     case 'single':
       return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePicker slotProps={DTPstyle} {...props}/>
+          <DatePickerContainer>
+            <DatePicker slotProps={DTPstyle} {...props} />
+          </DatePickerContainer>
         </LocalizationProvider>
-      )
+      );
     case 'range':
       return (
         <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <DatePickerContainer>
-              <DatePicker 
-              slotProps={DTPstyle} 
+          <DatePickerContainer>
+            <DatePicker
+              slotProps={DTPstyle}
               value={startDate}
               onChange={(newvalue) => setStartDate(newvalue)}
-              {...props}/>
+              {...props}
+            />
             <Separator>-</Separator>
-            <DatePicker 
-            slotProps={DTPstyle}
-            value={endDate}
-            onChange={(newvalue) => setEndDate(newvalue)} 
-            {...props}/>
+            <DatePicker
+              slotProps={DTPstyle}
+              value={endDate}
+              onChange={(newvalue) => setEndDate(newvalue)}
+              {...props}
+            />
           </DatePickerContainer>
         </LocalizationProvider>
-      )
+      );
   }
 }

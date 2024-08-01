@@ -1,16 +1,10 @@
 import { Accordion, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
-import { CloseButtonStyle, ModalWrapperStyle } from '../../components/modal/BasicModal.style';
+import { ModalWrapperStyle } from '../../components/modal/BasicModal.style';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;
-`;
-
-export const PageTitle = styled.h1`
-  padding: 1rem;
-  /* margin-bottom: 2rem; */
-  border-bottom: 1px solid #ddd;
 `;
 
 export const BtnArea = styled.div`
@@ -74,7 +68,12 @@ export const Schip = muiStyled(Chip)`
 `;
 
 export const ModalWrapper = styled.div`
-  ${ModalWrapperStyle}
+  ${ModalWrapperStyle};
+  text-align: center;
+  .modal-inner {
+    padding: 0 2rem;
+    box-sizing: border-box;
+  }
 `;
 
 export const ModalTitle = styled.h2`
