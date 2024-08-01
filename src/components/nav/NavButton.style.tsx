@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { Link } from 'react-router-dom';
 
-export const MUIButton = muiStyled(Button)`
+export const MUIButton = muiStyled(Button)<{ selected: boolean }>`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,13 +14,14 @@ export const MUIButton = muiStyled(Button)`
   flex: 1;
   height: 80px;
   min-width: 0;
-  
+  background-color: ${(props) => (props.selected ? 'var(--color-pri)' : 'transparent')};
+  color: ${(props) => (props.selected ? '#fff' : '#333')};
+
   &:hover,
   &:active {
     background-color: var(--color-pri);
     color: #fff;
   }
-  color: #333;
 `;
 
 export const TextBox = muiStyled(Box)`
@@ -52,4 +53,6 @@ export const LinkRoute = styled(Link)`
   position: absolute;
   text-decoration: none;
   color: inherit;
+  width: 100%;
+  height: 100%;
 `;
