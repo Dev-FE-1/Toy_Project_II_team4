@@ -1,7 +1,9 @@
 import { configureStore } from '@reduxjs/toolkit';
-
+import salaryAdReducer from '../slices/salaryAdSlice';
 export const store = configureStore({
-  reducer: {},
+  reducer: {
+    salaryAd: salaryAdReducer,
+  },
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
