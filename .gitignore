@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 .env
+
+./functions/permissions.json
+./functions/.env
