@@ -1,5 +1,5 @@
 import TextField from '@mui/material/TextField';
-
+import { SxProps } from '@mui/system';
 export interface TextInputFieldProps {
   label?: string; // 타이틀
   variant?: 'standard' | 'filled' | 'outlined';
@@ -9,6 +9,7 @@ export interface TextInputFieldProps {
   width?: string; // 입력 필드 넓이
   noValidate?: boolean; //form의 기본 브라우저 유효성 검사를 비활성화
   autoComplete?: string; //자동 완성 기능
+  sx?: SxProps; // mui 스타일 속성
 }
 
 export default function TextInputField({
@@ -17,6 +18,8 @@ export default function TextInputField({
   defaultValue = '',
   error = false,
   helperText = '',
+  sx,
+  ...props
 }: TextInputFieldProps) {
   return (
     <TextField
@@ -26,6 +29,8 @@ export default function TextInputField({
       defaultValue={defaultValue}
       helperText={helperText}
       variant={variant}
+      sx={sx}
+      {...props}
     />
   );
 }

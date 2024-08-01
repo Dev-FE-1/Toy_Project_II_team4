@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import GlobalStyle from './styles/GlobalStyle.tsx';
+
 import { RouterProvider } from 'react-router-dom';
 import { router } from './router.tsx';
-import { createId } from './firebase/createId.ts';
 
-createId();
+
+import App from './App.tsx';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <GlobalStyle />
-    <RouterProvider router={router} />
+    <App />
   </React.StrictMode>
 );

@@ -36,9 +36,18 @@ export default function GlobalStyle() {
         },
         html: {
           fontSize: '10px',
+          backgroundColor: '#eeeeee', // 페이지 전체 배경색을 빨간색으로 설정
         },
         body: {
           fontWeight: 400,
+          maxWidth: '568px',
+          margin: '0 auto',
+          backgroundColor: 'var(--color-white)',
+        },
+        '#root': {
+          minHeight: '100vh', // root 요소가 최소한 뷰포트 높이만큼 차지하도록 설정
+          display: 'flex',
+          flexDirection: 'column',
         },
         'h1, .h1, h2, .h2, h3, .h3, h4, .h4, h5, .h5, h6, .h6': {
           fontFamily: 'var(--font-family-primary)',
