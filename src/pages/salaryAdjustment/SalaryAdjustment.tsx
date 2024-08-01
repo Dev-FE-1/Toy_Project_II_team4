@@ -1,10 +1,13 @@
 import Btn from '../../components/button/Button';
 import AccordionList from './AccordionList';
 import BasicModal from '../../components/modal/BasicModal';
-import SelectBox from '../../components/selectBox/SelectBox';
+import { useBasicModal } from '../../components/modal/useBasicModal';
+import { CloseButton } from '../../components/modal/CloseButton';
+import FormWrap from './FormWrap';
+import Heading from '../../components/Heading/Heading';
+import BasicDialog from '../../components/modal/BasicDialog';
+
 import * as styled from './SalaryAdjustment.style';
-import SDataPicker from '../../components/datepicker/DatePicker';
-import TextInputField from '../../components/textInputField/TextInputField';
 
 const datas = [
   {
@@ -24,40 +27,35 @@ const datas = [
     details: { date: '2024.01.25', state: '결재완료', note: '비고', reason: '반려사유 입니다.' },
   },
 ];
-
 function SalaryAdjustment() {
-  const onAdjustment = () => {
-    alert('asa');
-  };
+  const { open, handleOpen, handleClose } = useBasicModal();
   return (
     <styled.Wrapper>
-      <styled.PageTitle>정정내역</styled.PageTitle>
+      <Heading title="정정내역" />
       <styled.BtnArea>
-        <Btn label="정정신청" btnsize="md" onClick={onAdjustment} />
+        <BasicDialog
+          modalOpenButton={
+            <Btn label="정정신청" btnsize="md" onClick={handleOpen} sx={{ fontSize: '1.5rem' }} />
+          }
+          modalCloseButton={<CloseButton handleClose={handleClose} />}
+          open={open}
+        >
+          <Heading title="급여 정정신청" />
+          <styled.ModalTitle>03월 급여 정정</styled.ModalTitle>
+          <FormWrap />
+          <Btn
+            label="취소"
+            btnsize="sm"
+            onClick={handleClose}
+            sx={{ fontSize: '1.5rem', mr: '1rem' }}
+            btntype="outlined"
+          />
+          <Btn label="확인" btnsize="md" onClick={handleClose} sx={{ fontSize: '1.5rem' }} />
+        </BasicDialog>
       </styled.BtnArea>
       {datas.map((data, i) => (
         <AccordionList key={i} title={data.title} details={data.details} />
       ))}
-
-      <BasicModal>
-        <styled.ModalWrapper>
-          <styled.PageTitle>급여 정정신청</styled.PageTitle>
-          <styled.ModalTitle>03월 급여 정정 신청</styled.ModalTitle>
-          <SelectBox
-            labelId="labelCate"
-            id="cate"
-            label="카테고리"
-            menuItems={[
-              { text: '주말 / 공휴일 근무 수당', value: 'cate1' },
-              { text: '야간 근무 수당(22:00-06:00)', value: 'cate2' },
-              { text: '연차 누락', value: 'cate3' },
-              { text: '경비 처리', value: 'cate4' },
-            ]}
-          />
-          <TextInputField label="제목" variant="outlined" />
-          <SDataPicker dateType="range" />
-        </styled.ModalWrapper>
-      </BasicModal>
     </styled.Wrapper>
   );
 }
