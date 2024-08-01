@@ -32,7 +32,6 @@ export const navbarLinks = {
   },
 };
 
-
 export const navbarItems = [
   navbarLinks.home,
   navbarLinks.payments,
