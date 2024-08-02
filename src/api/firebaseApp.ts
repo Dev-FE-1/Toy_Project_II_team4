@@ -9,4 +9,4 @@ const auth = getAuth(app);
 const db = getFirestore(app);
 const firebaseDB = getDatabase(app);
 
-export { app, auth, db };
+export { app, auth, db, firebaseDB };
