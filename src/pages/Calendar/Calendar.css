@@ -1,7 +1,7 @@
 .calendar {
   width: 95%;
   margin: 0 auto;
-  /* margin-bottom: 80px; */
+  margin-bottom: 30px;
   font-size: 1.8rem;
 }
 
@@ -146,6 +146,9 @@
 .schedule-box.공연 {
   background-color: rgba(220, 95, 0, 0.3); /* 기존 색상에 투명도 추가 */
 }
+.schedule-box.개인 {
+  background-color: #ddd;
+}
 
 /* 카테고리별 색상 예시 */
 .schedule-card.방송-출연 {
@@ -160,9 +163,89 @@
 .schedule-card.공연 {
   background-color: #dc5f00;
 }
+.schedule-card.개인 {
+  background-color: #ddd;
+}
 
 .selected-date-info {
   padding: 20px 0;
   border-top: 1px solid #ddd;
   font-size: 1.6rem;
+}
+
+.calendar-body {
+  position: relative;
+}
+/* ------------------------------------------------------- */
+.add-schedule-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #4285f4;
+  color: white;
+  font-size: 24px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  padding-bottom: 120px;
+  height: 50%;
+}
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-content input,
+.modal-content textarea {
+  margin-bottom: 10px;
+  padding: 5px;
+}
+
+.modal-content button {
+  margin-top: 10px;
+}
+
+.calendar-middle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.calendar-checkbox {
+  display: flex;
+  font-size: 16px;
+}
+.calendar-checkbox label {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.calendar-checkbox input[type='checkbox'] {
+  margin-right: 5px;
 }
