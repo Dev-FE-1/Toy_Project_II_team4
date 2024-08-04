@@ -1,7 +1,70 @@
 import { useState } from 'react';
 import Heading from '../../components/Heading';
-// import { CurrencyExchange } from '@mui/icons-material';
 import './Calendar.css';
+
+// 샘플 일정 데이터
+const sampleSchedules = [
+  {
+    dateId: 1,
+    category: '워크샵',
+    description: '프로젝트 미팅',
+    title: '팀 회의',
+    startDate: '2024-08-02',
+    startTime: '08:00',
+    endDate: '2024-08-04',
+    endTime: '09:00',
+  },
+  {
+    dateId: 6,
+    category: '방송 출연',
+    description: '비고',
+    title: '외부 일정',
+    startDate: '2024-08-03',
+    startTime: '09:00',
+    endDate: '2024-08-03',
+    endTime: '18:00',
+  },
+  {
+    dateId: 2,
+    category: '회의',
+    description: '프로젝트 미팅',
+    title: '팀 회의',
+    startDate: '2024-08-05',
+    startTime: '14:00',
+    endDate: '2024-08-07',
+    endTime: '16:00',
+  },
+  {
+    dateId: 3,
+    category: '워크샵',
+    description: '팀 빌딩',
+    title: '연간 워크샵',
+    startDate: '2024-08-10',
+    startTime: '09:00',
+    endDate: '2024-08-12',
+    endTime: '17:00',
+  },
+  {
+    dateId: 4,
+    category: '회의',
+    description: '프로젝트 미팅',
+    title: '팀 회의',
+    startDate: '2024-08-03',
+    startTime: '15:00',
+    endDate: '2024-08-03',
+    endTime: '16:00',
+  },
+  {
+    dateId: 5,
+    category: '방송 출연',
+    description: '프로젝트 미팅',
+    title: '팀 회의',
+    startDate: '2024-08-01',
+    startTime: '13:00',
+    endDate: '2024-08-12',
+    endTime: '16:00',
+  },
+];
 
 export default function Calendar(): React.ReactElement {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
