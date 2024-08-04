@@ -1,7 +1,7 @@
 import SelectBox from "../../components/selectBox/SelectBox";
 import Btn from "../../components/button/Button";
 import dayjs from "dayjs";
-import Heading from "../../components/Heading/Heading";
+import Heading from "../../components/Heading";
 import * as Styled from './SalaryList.style';
 import { useNavigate } from "react-router-dom";
 import NoticeCard from "./NoticeCard";

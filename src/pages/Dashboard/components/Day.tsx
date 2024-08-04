@@ -1,4 +1,4 @@
-import * as Styled from './Day.styled';
+import styled from 'styled-components';
 
 export default function Day({ day }: { day: string }) {
   const date = new Date();
@@ -10,12 +10,30 @@ export default function Day({ day }: { day: string }) {
   const dayOfWeekName = dayOfWeekNames[dayOfWeek];
 
   return (
-    <Styled.DayWrapper>
-      <Styled.DayText>{dayOfWeekName}요일</Styled.DayText>
-      <Styled.DateText>
+    <DayWrapper>
+      <DayText>{dayOfWeekName}요일</DayText>
+      <DateText>
         {day === 'today' ? dateOfToday : day === 'tomorrow' ? dateOfTomorrow : null}
-      </Styled.DateText>
+      </DateText>
       {/* <Todo></Todo> */}
-    </Styled.DayWrapper>
+    </DayWrapper>
   );
 }
+
+const DayWrapper = styled.div`
+  padding: 0 1rem;
+  flex-grow: 1;
+
+  &:first-child {
+    border-right: 1px solid var(--border-sec);
+  }
+`;
+const DayText = styled.div`
+  flex-grow: 1;
+  font-size: 2rem;
+`;
+const DateText = styled.div`
+  flex-grow: 1;
+  font-size: 3rem;
+  font-weight: bold;
+`;

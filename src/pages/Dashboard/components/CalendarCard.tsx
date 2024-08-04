@@ -1,11 +1,22 @@
 import Day from './Day';
-import * as Styled from './CalendarCard.styled';
+import { CardBox } from '../../../components/cardBox/CardBox.style';
+import styled from 'styled-components';
 
 export default function CalendarCard() {
   return (
-    <Styled.CalendarCardWrapper>
+    <CalendarCardWrapper>
       <Day day="today" />
       <Day day="tomorrow" />
-    </Styled.CalendarCardWrapper>
+    </CalendarCardWrapper>
   );
 }
+
+const CalendarCardWrapper = styled(CardBox)`
+  display: flex;
+  height: 19.5rem;
+  overflow: hidden;
+  background-color: var(--color-black);
+  margin: 1rem 0;
+  border-radius: 30px;
+  color: var(--color-white);
+`;

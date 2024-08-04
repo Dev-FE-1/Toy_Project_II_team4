@@ -1,0 +1,50 @@
+.calendar {
+  width: 95%;
+  margin: 0 auto;
+  font-size: 1.8rem;
+}
+
+.calendar .current-month-day {
+  cursor: pointer;
+}
+
+.calendar .current-month-day:hover {
+  background-color: #f0f0f0;
+}
+
+.selected-date {
+  background-color: #007bff;
+  color: white;
+}
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+}
+
+.weekdays {
+  display: flex;
+}
+
+.days-row {
+  display: flex;
+}
+.weekday,
+.day {
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  /* border: 1px solid #ddd; */
+  padding: 8px;
+}
+.day {
+  height: 40px;
+}
+
+.next-month-day,
+.prev-month-day {
+  color: #ddd;
+}
