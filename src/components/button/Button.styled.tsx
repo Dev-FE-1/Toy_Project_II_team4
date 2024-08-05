@@ -10,7 +10,7 @@ const StyledButton = styled(Button)<{
   && {
     background-color: ${(props) =>
       props.disabled ? 'var(--color-white)' : props.btntype === 'outlined' ? 'var(--color-sec)' : 'var(--color-pri)'};
-    color: ${(props) => (props.disabled ? 'var(--border-pri)' : 'var(--color-white)')};
+    color: ${(props) => (props.disabled ? 'var(--border-pri)' : props.btntype === 'outlined' ? 'var(--color-pri)' : 'var(--color-white)')};
     border: 1px solid
       ${(props) =>
         props.disabled ? '#d3d3d3' : props.btntype === 'outlined' ? 'var(--color-sec)' : 'var(--color-pri)'};
@@ -21,7 +21,7 @@ const StyledButton = styled(Button)<{
     &:hover {
       background-color: ${(props) => (props.disabled ? '#d3d3d3' : 'var(--color-white)')};
       color: ${(props) =>
-        props.disabled ? 'var(--border-pri)' : props.btntype === 'outlined' ? '#373A40' : 'var(--color-pri)'};
+        props.disabled ? 'var(--border-pri)' : 'var(--color-pri)'};
     }
   }
 
