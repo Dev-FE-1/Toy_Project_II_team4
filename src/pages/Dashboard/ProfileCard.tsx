@@ -3,7 +3,7 @@ import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import PhoneOutlinedIcon from '@mui/icons-material/PhoneOutlined';
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
 import styled from 'styled-components';
-import { CardBox } from '../../../components/cardBox/CardBox.style';
+import { CardBox } from '../../components/cardBox/CardBox.style';
 
 export default function ProfileCard() {
   const infos = [

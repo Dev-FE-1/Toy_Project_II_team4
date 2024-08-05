@@ -1,5 +1,5 @@
 import Day from './Day';
-import { CardBox } from '../../../components/cardBox/CardBox.style';
+import { CardBox } from '../../components/cardBox/CardBox.style';
 import styled from 'styled-components';
 
 export default function CalendarCard() {

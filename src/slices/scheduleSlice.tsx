@@ -28,7 +28,10 @@ export const scheduleSlice = createSlice({
       state.schedules = action.payload;
     },
     addSchedule: (state, action: PayloadAction<ISchedule>) => {
-      state.schedules.push(action.payload);
+      console.log('Adding schedule:', action.payload);
+      //   state.schedules.push(action.payload);
+      state.schedules = [...state.schedules, action.payload];
+      console.log('New state:', JSON.parse(JSON.stringify(state.schedules)));
     },
   },
 });
