@@ -3,7 +3,7 @@ import Dashboard from '../pages/Dashboard/DashboardPage.tsx';
 import SalaryList from '../pages/salaryList/SalaryList.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
 import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
-import Calendar from '../pages/Calendar/Calendar.tsx';
+import CalendarPage from '../pages/Calendar/CalendarPage.tsx';
 import { navbarLinks } from '../components/nav/NavLinks.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
 
@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
       },
       {
         path: navbarLinks.calendar.link,
-        element: <Calendar />,
+        element: <CalendarPage />,
       },
       {
         path: navbarLinks.myPage.link,

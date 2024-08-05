@@ -1,19 +1,30 @@
+import styled from 'styled-components';
+
 interface CalendarHeaderProps {
   currentDate: Date;
-  onPrevMonth: () => void;
-  onNextMonth: () => void;
+  goToPrevMonth: () => void;
+  goToNextMonth: () => void;
 }
 
 export function CalendarHeader({
   currentDate,
-  onPrevMonth,
-  onNextMonth,
+  goToPrevMonth,
+  goToNextMonth,
 }: CalendarHeaderProps): JSX.Element {
   return (
-    <div className="calendar-header">
-      <button onClick={onPrevMonth}>&lt;</button>
+    <CalendarHeaderWrapper className="calendar-header">
+      <button onClick={goToPrevMonth}>&lt;</button>
       <span>{`${currentDate.getFullYear()}년 ${String(currentDate.getMonth() + 1).padStart(2, '0')}월`}</span>
-      <button onClick={onNextMonth}>&gt;</button>
-    </div>
+      <button onClick={goToNextMonth}>&gt;</button>
+    </CalendarHeaderWrapper>
   );
 }
+
+export const CalendarHeaderWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 2.2rem;
+  font-weight: bold;
+`;

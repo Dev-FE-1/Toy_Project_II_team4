@@ -1,7 +1,6 @@
 import React from 'react';
 
 interface useCalendarProps {
-  currentDate: Date;
   setCurrentDate: React.Dispatch<React.SetStateAction<Date>>;
   selectedDate: Date;
   setSelectedDate: React.Dispatch<React.SetStateAction<Date>>;

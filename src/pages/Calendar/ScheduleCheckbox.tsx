@@ -4,13 +4,15 @@ interface ScheduleCheckboxProps {
   onChange: (checked: boolean) => void;
 }
 
-const ScheduleCheckbox: React.FC<ScheduleCheckboxProps> = ({ label, checked, onChange }) => {
+export default function ScheduleCheckbox({
+  label,
+  checked,
+  onChange,
+}: ScheduleCheckboxProps): JSX.Element {
   return (
     <label>
       <input type="checkbox" checked={checked} onChange={(e) => onChange(e.target.checked)} />
       {label}
     </label>
   );
-};
-
-export default ScheduleCheckbox;
+}
