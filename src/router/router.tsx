@@ -1,9 +1,9 @@
 import { createBrowserRouter } from 'react-router-dom';
-import Dashboard from '../pages/Dashboard/Dashboard.tsx';
+import Dashboard from '../pages/Dashboard/DashboardPage.tsx';
 import SalaryList from '../pages/salaryList/SalaryList.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
 import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
-import Calendar from '../pages/Calendar/Calendar.tsx';
+import CalendarPage from '../pages/Calendar/CalendarPage.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
 import { ROUTE_PATHS } from './paths.tsx';
 import LoginPage from '../pages/login/LoginPage.tsx';
@@ -33,7 +33,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTE_PATHS.CALENDAR,
-        element: <Calendar />,
+        element: <CalendarPage />,
       },
       {
         path: ROUTE_PATHS.MY_PAGE,
