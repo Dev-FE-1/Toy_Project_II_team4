@@ -4,8 +4,8 @@ import SalaryList from '../pages/salaryList/SalaryList.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
 import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
 import Calendar from '../pages/Calendar/Calendar.tsx';
-import { navbarLinks } from '../components/nav/NavLinks.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
+import { ROUTE_PATHS } from './paths.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -14,27 +14,27 @@ export const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
     children: [
       {
-        path: navbarLinks.home.link,
+        path: ROUTE_PATHS.HOME,
         element: <Dashboard />,
       },
       {
-        path: navbarLinks.payments.link,
+        path: ROUTE_PATHS.PAYMENTS,
         element: <SalaryList />,
       },
       {
-        path: navbarLinks.adjustSalary.link,
+        path: ROUTE_PATHS.ADJUST_SALARY,
         element: <SalaryAdjustment />,
       },
       {
-        path: navbarLinks.calendar.link,
+        path: ROUTE_PATHS.CALENDAR,
         element: <Calendar />,
       },
       {
-        path: navbarLinks.myPage.link,
+        path: ROUTE_PATHS.MY_PAGE,
         element: <h1>마이페이지 컴포넌트</h1>,
       },
       {
-        path: '/salary-detail/:id',
+        path: ROUTE_PATHS.SALARY_DETAIL,
         element: <SalaryDetail />,
       },
     ],
