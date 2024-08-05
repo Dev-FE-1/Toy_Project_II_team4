@@ -1,4 +1,4 @@
-import Heading from '../../components/Heading';
+import Heading from '../../components/Heading/Heading';
 import ProfileCard from './ProfileCard';
 import CalendarCard from './CalendarCard';
 import NoticeCard from '../salaryList/NoticeCard';

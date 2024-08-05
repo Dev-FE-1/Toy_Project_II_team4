@@ -2,7 +2,7 @@ import { useNavigate,useParams } from "react-router-dom";
 import Btn from "../../components/button/Button";
 import IconBtn from "../../components/iconButton/IconButton";
 import * as Styled from './SalaryDetail.style';
-import Heading from "../../components/Heading";
+import Heading from "../../components/Heading/Heading";
 import dayjs from "dayjs";
 import SalaryCard from "./SalaryCard";
 import MoveMonth from "./MoveMonth";
