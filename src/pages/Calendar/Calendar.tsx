@@ -4,6 +4,9 @@ import './Calendar.css';
 import { AddScheduleModal } from './AddScheduleModal';
 import DateButton from './DateButton';
 import ScheduleCheckbox from './ScheduleCheckbox';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
+import { setSchedules, addSchedule } from '../../reducer/scheduleSlice';
 
 interface ISchedule {
   dateId: number;
@@ -29,11 +32,14 @@ interface IFormatDate {
 export default function Calendar(): React.ReactElement {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
-  const [schedules, setSchedules] = useState<ISchedule[]>([]);
   const [selectedScheduleId, setSelectedScheduleId] = useState<number | null>(null);
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
   const [showCompanySchedule, setShowCompanySchedule] = useState(true);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(true);
+  // const [schedules, setSchedules] = useState<ISchedule[]>([]);
+
+  const dispatch = useDispatch();
+  const schedules = useSelector((state: RootState) => state.schedules.schedules);
 
   const weekdays: string[] = ['일', '월', '화', '수', '목', '금', '토'];
 
@@ -42,14 +48,14 @@ export default function Calendar(): React.ReactElement {
       try {
         const response = await fetch('/data/calendar.json');
         const data: { schedule: ISchedule[] } = (await response.json()) as IScheduleData;
-        setSchedules(data.schedule);
+        dispatch(setSchedules(data.schedule));
       } catch (error) {
         console.error('Error loading schedules:', error);
       }
     };
 
     void fetchSchedules();
-  }, []);
+  }, [dispatch]);
 
   // 이전 달 "<" 클릭
   const prevMonth = (): void => {
@@ -108,7 +114,7 @@ export default function Calendar(): React.ReactElement {
     return filteredSchedules.filter(
       (schedule) =>
         schedule.startDate <= selectedDateString && selectedDateString <= schedule.endDate
-    )
+    );
   };
 
   //캘린더 날짜 렌더링
@@ -185,8 +191,11 @@ export default function Calendar(): React.ReactElement {
   const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
   const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
 
+  // const onAddSchedule = (newSchedule: ISchedule) => {
+  //   setSchedules((prevSchedules) => [...prevSchedules, newSchedule]);
+  // };
   const onAddSchedule = (newSchedule: ISchedule) => {
-    setSchedules((prevSchedules) => [...prevSchedules, newSchedule]);
+    dispatch(addSchedule(newSchedule));
   };
 
   const goToToday = (): void => {

@@ -15,7 +15,6 @@ export default function Day({ day }: { day: string }) {
       <DateText>
         {day === 'today' ? dateOfToday : day === 'tomorrow' ? dateOfTomorrow : null}
       </DateText>
-      {/* <Todo></Todo> */}
     </DayWrapper>
   );
 }
