@@ -30,3 +30,22 @@ export default function BasicDialog({
     </div>
   );
 }
+
+// BasicDialog 컴포넌트 사용방법
+// 1. import BasicDialog from './components/modal/BasicModal';
+// 2.
+
+{
+  /* <BasicDialog 
+  open={open} 
+  modalOpenButton = {
+    <Btn label="정정신청" 
+    btnsize="md" 
+    onClick={handleOpen}  
+    sx={{ fontSize: '1.5rem' }} />
+      } 
+  modalCloseButton={
+      <CloseButton handleClose={handleClose} />
+  }> */
+}
+// useBasicDialog 커스텀훅에서 open, handleClose, handleopen 상태와 함수를 정의하고, 이를 BasicDialog 컴포넌트에 전달해야함.

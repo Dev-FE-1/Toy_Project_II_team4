@@ -6,6 +6,8 @@ import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
 import Calendar from '../pages/Calendar/Calendar.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
 import { ROUTE_PATHS } from './paths.tsx';
+import LoginPage from '../pages/login/LoginPage.tsx';
+import { MyPage } from '../pages/myPage/MyPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -13,6 +15,10 @@ export const router = createBrowserRouter([
     element: <AppLayout />,
     errorElement: <div>404 Not Found</div>,
     children: [
+      {
+        path: ROUTE_PATHS.LOGIN,
+        element: <LoginPage />,
+      },
       {
         path: ROUTE_PATHS.HOME,
         element: <Dashboard />,
@@ -31,7 +37,7 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTE_PATHS.MY_PAGE,
-        element: <h1>마이페이지 컴포넌트</h1>,
+        element: <MyPage />,
       },
       {
         path: ROUTE_PATHS.SALARY_DETAIL,
