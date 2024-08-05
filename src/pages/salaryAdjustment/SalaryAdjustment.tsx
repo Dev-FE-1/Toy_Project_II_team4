@@ -1,11 +1,10 @@
 import Btn from '../../components/button/Button';
 import AccordionList from './AccordionList';
-import BasicModal from '../../components/modal/BasicModal';
 import { useBasicModal } from '../../components/modal/useBasicModal';
 import { CloseButton } from '../../components/modal/CloseButton';
 import FormWrap from './FormWrap';
 import Heading from '../../components/Heading/Heading';
-import BasicDialog from '../../components/modal/BasicDialog';
+import BasicDialog from '../../components/modal/BasicModal';
 
 import * as styled from './SalaryAdjustment.style';
 
