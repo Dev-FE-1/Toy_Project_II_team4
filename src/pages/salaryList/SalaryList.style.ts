@@ -28,7 +28,7 @@ export const Grayline = styled.div`
   height:0.08px;
 `;
 
-export const ListCardBox = styled.div<{$state:string}>`
+export const ListCardBox = styled.div<{$state:boolean}>`
   color:var(--color-black);
   padding: 1.5rem;
   border-radius:0.5rem;
@@ -36,7 +36,7 @@ export const ListCardBox = styled.div<{$state:string}>`
   display:flex;
   max-height:2.3rem;
   justify-content:space-between;
-  border:${({$state})=> $state === 'true' ? 
+  border:${({$state})=> $state === true ? 
     '1px solid var(--color-pri)' : 
     '1px solid var(--border-sec)'
   };

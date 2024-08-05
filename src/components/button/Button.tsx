@@ -1,3 +1,4 @@
+import React from 'react';
 import StyledButton from './Button.styled';
 import { ButtonProps as MuiButtonProps } from '@mui/joy/Button';
 //btnType의 경우 outlined로 타입을 넣어주지 않을 경우 기본 버튼은 primary
@@ -7,7 +8,7 @@ import { ButtonProps as MuiButtonProps } from '@mui/joy/Button';
 //<Btn disabled label='비활성화'/> 예) 비활성화 버튼
 
 type ButtonProps = MuiButtonProps &{
-  label: string;
+  label: React.ReactNode;
   btntype?: string;
   btnsize?: string;
   round?: string;
