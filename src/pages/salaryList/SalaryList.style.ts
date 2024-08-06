@@ -30,8 +30,9 @@ export const Grayline = styled.div`
 
 export const ListCardBox = styled.div<{$state:boolean}>`
   color:var(--color-black);
-  padding: 1.5rem;
-  border-radius:0.5rem;
+  background-color:var(--color-white);
+  padding: 1.7rem;
+  border-radius:1rem;
   margin: 1rem auto;
   display:flex;
   max-height:2.3rem;
@@ -55,10 +56,10 @@ export const List = styled.div`
   justify-content: center;
   & > .title {
     font-weight: var(--font-weight-semibold);
-    font-size: 1.2rem;
+    font-size: 1.5rem;
   }
   & > .date {
-    font-size: 10px;
+    font-size: 13px;
     color: var(--color-gray);
     text-align:left;
   }

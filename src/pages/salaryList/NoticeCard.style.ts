@@ -2,12 +2,12 @@ import styled from "styled-components";
 
 export const SalaryCardBox = styled.div`
   color:var(--color-black);
-  padding: 2rem;
+  background-color:var(--color-white);
+  padding: 3rem;
   margin: 1rem;
   border-radius:0.8rem;
   border: 3px solid var(--color-pri);
   margin: 2rem auto;
-  text-align:center;
   box-sizing:border-box;
 
   h2{
