@@ -14,7 +14,7 @@ export const Header = styled.div`
 
 export const Listline = styled.div`
   background-color:var(--border-pri);
-  height:0.1rem;
+  height:0.05rem;
 `;
 
 export const Thinline = styled.div`
@@ -34,15 +34,23 @@ export const RSection = styled.div`
   gap: 1rem; 
 `;
 
-export const ListWrapper = styled.div<{ type?:string }>`
+export const ListWrapper = styled.div<{ type?:string, content?:string}>`
   display:flex;
   justify-content: space-between;
   gap: 1rem;
-  padding:1.4rem 1rem;
+  padding:2rem 1rem;
+  box-sizing:border-box;
   
   div{
     font-size: ${props => props.type === 'main' ? '1.4rem' : '1.2rem'};
     font-weight: ${props => props.type === 'main' ? 'bold' : 'normal'};
+  }
+  .price{
+    color: ${props => 
+      props.content === 'pension' ? '#039C00' :
+      props.content === 'deduction' ? '#CC4846' :
+      props.content === 'pay' ? 'var(--color-pri)' : 
+      'var(--color-black)'}
   }
 `;
 

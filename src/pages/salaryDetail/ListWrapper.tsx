@@ -1,24 +1,19 @@
 import React from 'react';
 import * as Styled from './SalaryDetail.style';
+import {SalaryDetailItem} from '../salaryList/api/fetchSalaryInfo';
 
-type SalaryDetailItem = {
-    label:string;
-    value:string;
-    type?: 'main' | 'sub'
+interface ListWrapperItems {
+  details: SalaryDetailItem[]
 }
 
-type ListWrapperProps = {
-    details:SalaryDetailItem[];
-}
-
-export default function ListWrapper({details}:ListWrapperProps) {
+export default function ListWrapper({details}:ListWrapperItems) {
     return (
     <>     
     {details.map((item, index)=>
       <React.Fragment key={index}>
-        <Styled.ListWrapper type={item.type}>
+        <Styled.ListWrapper type={item.type} content={item.content}>
           <div>{item.label}</div>
-          <div>{item.value}원</div>
+          <div className='price'>{item.value} 원</div>
         </Styled.ListWrapper>
         {item.type === 'main' && index !== details.length - 1 && (
           <Styled.Thinline />
