@@ -1,5 +1,4 @@
 import { useNavigate, useParams } from "react-router-dom";
-import Btn from "../../components/button/Button";
 import IconBtn from "../../components/iconButton/IconButton";
 import * as Styled from './SalaryDetail.style';
 import jsPDF from "jspdf";
@@ -10,6 +9,7 @@ import useSalaryDetails from "../salaryList/useSalaryDetails";
 import MoveMonth from "./MoveMonth";
 import SalaryCard from "./SalaryCard";
 import ListWrapper from "./ListWrapper";
+import SelectedModal from "./DetailMonthModal";
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
@@ -35,13 +35,10 @@ export default function SalaryDetailPage() {
   }
 
   const employeeProfile = employees[userId]?.profile || {};
+  
   const handleCloseButton = () => {
     navigate('/payments')
   };
-
-  const handleApply = () => {
-    navigate('/salary-adjustment')
-  }
 
   const handleDownload = () => {
     if (detailRef.current) {
@@ -65,19 +62,23 @@ export default function SalaryDetailPage() {
                 <h2>급여명세서</h2>
               </Styled.LSection>
               <Styled.RSection>
-              <Btn size="lg" label='정정신청' onClick={handleApply} />
+              <SelectedModal month={salaryData.payday.slice(5, 7)}/>
                 <IconBtn icontype="download" onClick={handleDownload} />
               </Styled.RSection>
             </Styled.Header>
             <Styled.Listline />
             <div key={salaryData.id} ref={detailRef}>
-              <MoveMonth id={salaryData.id} date={salaryData.payday} salaryData={salaryDetails[userId]} />
-                <SalaryCard
-                  id={salaryData.id}
-                  name={employeeProfile.name || '이름 없음'}
-                  realpay={salaryData.realpay}
-                  payday={salaryData.payday}
-                />
+              <MoveMonth 
+                id={salaryData.id} 
+                date={salaryData.payday} 
+                salaryData={salaryDetails[userId]} 
+              />
+              <SalaryCard
+                id={salaryData.id}
+                name={employeeProfile.name || '이름 없음'}
+                realpay={salaryData.realpay}
+                payday={salaryData.payday}
+              />
                 <Styled.Info>
                   <Styled.Listline />
                   <ListWrapper details={salaryData.details}/>
