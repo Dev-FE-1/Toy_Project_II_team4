@@ -49,13 +49,16 @@ export const LoginPageContainer = styled.div`
     & label {
       font-size: 15px;
       font-weight: 500;
-      margin-bottom: 5px;
     }
 
     & p {
       font-size: 11px;
       color: var(--font-sec);
-      margin-top: 5px;
+    }
+
+    & input {
+      font-size: 16px;
+      height: 40px;
     }
   }
 `;

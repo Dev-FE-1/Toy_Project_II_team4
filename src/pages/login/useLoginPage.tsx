@@ -8,6 +8,7 @@ export function useLoginPage() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
   } = useForm();
 
@@ -31,5 +32,6 @@ export function useLoginPage() {
     register,
     handleSubmit,
     errors,
+    control,
   };
 }
