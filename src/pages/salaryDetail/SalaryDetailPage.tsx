@@ -40,6 +40,10 @@ export default function SalaryDetailPage() {
     navigate('/payments')
   };
 
+  const handleApply = () => {
+    navigate('/salary-adjustment')
+  }
+
   const handleDownload = () => {
     if (detailRef.current) {
         html2canvas(detailRef.current).then(canvas => {
@@ -62,7 +66,7 @@ export default function SalaryDetailPage() {
                 <Heading title="급여명세서" />
               </Styled.LSection>
               <Styled.RSection>
-                <Btn size="lg" label='정정신청' />
+              <Btn size="lg" label='정정신청' onClick={handleApply} />
                 <IconBtn icontype="download" onClick={handleDownload} />
               </Styled.RSection>
             </Styled.Header>

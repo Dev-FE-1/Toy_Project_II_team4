@@ -1,7 +1,7 @@
 import { Accordion, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
-import { ModalWrapperStyle } from '../../components/modal/BasicModal.style';
+import { ModalWrapperStyle } from '../../components/modal/BasicModal.styled';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;

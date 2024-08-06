@@ -56,7 +56,7 @@ export default function SalaryListPage(){
             onClick={()=>{handleApplicationBtn(el.id)}}>
             <Styled.List>
             <span className="title">{el.title}</span>
-            <span className="date">{el.payday}</span>
+            <span className="date">{el.state === true ? '지급예정' : el.payday}</span>
             </Styled.List>
             <Styled.Btn>
               {el.state === true ? 
