@@ -8,7 +8,7 @@ export const Container = styled.div`
     font-weight:var(--font-weight-bold);
   }
   & > div {
-    background: linear-gradient(180deg, var(--color-pri), #9FA1AB);
+    background: var(--color-pri-white);
     color: var(--color-white);
     padding-bottom:5rem;
   }
@@ -28,3 +28,7 @@ export const ItemWrapper = styled.div`
   font-weight:var(--font-weight-bold);
   }
 `;
+
+export const LgFont = styled.span`
+  font-size:25px;
+`

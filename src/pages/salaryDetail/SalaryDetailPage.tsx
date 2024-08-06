@@ -2,11 +2,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import Btn from "../../components/button/Button";
 import IconBtn from "../../components/iconButton/IconButton";
 import * as Styled from './SalaryDetail.style';
-import Heading from "../../components/Heading/Heading";
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import React, { useRef } from "react";
-import { SalaryDataItem} from "../salaryList/api/fetchSalaryInfo";
+import {SalaryDataItem} from '../salaryList/api/fetchSalaryInfo';
 import useSalaryDetails from "../salaryList/useSalaryDetails";
 import MoveMonth from "./MoveMonth";
 import SalaryCard from "./SalaryCard";
@@ -63,7 +62,7 @@ export default function SalaryDetailPage() {
           <Styled.Header>
             <Styled.LSection>
               <IconBtn icontype="close" onClick={handleCloseButton} />
-                <Heading title="급여명세서" />
+                <h2>급여명세서</h2>
               </Styled.LSection>
               <Styled.RSection>
               <Btn size="lg" label='정정신청' onClick={handleApply} />
@@ -81,7 +80,7 @@ export default function SalaryDetailPage() {
                 />
                 <Styled.Info>
                   <Styled.Listline />
-                  <ListWrapper details={salaryData.details} />
+                  <ListWrapper details={salaryData.details}/>
                   <Styled.Listline />
                 </Styled.Info>
           </div>

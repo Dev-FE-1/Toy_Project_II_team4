@@ -5,6 +5,7 @@ export interface SalaryDetailItem {
   label: string;
   value: string;
   type?: 'main' | 'sub';
+  content?:string;
 }
 
 export interface SalaryDataItem {

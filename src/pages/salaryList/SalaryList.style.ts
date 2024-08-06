@@ -29,12 +29,13 @@ export const Grayline = styled.div`
 `;
 
 export const ListCardBox = styled.div<{$state:boolean}>`
+  background-color:var(--color-white);
   color:var(--color-black);
-  padding: 1.5rem;
-  border-radius:0.5rem;
-  margin: 1rem auto;
+  padding: 1.5rem 2rem 2rem 2rem;
+  border-radius:1rem;
+  margin: 1.5rem auto;
   display:flex;
-  max-height:2.3rem;
+  height:2.5rem;
   justify-content:space-between;
   border:${({$state})=> $state === true ? 
     '1px solid var(--color-pri)' : 
@@ -49,17 +50,18 @@ export const ListCardBox = styled.div<{$state:boolean}>`
   }
 `;
 
-export const List = styled.div`
+export const List = styled.div<{$state:boolean}>`
   display: flex;
   flex-direction: column;
   justify-content: center;
   & > .title {
-    font-weight: var(--font-weight-semibold);
-    font-size: 1.2rem;
+    font-weight: ${({$state}) => $state === true? 'var(--font-weight-bold)' : 'var(font-weight-semibold)'};
+    line-height: 3.2rem;
+    font-size: 1.5rem;
   }
   & > .date {
-    font-size: 10px;
-    color: var(--color-gray);
+    font-size: 13px;
+    color: ${({$state}) => $state === true? 'var(--font-pri)' : 'var(--font-sec)'};
     text-align:left;
   }
 `;
