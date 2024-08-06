@@ -51,30 +51,3 @@ export default function LoginPage() {
     </div>
   );
 }
-
-{
-  /* <div>
-            <TextField
-              label="이메일"
-              {...register('email')}
-              variant="standard"
-              helperText="이메일을 입력해주세요"
-              autoComplete="on"
-              defaultValue={'badaclock@gmail.com'}
-              type="email"
-            />
-          </div> */
-}
-{
-  /* <div>
-            <TextField
-              label="비밀번호"
-              {...register('password')}
-              variant="standard"
-              helperText="비밀번호를 8자 이상 입력해주세요"
-              autoComplete="on"
-              type="password"
-              defaultValue={'12345678'}
-            />
-          </div> */
-}
