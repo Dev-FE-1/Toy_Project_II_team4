@@ -1,0 +1,31 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "npm run dev",
+      "request": "launch",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev"],
+      "type": "node",
+      "serverReadyAction": {
+        "action": "openExternally",
+        "pattern": "listening on port ([0-9]+)",
+        "uriFormat": "http://localhost:%s"
+      }
+    },
+    {
+      "type": "chrome",
+      "request": "launch",
+      "name": "debug config",
+      "url": "http://localhost:5173",
+      "webRoot": "${workspaceFolder}/src"
+    }
+  ],
+  "compounds": [
+    {
+      "name": "Debug React",
+      "configurations": ["debug config", "npm run dev"],
+      "stopAll": true
+    }
+  ]
+}
