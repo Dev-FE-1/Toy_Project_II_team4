@@ -16,7 +16,7 @@ export default function SalaryCard({id, name, realpay, payday}:salaryData){
       <hr />
       <Styled.ItemWrapper>
         <div className="pay"><h5>실수령액</h5></div>
-          <div className="pay"><h3>{realpay}원</h3></div>
+          <div className="pay"><h3><Styled.LgFont>{realpay}</Styled.LgFont> 원</h3></div>
       </Styled.ItemWrapper><hr/>
       <Styled.ItemWrapper>
         <div className="pay">급여지급일</div>

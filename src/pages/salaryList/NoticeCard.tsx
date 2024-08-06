@@ -13,10 +13,11 @@ export default function NoticeCard({ date, day, button = false, label, onClick }
   return (
     <Styled.SalaryCardBox>
       <h2>
-        <Styled.Orangetxt>{date}</Styled.Orangetxt>급여 명세서
+        <Styled.Orangetxt>{date}</Styled.Orangetxt>급여명세서
       </h2>
+      <h6 className='imoge'>✉️</h6>
       <h3>
-        <p>정정 신청 기간입니다.</p>
+        <p>정정 신청 기간입니다.</p> 
         <p>
           <Styled.Orangetxt>{day}</Styled.Orangetxt>까지 신청해주세요.
         </p>
