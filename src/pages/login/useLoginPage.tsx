@@ -4,12 +4,20 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { auth } from '../../api/firebaseApp';
 
+interface IFormInput {
+  email: string;
+  password: string;
+}
+
 export function useLoginPage() {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors },
-  } = useForm();
+  } = useForm<IFormInput>({
+    mode: 'onChange',
+  });
 
   const handleLogin: SubmitHandler<FieldValues> = (form) => {
     console.log(form.email, form.password);
@@ -31,5 +39,6 @@ export function useLoginPage() {
     register,
     handleSubmit,
     errors,
+    control,
   };
 }

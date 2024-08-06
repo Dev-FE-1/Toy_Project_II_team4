@@ -8,26 +8,9 @@ import BasicDialog from '../../components/modal/BasicModal';
 
 import * as styled from './SalaryAdjustment.style';
 
-const datas = [
-  {
-    title: '04월 급여명세서/경비누락',
-    details: { date: '2024.04.25', state: '결재대기', note: '비고', reason: '반려사유 입니다.' },
-  },
-  {
-    title: '03월 급여명세서/경비누락',
-    details: { date: '2024.03.25', state: '결재완료', note: '비고', reason: '반려사유 입니다.' },
-  },
-  {
-    title: '02월 급여명세서/경비누락',
-    details: { date: '2024.02.25', state: '반려', note: '비고', reason: '반려사유 입니다.' },
-  },
-  {
-    title: '01월 급여명세서/경비누락',
-    details: { date: '2024.01.25', state: '결재완료', note: '비고', reason: '반려사유 입니다.' },
-  },
-];
 function SalaryAdjustment() {
   const { open, handleOpen, handleClose } = useBasicModal();
+
   return (
     <styled.Wrapper>
       <Heading title="정정내역" />
@@ -52,10 +35,10 @@ function SalaryAdjustment() {
           <Btn label="확인" btnsize="md" onClick={handleClose} sx={{ fontSize: '1.5rem' }} />
         </BasicDialog>
       </styled.BtnArea>
-      {datas.map((data, i) => (
-        <AccordionList key={i} title={data.title} details={data.details} />
-      ))}
+
+      <AccordionList />
     </styled.Wrapper>
   );
 }
+
 export default SalaryAdjustment;
