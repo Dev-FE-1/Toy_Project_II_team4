@@ -31,11 +31,11 @@ export const router = createBrowserRouter([
       },
       {
         path: ROUTE_PATHS.PAYMENTS,
-        element: <SalaryAdjustment />,
+        element: <SalaryListPage />,
       },
       {
         path: ROUTE_PATHS.ADJUST_SALARY,
-        element: <SalaryListPage />,
+        element: <SalaryAdjustment />,
       },
       {
         path: ROUTE_PATHS.CALENDAR,
