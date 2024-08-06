@@ -5,12 +5,10 @@ import { CloseButton } from '../../components/modal/CloseButton';
 import FormWrap from './FormWrap';
 import Heading from '../../components/Heading/Heading';
 import BasicDialog from '../../components/modal/BasicDialog';
-import { useSelector } from 'react-redux';
+
 import * as styled from './SalaryAdjustment.style';
-import { RootState } from '../../store/store';
 
 function SalaryAdjustment() {
-  const datas = useSelector((state: RootState) => state.salaryAd);
   const { open, handleOpen, handleClose } = useBasicModal();
 
   return (
@@ -37,10 +35,10 @@ function SalaryAdjustment() {
           <Btn label="확인" btnsize="md" onClick={handleClose} sx={{ fontSize: '1.5rem' }} />
         </BasicDialog>
       </styled.BtnArea>
-      {datas.map((data, i) => (
-        <AccordionList key={i} title={data.title} details={data.details} />
-      ))}
+
+      <AccordionList />
     </styled.Wrapper>
   );
 }
+
 export default SalaryAdjustment;

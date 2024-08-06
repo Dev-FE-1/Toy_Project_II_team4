@@ -1,71 +1,96 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface Data {
-  title: string;
-  details: {
-    id: string;
-    date: string;
-    state: string;
-    note: string;
-    reason: string;
-  };
-}
-const datas = [
-  {
-    title: '04월 급여명세서/경비누락',
-    details: {
-      id: '4',
-      date: '2024.04.25',
-      state: '결재대기',
-      note: '비고',
-      reason: '반려사유 입니다.',
-    },
-  },
-  {
-    title: '03월 급여명세서/경비누락',
-    details: {
-      id: '3',
-      date: '2024.03.25',
-      state: '결재완료',
-      note: '비고',
-      reason: '반려사유 입니다.',
-    },
-  },
-  {
-    title: '02월 급여명세서/경비누락',
-    details: {
-      id: '2',
-      date: '2024.02.25',
-      state: '반려',
-      note: '비고',
-      reason: '반려사유 입니다.',
-    },
-  },
-  {
-    title: '01월 급여명세서/경비누락',
-    details: {
-      id: '1',
-      date: '2024.01.25',
-      state: '결재완료',
-      note: '비고',
-      reason: '반려사유 입니다.',
-    },
-  },
-];
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { firebaseDB } from '../api/firebaseApp';
+import { get, ref, set } from 'firebase/database';
 
-const initialState = datas;
+const PATH = '/salaryAdjustments/sajo1234567';
+const dbRef = ref(firebaseDB, PATH);
 
-export const salaryAdSlice = createSlice({
+const salaryAdSlice = createSlice({
   name: 'salaryAd',
-  initialState,
-  reducers: {
-    addItem: (state, action: PayloadAction<Data>) => {
-      state.push(action.payload);
-    },
-    delItem: (state, action: PayloadAction<string>) => {
-      return state.filter((item) => item.details.id !== action.payload);
-    },
+  initialState: {
+    data: [],
+    status: 'idle',
+    error: null,
+  } as SalaryAdState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchSalaryAdData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchSalaryAdData.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload;
+      })
+      .addCase(fetchSalaryAdData.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'error: extraReducers fetch 실패';
+      })
+      .addCase(deleteSalaryAdData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(deleteSalaryAdData.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        console.log(action.payload);
+        state.data = action.payload;
+      })
+      .addCase(deleteSalaryAdData.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'error: extraReducers delete 실패';
+      });
   },
 });
 
-export const { addItem, delItem } = salaryAdSlice.actions;
+export const fetchSalaryAdData = createAsyncThunk('salaryAd/fetchSalaryAdData', async () => {
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return snapshot.val() as Data[];
+    } else {
+      return [];
+    }
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : 'fetch 실패');
+  }
+});
+
+export const deleteSalaryAdData = createAsyncThunk(
+  'salaryAd/deleteSalaryAdData',
+  async (id: string) => {
+    const snapshot = await get(ref(firebaseDB, PATH));
+    const state = snapshot.val() as Data[];
+    const updated = state.filter((item) => item.id !== id);
+    try {
+      await set(dbRef, updated);
+      return updated;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : 'delete 실패');
+    }
+  }
+);
+
+interface File {
+  fileName: string;
+  fileUrl: string;
+}
+
+interface Data {
+  id: string;
+  category: '주말 / 공휴일 근무 수당' | '야간 근무 수당(22:00-06:00)' | '연차 누락' | '경비 처리';
+  description: string;
+  endTime: string;
+  files: File[];
+  month: string;
+  requestTime: string;
+  startTime: string;
+  status: '결재대기' | '결재완료' | '반려';
+}
+
+export interface SalaryAdState {
+  data: Data[] | [];
+  status: 'idle' | 'loading' | 'failed' | 'succeeded';
+  error: string | null;
+}
+
+// export const { addItem, delItem } = salaryAdSlice.actions;
 export default salaryAdSlice.reducer;
