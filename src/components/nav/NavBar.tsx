@@ -8,7 +8,7 @@ export default function NavBar() {
   const location = useLocation();
   const { selected, setSelected } = useNavBar(location.pathname);
 
-  console.log(location.pathname);
+  // console.log(location.pathname);
   return (
     <Styled.NavBarWrapper>
       <Styled.MyToolbar>
