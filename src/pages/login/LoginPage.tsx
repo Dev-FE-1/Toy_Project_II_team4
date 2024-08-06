@@ -4,8 +4,14 @@ import LogoImg from '../../styles/images/sajoLogo.png';
 import Btn from '../../components/button/Button';
 import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
+import { useState } from 'react';
+import CircularProgress from '@mui/material/CircularProgress';
+
 export default function LoginPage() {
-  const { handleSubmit, handleLogin, control } = useLoginPage();
+  const { handleSubmit, handleLogin, control, errors } = useLoginPage();
+
+  const [isEmailEmpty, setIsEmailEmpty] = useState(true);
+  const [isPasswordEmpty, setIsPasswordEmpty] = useState(true);
 
   return (
     <div>
@@ -18,34 +24,68 @@ export default function LoginPage() {
           <Controller
             name="email"
             control={control}
-            defaultValue={'badaclock@gmail.com'}
+            // defaultValue="badaclock@gmail.com"
+            rules={{
+              required: true,
+              pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+              onChange: (e) => {
+                setIsEmailEmpty(e.target.value.length < 0);
+              },
+            }}
             render={({ field }) => (
               <TextField
                 label="이메일"
+                className="form__login_Email"
                 {...field}
                 variant="standard"
-                helperText="이메일을 입력해주세요"
-                type="email"
+                helperText={
+                  isEmailEmpty || errors.email
+                    ? '이메일 형식으로 입력해주세요 예) "example@gmail.com"'
+                    : ''
+                }
                 autoComplete="on"
+                error={errors.email ? true : false}
               />
             )}
           />
           <Controller
             name="password"
             control={control}
-            defaultValue={'12345678'}
+            // defaultValue={'12345678'}
+            rules={{
+              required: true,
+              minLength: 8,
+              onChange: (e) => {
+                setIsPasswordEmpty(e.target.value.length < 0);
+              },
+            }}
             render={({ field }) => (
               <TextField
+                className="form__login_Password"
                 label="비밀번호"
                 {...field}
                 variant="standard"
-                helperText="비밀번호를 8자 이상 입력해주세요"
+                helperText={
+                  isPasswordEmpty || errors.password ? '비밀번호를 8자 이상 입력해주세요' : ''
+                }
                 autoComplete="on"
                 type="password"
+                error={errors.password ? true : false}
               />
             )}
           />
-          <Btn label="로그인" type="submit" />
+          <Btn
+            label="로그인"
+            type="submit"
+            className={
+              isEmailEmpty || isPasswordEmpty || errors.email || errors.password ? 'disabled' : ''
+            }
+            children={
+              <div className="wrapper__loading_spinner">
+                <CircularProgress className="form__loading_spinner" />
+              </div>
+            }
+          ></Btn>
         </form>
       </Styled.LoginPageContainer>
     </div>
