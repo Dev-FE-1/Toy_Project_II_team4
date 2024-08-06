@@ -25,6 +25,7 @@ export default function SalaryCard() {
 }
 
 export const SalaryCardWrapper = styled(NoticeCard)`
+  /* 하단 스타일이 적용이 되고 있지 않습니다. */
   display: flex;
   border: 1px solid var(--border-sec);
   height: 19.5rem;
