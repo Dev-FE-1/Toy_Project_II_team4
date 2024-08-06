@@ -37,7 +37,7 @@ export default function SalaryDetailPage() {
   const employeeProfile = employees[userId]?.profile || {};
   
   const handleCloseButton = () => {
-    navigate('/payments')
+    navigate(-1)
   };
 
   const handleDownload = () => {
