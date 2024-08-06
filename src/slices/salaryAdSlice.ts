@@ -69,17 +69,11 @@ export const deleteSalaryAdData = createAsyncThunk(
   }
 );
 
-interface File {
-  fileName: string;
-  fileUrl: string;
-}
-
 interface Data {
   id: string;
   category: '주말 / 공휴일 근무 수당' | '야간 근무 수당(22:00-06:00)' | '연차 누락' | '경비 처리';
   description: string;
   endTime: string;
-  files: File[];
   month: string;
   requestTime: string;
   startTime: string;

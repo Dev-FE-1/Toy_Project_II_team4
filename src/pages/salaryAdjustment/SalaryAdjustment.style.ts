@@ -1,27 +1,37 @@
 import { Accordion, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
-import { ModalWrapperStyle } from '../../components/modal/BasicModal.styled';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;
-`;
-
-export const BtnArea = styled.div`
-  display: flex;
-  justify-content: flex-end;
-  margin: 2rem 0;
-  .MuiButton-root {
+  .btnArea {
+    display: flex;
+    justify-content: flex-end;
+    margin: 2rem 0;
+  }
+  .btn-area .MuiButton-root {
     width: 10rem;
     font-size: 1.5rem;
   }
 `;
 
 export const SAccordion = muiStyled(Accordion)`
-  .MuiAccordionSummary-content {
+  .MuiAccordionSummary-root .title {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+  }
+  .MuiAccordionSummary-content{
+    display:flex;
+    justify-content:space-between;
+  }
+  .MuiAccordionSummary-root .title .title-inner {
+    text-align: left;
+  }
+  .MuiAccordionSummary-root .title .title-inner p {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+  }
+  .MuiAccordionSummary-root .title .title-inner .date {
+    color: var(--font-sec);
   }
   .MuiAccordionDetails-root ul {
     text-align: left;
@@ -29,19 +39,8 @@ export const SAccordion = muiStyled(Accordion)`
   .MuiAccordionDetails-root ul li {
     margin-bottom: 1rem;
   }
-`;
-
-export const AccordionTitle = styled.div`
-  display: flex;
-  .title-wrap {
-    text-align: left;
-  }
-  p {
-    font-weight: 600;
-    margin-bottom: 0.5rem;
-  }
-  .date {
-    color: var(--font-sec);
+    .MuiAccordionDetails-root ul li span{
+    font-weight:bold;
   }
 `;
 
@@ -67,17 +66,14 @@ export const Schip = muiStyled(Chip)`
   }
 `;
 
-export const ModalWrapper = styled.div`
-  ${ModalWrapperStyle};
-  text-align: center;
-  .modal-inner {
-    padding: 0 2rem;
-    box-sizing: border-box;
+export const modalWrapper = styled.div`
+  .modal-title {
+    padding: 3rem 0;
+    text-align: center;
+    font-weight: bold;
   }
-`;
-
-export const ModalTitle = styled.h2`
-  padding: 3rem 0;
-  text-align: center;
-  font-weight: bold;
+  .modal-btnArea {
+    display: flex;
+    justify-content: center;
+  }
 `;

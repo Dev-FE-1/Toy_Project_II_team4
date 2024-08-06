@@ -14,7 +14,7 @@ function SalaryAdjustment() {
   return (
     <styled.Wrapper>
       <Heading title="정정내역" />
-      <styled.BtnArea>
+      <div className="btnArea">
         <BasicDialog
           modalOpenButton={
             <Btn label="정정신청" btnsize="md" onClick={handleOpen} sx={{ fontSize: '1.5rem' }} />
@@ -22,19 +22,13 @@ function SalaryAdjustment() {
           modalCloseButton={<CloseButton handleClose={handleClose} />}
           open={open}
         >
-          <Heading title="급여 정정신청" />
-          <styled.ModalTitle>03월 급여 정정</styled.ModalTitle>
-          <FormWrap />
-          <Btn
-            label="취소"
-            btnsize="sm"
-            onClick={handleClose}
-            sx={{ fontSize: '1.5rem', mr: '1rem' }}
-            btntype="outlined"
-          />
-          <Btn label="확인" btnsize="md" onClick={handleClose} sx={{ fontSize: '1.5rem' }} />
+          <styled.modalWrapper>
+            <Heading title="급여 정정신청" />
+            <h2 className="modal-title">07월 급여 정정</h2>
+            <FormWrap />
+          </styled.modalWrapper>
         </BasicDialog>
-      </styled.BtnArea>
+      </div>
 
       <AccordionList />
     </styled.Wrapper>
