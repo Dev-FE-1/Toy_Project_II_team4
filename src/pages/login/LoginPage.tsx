@@ -49,6 +49,7 @@ export default function LoginPage() {
               variant="standard"
               helperText="이메일을 입력해주세요"
               autoComplete="on"
+              defaultValue={'badaclock@gmail.com'}
               type="email"
               InputProps={{
                 style: { fontSize: '16px', height: '40px' },
@@ -63,6 +64,7 @@ export default function LoginPage() {
               helperText="비밀번호를 8자 이상 입력해주세요"
               autoComplete="on"
               type="password"
+              defaultValue={'12345678'}
               InputProps={{
                 style: { fontSize: '16px', height: '40px' },
               }}

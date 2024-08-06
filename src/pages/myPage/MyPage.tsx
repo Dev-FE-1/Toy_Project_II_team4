@@ -1,5 +1,6 @@
 import Btn from '../../components/button/Button';
-import ProfileCard from '../Dashboard/components/ProfileCard';
+// import ProfileCard from '../Dashboard/components/ProfileCard';
+import ProfileCard from '../Dashboard/ProfileCard';
 import { useMyPage } from './useMyPage';
 
 export function MyPage() {
