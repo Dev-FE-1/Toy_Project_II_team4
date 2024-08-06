@@ -1,6 +1,7 @@
 import TextField from '@mui/material/TextField';
 import { SxProps } from '@mui/system';
-export interface TextInputFieldProps {
+import { TextFieldProps } from '@mui/material/TextField';
+export interface TextInputFieldProps extends Omit<TextFieldProps, 'children'> {
   label?: string; // 타이틀
   variant?: 'standard' | 'filled' | 'outlined';
   defaultValue?: string; // 기본값

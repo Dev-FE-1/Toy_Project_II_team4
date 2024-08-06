@@ -1,0 +1,118 @@
+{
+  "employees": {
+    "sajo1234567": {
+      "profile": {
+        "name": "김지훈",
+        "email": "hong@example.com",
+        "position": "로드 매니저",
+        "team": "관리 2팀",
+        "responsibleTeam": "블루핑크",
+        "profileImage": "https://i.imgur.com/cg72aew.png",
+        "phoneNumber": "010-1234-5678",
+        "introduction": "언저든지 긍정적인 마인드로 일을 처리하는 것을 좋아합니다."
+      }
+    },
+    "sajo1234568": {
+      "profile": {
+        "name": "목지훈",
+        "email": "hong@example.com",
+        "position": "촬영 팀장",
+        "team": "관리 1팀",
+        "responsibleTeam": "블루핑크",
+        "profileImage": "https://i.imgur.com/cg72aew.png"
+      }
+    }
+  },
+  "schedules": {
+    "sajo1234567": {
+      "1": {
+        "category": "방송 출연",
+        "description": "비고",
+        "title": "외부 일정",
+        "startTime": "2024-08-03 09:00",
+        "endTime": "2024-08-03 18:00"
+      },
+      "2": {
+        "category": "촬영",
+        "description": "비고",
+        "title": "외부 촬영 일정",
+        "startTime": "2024-08-04 00:00",
+        "endTime": "2024-08-05 23:59"
+      }
+    }
+  },
+  "salaryDetails": {
+    "sajo1234567": {
+      "1": {
+        "realpay": "3199260",
+        "payday": "2024-05-25",
+        "details": {
+          "지급내역": { "value": "3500000", "type": "main" },
+          "기본급": { "value": "3500000", "type": "sub" },
+          "공제내역": { "value": "300700", "type": "main" },
+          "국민연금": { "value": "150000", "type": "sub" },
+          "수당내역": { "value": "10500000", "type": "main" },
+          "인센티브": { "value": "10500000", "type": "sub" }
+        }
+      },
+      "2": {
+        "realpay": "3199260",
+        "payday": "2024-06-25",
+        "details": {
+          "지급내역": { "value": "3500000", "type": "main" },
+          "기본급": { "value": "3500000", "type": "sub" },
+          "공제내역": { "value": "300700", "type": "main" },
+          "국민연금": { "value": "150000", "type": "sub" },
+          "수당내역": { "value": "10500000", "type": "main" },
+          "인센티브": { "value": "10500000", "type": "sub" }
+        }
+      },
+      "3": {
+        "realpay": "3199260",
+        "payday": "2024-07-25",
+        "details": {
+          "지급내역": { "value": "3500000", "type": "main" },
+          "기본급": { "value": "3500000", "type": "sub" },
+          "공제내역": { "value": "300700", "type": "main" },
+          "국민연금": { "value": "150000", "type": "sub" },
+          "수당내역": { "value": "10500000", "type": "main" },
+          "인센티브": { "value": "10500000", "type": "sub" }
+        }
+      }
+    }
+  },
+  "salaryAdjustments": {
+    "sajo1234567": {
+      "1": {
+        "month": "2024-08",
+        "description": "해당 일자에 주말 근무를 하였으나 수당이 누락되었습니다. 확인 부탁드립니다.",
+        "status": "결제대기",
+        "category": "주말 / 공휴일 근무 수당",
+        "startTime": "2024-08-03 09:00",
+        "endTime": "2024-08-03 18:00",
+        "requestTime": "2024-08-03 09:00",
+        "files": [
+          {
+            "fileName": "weekend_work_evidence.pdf",
+            "fileUrl": "http://example.com/files/weekend_work_evidence.pdf"
+          }
+        ]
+      },
+      "2": {
+        "month": "2024-08",
+        "description": "해당 날짜 연차 누락",
+        "status": "결제완료",
+        "category": "연차누락",
+        "startTime": "2024-08-03 09:00",
+        "endTime": "2024-08-03 18:00",
+        "requestTime": "2024-08-03 09:00",
+        "files": [
+          {
+            "fileName": "weekend_work_evidence.pdf",
+            "fileUrl": "http://example.com/files/weekend_work_evidence.pdf"
+          }
+        ]
+      }
+    }
+  }
+}

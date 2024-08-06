@@ -14,9 +14,9 @@ export default function GlobalStyle() {
           '--font-weight-medium': '500',
 
           /* Color system */
-          '--color-pri': '#dc5f00',
-          '--color-pri-white': '#ffb987;',
-          '--color-sec': '#373a40',
+          '--color-pri': '#3282F6',
+          '--color-pri-white': '#8AB3EC;',
+          '--color-sec': '#E8F3FF',
           '--color-tar': '#686d76',
           '--color-blue': '#3473e1',
           '--color-yellow': '#ffcb34',
@@ -30,6 +30,8 @@ export default function GlobalStyle() {
 
           '--border-pri': '#9a9a9a',
           '--border-sec': '#eeeeee',
+
+          '--page-gray' : '#F0F3F8',
         },
         '*': {
           fontFamily: 'var(--font-family-primary)',

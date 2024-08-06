@@ -3,39 +3,32 @@ import EditNoteIcon from '@mui/icons-material/EditNote';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import PaymentsIcon from '@mui/icons-material/Payments';
-
-export const navbarLinks = {
-  home: {
-    name: '홈',
-    icon: <HomeIcon />,
-    link: '/home',
-  },
-  payments: {
-    name: '급여정산',
-    icon: <PaymentsIcon />,
-    link: '/payments',
-  },
-  adjustSalary: {
-    name: '정정신청',
-    icon: <EditNoteIcon />,
-    link: '/salary-adjustment',
-  },
-  calendar: {
-    name: '캘린더',
-    icon: <CalendarMonthIcon />,
-    link: '/calendar',
-  },
-  myPage: {
-    name: '마이페이지',
-    icon: <AccountCircleIcon />,
-    link: '/my-page',
-  },
-};
+import { ROUTE_PATHS } from '../../router/paths';
 
 export const navbarItems = [
-  navbarLinks.home,
-  navbarLinks.payments,
-  navbarLinks.adjustSalary,
-  navbarLinks.calendar,
-  navbarLinks.myPage,
+  {
+    name: '홈',
+    icon: <HomeIcon />,
+    link: ROUTE_PATHS.HOME,
+  },
+  {
+    name: '급여정산',
+    icon: <PaymentsIcon />,
+    link: ROUTE_PATHS.PAYMENTS,
+  },
+  {
+    name: '정정신청',
+    icon: <EditNoteIcon />,
+    link: ROUTE_PATHS.ADJUST_SALARY,
+  },
+  {
+    name: '캘린더',
+    icon: <CalendarMonthIcon />,
+    link: ROUTE_PATHS.CALENDAR,
+  },
+  {
+    name: '마이페이지',
+    icon: <AccountCircleIcon />,
+    link: ROUTE_PATHS.MY_PAGE,
+  },
 ];
