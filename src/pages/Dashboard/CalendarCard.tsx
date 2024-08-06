@@ -13,10 +13,10 @@ export default function CalendarCard() {
 
 const CalendarCardWrapper = styled(CardBox)`
   display: flex;
+  border: 1px solid var(--border-sec);
   height: 19.5rem;
+  padding: 0;
   overflow: hidden;
-  background-color: var(--color-black);
+  position: relative;
   margin: 1rem 0;
-  border-radius: 30px;
-  color: var(--color-white);
 `;
