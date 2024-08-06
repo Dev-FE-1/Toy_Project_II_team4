@@ -1,6 +1,5 @@
 import SelectBox from "../../components/selectBox/SelectBox";
 import Btn from "../../components/button/Button";
-import dayjs from "dayjs";
 import * as Styled from './SalaryList.style';
 import { useNavigate } from "react-router-dom";
 import NoticeCard from "./NoticeCard";
@@ -25,11 +24,6 @@ export default function SalaryListPage(){
   const salaryList = data?.salaryDetails[userId] || [] 
   salaryList.sort((a,b) => b.id-a.id)
 
-  const firstPayData = salaryList[0]
-  const originDate = dayjs(firstPayData.payday,'YYYY.MM.DD')
-  const finalDate = originDate.format('MM월 ')
-  const finalDay = originDate.subtract(2,'day').format('DD일')
-
   const handleApplicationBtn = (id:number) => {
     if(salaryList.find((item) => item.id === id)){
       navigate(`/salary-detail/${id}`)
@@ -41,7 +35,7 @@ export default function SalaryListPage(){
   return(
     <Styled.Salary>
       <Heading title="급여정산"/>
-      <NoticeCard date={finalDate} day={finalDay}/>
+      <NoticeCard userId={userId}/>
         <Styled.YearSelect>
         <SelectBox 
           labelId="SalaryYear" 
