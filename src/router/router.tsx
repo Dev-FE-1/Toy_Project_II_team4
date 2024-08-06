@@ -2,10 +2,14 @@ import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard/DashboardPage.tsx';
 import SalaryListPage from '../pages/salaryList/SalaryListPage.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
-import SalaryDetailPage from '../pages/salaryDetail/SalaryDetailPage.tsx';
+
 import CalendarPage from '../pages/Calendar/CalendarPage.tsx';
-import { navbarLinks } from '../components/nav/NavLinks.tsx';
+
 import AppLayout from '../layout/AppLayout.tsx';
+import { ROUTE_PATHS } from './paths.tsx';
+import LoginPage from '../pages/login/LoginPage.tsx';
+import { MyPage } from '../pages/myPage/MyPage.tsx';
+import SalaryDetailPage from '../pages/salaryDetail/SalaryDetailPage.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -14,27 +18,35 @@ export const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
     children: [
       {
-        path: navbarLinks.home.link,
+        path: ROUTE_PATHS.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: ROUTE_PATHS.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: ROUTE_PATHS.HOME,
         element: <Dashboard />,
       },
       {
-        path: navbarLinks.payments.link,
+        path: ROUTE_PATHS.PAYMENTS,
         element: <SalaryListPage />,
       },
       {
-        path: navbarLinks.adjustSalary.link,
+        path: ROUTE_PATHS.ADJUST_SALARY,
         element: <SalaryAdjustment />,
       },
       {
-        path: navbarLinks.calendar.link,
+        path: ROUTE_PATHS.CALENDAR,
         element: <CalendarPage />,
       },
       {
-        path: navbarLinks.myPage.link,
-        element: <h1>마이페이지 컴포넌트</h1>,
+        path: ROUTE_PATHS.MY_PAGE,
+        element: <MyPage />,
       },
       {
-        path: '/salary-detail/:id',
+        path: ROUTE_PATHS.SALARY_DETAIL,
         element: <SalaryDetailPage />,
       },
     ],
