@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard/DashboardPage.tsx';
-import SalaryList from '../pages/salaryList/SalaryList.tsx';
+import SalaryListPage from '../pages/salaryList/SalaryListPage.tsx';
 import SalaryAdjustment from '../pages/salaryAdjustment/SalaryAdjustment.tsx';
-import SalaryDetail from '../pages/salaryDetail/SalaryDetail.tsx';
+import SalaryDetailPage from '../pages/salaryDetail/SalaryDetailPage.tsx';
 import CalendarPage from '../pages/Calendar/CalendarPage.tsx';
 import { navbarLinks } from '../components/nav/NavLinks.tsx';
 import AppLayout from '../layout/AppLayout.tsx';
@@ -19,7 +19,7 @@ export const router = createBrowserRouter([
       },
       {
         path: navbarLinks.payments.link,
-        element: <SalaryList />,
+        element: <SalaryListPage />,
       },
       {
         path: navbarLinks.adjustSalary.link,
@@ -35,7 +35,7 @@ export const router = createBrowserRouter([
       },
       {
         path: '/salary-detail/:id',
-        element: <SalaryDetail />,
+        element: <SalaryDetailPage />,
       },
     ],
   },
