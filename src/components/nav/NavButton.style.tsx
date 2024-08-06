@@ -20,7 +20,7 @@ export const MUIButton = muiStyled(Button)<{ selected: boolean }>`
   &:hover,
   &:active {
     background-color: var(--color-pri);
-    color: #fff;
+    color: var(--color-white);
   }
 `;
 

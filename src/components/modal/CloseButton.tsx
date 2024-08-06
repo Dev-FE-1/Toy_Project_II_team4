@@ -1,5 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
-import * as styled from './BasicModal.style';
+import * as styled from './CloseButton.styled';
 
 interface CloseButtonProps {
   handleClose: () => void;
