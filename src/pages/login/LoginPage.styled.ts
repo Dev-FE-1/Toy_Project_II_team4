@@ -12,9 +12,10 @@ export const LoginPageContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
   & img {
-    width: 230px;
-    margin-top: 100px;
+    width: 180px;
+    margin-top: 200px;
     margin-bottom: 45px;
   }
 
@@ -31,34 +32,47 @@ export const LoginPageContainer = styled.div`
   }
 
   & form {
+    margin-top: 10px;
     width: 350px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    & div {
+
+    div.form__login_Email,
+    div.form__login_Password {
       width: 100%;
+      height: 86px;
     }
 
     & button.css-8fb7o1-JoyButton-root {
       width: 100%;
       height: 50px;
-      margin-top: 30px;
       font-size: 16px;
     }
 
     & label {
       font-size: 15px;
-      font-weight: 500;
+      margin-bottom: 5px;
+      font-weight: 700;
+      opacity: 0.8;
     }
 
     & p {
       font-size: 11px;
       color: var(--font-sec);
+      margin-top: 5px;
     }
+  }
 
-    & input {
-      font-size: 16px;
-      height: 40px;
-    }
+  & input {
+    font-size: 16px;
+    height: 30px;
+  }
+
+  & .disabled {
+    pointer-events: none;
+    cursor: not-allowed;
+    opacity: 0.5;
+    user-select: none;
   }
 `;
