@@ -1,11 +1,11 @@
 import NoticeCard from '../salaryList/NoticeCard';
-import styled from 'styled-components';
 import useSalaryDetails from '../salaryList/useSalaryDetails';
 
 export default function SalaryCard() {
   const userId = 'sajo1234567';
   const { data, error, isLoading } = useSalaryDetails();
 
+  console.log(data);
   if (isLoading) {
     return <div>Loading...</div>;
   }

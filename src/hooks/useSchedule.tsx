@@ -2,19 +2,7 @@ import { useEffect, useState } from 'react';
 import { getFormatDate } from '../utils/FormatDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../store/store';
-import { setSchedules, addSchedule } from '../slices/scheduleSlice';
-
-interface ISchedule {
-  dateId: number;
-  category: string;
-  scheduleType: 'company' | 'personal';
-  description: string;
-  title: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-}
+import { fetchSchedules, addSchedule, ISchedule } from '../slices/scheduleSlice';
 
 interface useScheduleProps {
   selectedDate: Date;
@@ -27,18 +15,9 @@ export function useSchedule({ selectedDate }: useScheduleProps) {
   const [showCompanySchedule, setShowCompanySchedule] = useState(true);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(true);
 
+  console.log(schedules);
   useEffect(() => {
-    const fetchSchedules = async () => {
-      try {
-        const response = await fetch('/data/calendar.json');
-        const data = (await response.json()) as { schedule: ISchedule[] };
-        dispatch(setSchedules(data.schedule));
-      } catch (error) {
-        console.error('Error loading schedules:', error);
-      }
-    };
-
-    void fetchSchedules();
+    dispatch(fetchSchedules());
   }, [dispatch]);
 
   useEffect(() => {
