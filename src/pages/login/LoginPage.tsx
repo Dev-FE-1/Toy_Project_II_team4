@@ -1,5 +1,5 @@
 import * as Styled from './LoginPage.styled';
-import { useLoginPage } from './useLoginPage';
+import { useLoginPage } from '../../hooks/useLoginPage';
 import LogoImg from '../../styles/images/sajoLogo.png';
 import Btn from '../../components/button/Button';
 import { TextField } from '@mui/material';

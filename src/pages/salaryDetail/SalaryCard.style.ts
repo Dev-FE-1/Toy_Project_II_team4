@@ -10,7 +10,7 @@ export const Container = styled.div`
   & > div {
     background: var(--color-pri-white);
     color: var(--color-white);
-    padding-bottom: 5rem;
+    padding: 4rem 2rem;
   }
 `;
 
@@ -21,7 +21,7 @@ export const ItemWrapper = styled.div`
 
   .pay {
     box-sizing: border-box;
-    padding: 1rem 0rem;
+    margin: 2rem 0rem;
     font-size: var(--font-size-small);
   }
   .pay > h5,

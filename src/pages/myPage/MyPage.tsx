@@ -1,10 +1,9 @@
 import Btn from '../../components/button/Button';
-// import ProfileCard from '../Dashboard/components/ProfileCard';
 import ProfileCard from '../Dashboard/ProfileCard';
-import { useMyPage } from './useMyPage';
+import { useLogout } from '../../hooks/useLogout';
 
 export function MyPage() {
-  const { handleLogout } = useMyPage();
+  const { handleLogout } = useLogout(); // TODO 하이오더 컴포넌트 필요
   return (
     <div>
       <h1>마이페이지</h1>
