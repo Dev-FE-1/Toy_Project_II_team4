@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import NoticeCard from "./NoticeCard";
 import useSalaryDetails from "./useSalaryDetails";
 import Heading from "../../components/Heading/Heading";
+import { useState } from "react";
 
 const years = [
-  { value: '2021', text: '2021' },
   { value: '2022', text: '2022' },
   { value: '2023', text: '2023' },
   { value: '2024', text: '2024' },
@@ -16,13 +16,15 @@ const years = [
 export default function SalaryListPage(){
   const navigate = useNavigate()
   const userId = "sajo1234567"
+  const [selectedYear, setSelectedYear] = useState<number>(2024)
   const {data, error, isLoading} = useSalaryDetails()
 
   if (isLoading) {return <div>Loading...</div>}
   if (error) {return <div>Error: {error.message}</div>}
 
   const salaryList = data?.salaryDetails[userId] || [] 
-  const sortedSalaryList = [...salaryList].sort((a,b) => b.id-a.id)
+  const filteredItem = salaryList.filter((item) => Number(item.payday.slice(0,4)) === Number(selectedYear))
+  const sortedSalaryList = [...filteredItem].sort((a,b) => b.id-a.id)
 
   const handleApplicationBtn = (id:number) => {
     if(sortedSalaryList.find((item) => item.id === id)){
@@ -42,6 +44,8 @@ export default function SalaryListPage(){
           id="year-select" 
           label="year" 
           menuItems={years}
+          value={selectedYear}
+          onChange={(e) => setSelectedYear(Number(e.target.value))}
         />
       </Styled.YearSelect>
         {sortedSalaryList.map((el)=>
