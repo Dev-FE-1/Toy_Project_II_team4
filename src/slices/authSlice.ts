@@ -1,7 +1,13 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { auth, firebaseDB } from '../api/firebaseApp';
-import { signInWithEmailAndPassword, User } from 'firebase/auth';
+import { signInWithEmailAndPassword, signOut } from 'firebase/auth';
 import { ref, get } from 'firebase/database';
+
+type User = {
+  uid: string;
+  email: string | null;
+  displayName: string | null;
+};
 
 export interface AuthState {
   user: User | null;
@@ -15,9 +21,14 @@ export const login = createAsyncThunk(
   async ({ email, password }: { email: string; password: string }, { rejectWithValue }) => {
     try {
       const userCredential = await signInWithEmailAndPassword(auth, email, password);
-      return userCredential.user;
+      return {
+        uid: userCredential.user.uid,
+        email: userCredential.user.email,
+        displayName: userCredential.user.displayName,
+      };
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      console.error(error); // log the error server-side
+      return rejectWithValue('An error occurred while logging in.');
     }
   }
 );
@@ -30,7 +41,8 @@ export const fetchProfile = createAsyncThunk(
       const snapshot = await get(profileRef);
       return snapshot.val();
     } catch (error: any) {
-      return rejectWithValue(error.message);
+      console.error(error); // log the error server-side
+      return rejectWithValue('An error occurred while fetching profile.');
     }
   }
 );
@@ -49,6 +61,7 @@ const authSlice = createSlice({
     logout: (state) => {
       state.user = null;
       state.profile = null;
+      signOut(auth);
     },
   },
   extraReducers: (builder) => {

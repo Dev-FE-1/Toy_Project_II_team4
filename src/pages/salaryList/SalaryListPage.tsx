@@ -68,7 +68,7 @@ export default function SalaryListPage() {
             },
             '& .MuiSelect-icon': {
               fontSize: '2rem',
-              right: '2rem',
+              right: '1rem',
               transform: 'translateY(-50%)',
               top: '40%',
             },
