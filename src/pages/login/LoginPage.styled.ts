@@ -15,7 +15,7 @@ export const LoginPageContainer = styled.div`
 
   & img {
     width: 180px;
-    margin-top: 200px;
+    margin-top: 145px;
     margin-bottom: 45px;
   }
 
