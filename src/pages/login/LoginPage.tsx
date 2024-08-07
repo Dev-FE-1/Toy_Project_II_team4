@@ -6,32 +6,21 @@ import { TextField } from '@mui/material';
 import { Controller } from 'react-hook-form';
 
 export default function LoginPage() {
-  const {
-    handleSubmit,
-    handleLogin,
-    control,
-    errors,
-    emailHelperText,
-    passwordHelperText,
-    checkEmailEmpty,
-    checkPasswordEmpty,
-    isLoginButtonDisabled,
-    loading,
-  } = useLoginPage();
+  const loginPage = useLoginPage(); // TODO 하이오더 컴포넌트 필요
 
   return (
     <div>
       <Styled.LoginPageContainer>
         <img src={LogoImg} alt="logo" />
         <div className="form__descriptions">{/* <h3>이메일과 비밀번호를 입력해주세요</h3> */}</div>
-        <form onSubmit={handleSubmit(handleLogin)}>
+        <form onSubmit={loginPage.handleSubmit(loginPage.handleLogin)}>
           <Controller
             name="email"
-            control={control}
+            control={loginPage.control}
             rules={{
               required: true,
               pattern: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
-              onChange: checkEmailEmpty,
+              onChange: loginPage.checkEmailEmpty,
             }}
             render={({ field }) => (
               <TextField
@@ -39,20 +28,19 @@ export default function LoginPage() {
                 className="form__login_Email"
                 {...field}
                 variant="standard"
-                helperText={emailHelperText()}
+                helperText={loginPage.emailHelperText()}
                 autoComplete="on"
-                error={errors.email ? true : false}
-                onLoad={checkEmailEmpty}
+                error={loginPage.errors.email ? true : false}
               />
             )}
           />
           <Controller
             name="password"
-            control={control}
+            control={loginPage.control}
             rules={{
               required: true,
               minLength: 8,
-              onChange: checkPasswordEmpty,
+              onChange: loginPage.checkPasswordEmpty,
             }}
             render={({ field }) => (
               <TextField
@@ -60,18 +48,17 @@ export default function LoginPage() {
                 label="비밀번호"
                 {...field}
                 variant="standard"
-                helperText={passwordHelperText()}
+                helperText={loginPage.passwordHelperText()}
                 autoComplete="on"
                 type="password"
-                error={errors.password ? true : false}
-                onLoad={checkPasswordEmpty}
+                error={loginPage.errors.password ? true : false}
               />
             )}
           />
           <Btn
-            label={`${loading ? '로그인 중입니다..,' : '로그인'}`}
+            label={`${loginPage.loading ? '로그인 중입니다..,' : '로그인'}`}
             type="submit"
-            className={isLoginButtonDisabled}
+            className={loginPage.isLoginButtonDisabled}
           ></Btn>
         </form>
       </Styled.LoginPageContainer>
