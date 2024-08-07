@@ -169,7 +169,6 @@ const ModalWrapper = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  /* background-color: rgba(0, 0, 0, 0.5); */
   display: flex;
   justify-content: center;
   align-items: flex-end;
@@ -180,7 +179,6 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   padding-bottom: 100px;
-  border-radius: 10px 10px 0 0;
   max-width: 568px;
   width: 100%;
   height: 100%;
