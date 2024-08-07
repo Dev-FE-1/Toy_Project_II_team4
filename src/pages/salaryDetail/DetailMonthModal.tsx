@@ -1,7 +1,7 @@
 import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import { CloseButton } from '../../components/modal/CloseButton';
-import { useBasicModal } from '../../components/modal/useBasicModal';
+import { useBasicModal } from '../../hooks/useBasicModal';
 import * as styled from '../salaryAdjustment/SalaryAdjustment.style';
 import Heading from '../../components/Heading/Heading';
 import FormWrap from '../salaryAdjustment/FormWrap';
