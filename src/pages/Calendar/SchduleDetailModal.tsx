@@ -1,8 +1,18 @@
 import React, { useState } from 'react';
-import IconBtn from '../../components/iconButton/IconButton';
-import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { updateSchedule, deleteSchedule } from '../../slices/scheduleSlice';
+import BasicDialog from '../../components/modal/BasicModal';
+import Btn from '../../components/button/Button';
+import IconBtn from '../../components/iconButton/IconButton';
+import styled from 'styled-components';
+import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { Form } from 'react-router-dom';
+import SelectBox from '../../components/selectBox/SelectBox';
+import SDataPicker from '../../components/datepicker/DatePicker';
+import { TimePicker } from '@mui/x-date-pickers';
+import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import dayjs from 'dayjs';
 
 interface ISchedule {
   dateId: number;
@@ -20,18 +30,19 @@ interface ScheduleDetailModalProps {
   schedule: ISchedule;
   onClose: () => void;
 }
+const categoryOptions = [
+  { text: '공연', value: '공연' },
+  { text: '팬 이벤트', value: '팬 이벤트' },
+  { text: '방송 출연', value: '방송 출연' },
+  { text: '촬영', value: '촬영' },
+];
 
 export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalProps): JSX.Element {
   const dispatch = useDispatch();
+  
   const [isEditing, setIsEditing] = useState(false);
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
-  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (e.target === e.currentTarget) {
-      onClose();
-    }
-  };
-  console.log(schedule);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -40,7 +51,7 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
   };
 
   const handleUpdateSchedule = () => {
-    dispatch<AppDispatch>(updateSchedule(editedSchedule));
+    dispatch(updateSchedule(editedSchedule));
     setIsEditing(false);
   };
 
@@ -52,96 +63,167 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
   };
 
   return (
-    <ModalWrapper onClick={handleOverlayClick}>
-      <ModalContent>
+    <BasicDialog open={true} onClose={onClose}>
+      <ModalWrapper>
         <ModalHeader>
-          <CloseButton onClick={onClose}>&times;</CloseButton>
-          <ActionButtons>
-            {isEditing ? (
-              <>
-                <button onClick={handleUpdateSchedule}>저장</button>
-                <button onClick={() => setIsEditing(false)}>취소</button>
-              </>
-            ) : (
-              <>
-                <IconBtn icontype="edit" onClick={() => setIsEditing(true)} />
-                <IconBtn icontype="delete" onClick={handleDeleteSchedule} />
-              </>
-            )}
-          </ActionButtons>
+          <TitleContainer>
+            <CloseButton onClick={onClose}>&times;</CloseButton>
+            <Heading>{isEditing ? '일정 수정' : ''}</Heading>
+          </TitleContainer>
+          {isEditing ? (
+            <Btn
+              type="button"
+              label="완료"
+              btnsize="sm"
+              sx={{ fontSize: '1.6rem' }}
+              onClick={handleUpdateSchedule}
+            />
+          ) : (
+            <ActionButtons>
+              <IconBtn icontype="edit" onClick={() => setIsEditing(true)} />
+              <IconBtn icontype="delete" onClick={handleDeleteSchedule} />
+            </ActionButtons>
+          )}
         </ModalHeader>
         {isEditing ? (
-          <EditForm>
-            <input
-              type="text"
+          <Form>
+            <TextField
+              label="제목"
+              fullWidth
+              sx={{ mb: '2rem', fontSize: '1.6rem' }}
               name="title"
               value={editedSchedule.title}
               onChange={handleInputChange}
-              placeholder="제목"
               required
+              InputProps={{ style: { fontSize: 16 } }}
+              InputLabelProps={{ style: { fontSize: 16 } }}
             />
-            <select
-              name="category"
-              value={editedSchedule.category}
-              onChange={handleInputChange}
-              required
-            >
-              <option value="">카테고리 선택</option>
-              {['공연', '팬 이벤트', '방송 출연', '촬영'].map((category) => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-            <select
+            <RadioGroup
+              row
               name="scheduleType"
               value={editedSchedule.scheduleType}
               onChange={handleInputChange}
-              required
+              sx={{ mb: '2rem', fontSize: '1.6rem' }}
             >
-              <option value="company">회사</option>
-              <option value="personal">개인</option>
-            </select>
-            <input
-              type="date"
-              name="startDate"
-              value={editedSchedule.startDate}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="time"
-              name="startTime"
-              value={editedSchedule.startTime}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="date"
-              name="endDate"
-              value={editedSchedule.endDate}
-              onChange={handleInputChange}
-              required
-            />
-            <input
-              type="time"
-              name="endTime"
-              value={editedSchedule.endTime}
-              onChange={handleInputChange}
-              required
-            />
-            <textarea
+              <FormControlLabel value="company" control={<Radio />} label="회사" />
+              <FormControlLabel value="personal" control={<Radio />} label="개인" />
+            </RadioGroup>
+            {editedSchedule.scheduleType === 'company' && (
+              <SelectBox
+                labelId="labelCate"
+                id="category"
+                label="카테고리"
+                menuItems={categoryOptions}
+                sx={{ marginBottom: '20px', fontSize: '1.6rem' }}
+                value={editedSchedule.category}
+                onChange={handleInputChange}
+                name="category"
+              />
+            )}
+            <LocalizationProvider dateAdapter={AdapterDayjs}>
+              <DateTimeContainer>
+                <SDataPicker
+                  label="시작 날짜"
+                  dateType="single"
+                  slotProps={{
+                    field: {
+                      sx: {
+                        width: '100%',
+                        fontSize: '1.6rem',
+                      },
+                    },
+                  }}
+                  format="YYYY-MM-DD"
+                  name="startDate"
+                  value={dayjs(editedSchedule.startDate)}
+                  onChange={(newValue) =>
+                    setEditedSchedule((prev) => ({
+                      ...prev,
+                      startDate: newValue ? newValue.format('YYYY-MM-DD') : '',
+                    }))
+                  }
+                />
+                <TimePicker
+                  label="시작 시간"
+                  slotProps={{
+                    field: {
+                      sx: {
+                        width: '100%',
+                        fontSize: '1.6rem',
+                      },
+                    },
+                  }}
+                  ampm={false}
+                  name="startTime"
+                  value={dayjs(`2023-01-01T${editedSchedule.startTime}`)}
+                  onChange={(newValue) =>
+                    setEditedSchedule((prev) => ({
+                      ...prev,
+                      startTime: newValue ? newValue.format('HH:mm') : '',
+                    }))
+                  }
+                />
+              </DateTimeContainer>
+              <DateTimeContainer>
+                <SDataPicker
+                  label="종료 날짜"
+                  dateType="single"
+                  slotProps={{
+                    field: {
+                      sx: {
+                        width: '100%',
+                        fontSize: '1.6rem',
+                      },
+                    },
+                  }}
+                  format="YYYY-MM-DD"
+                  name="endDate"
+                  value={dayjs(editedSchedule.endDate)}
+                  onChange={(newValue) =>
+                    setEditedSchedule((prev) => ({
+                      ...prev,
+                      endDate: newValue ? newValue.format('YYYY-MM-DD') : '',
+                    }))
+                  }
+                />
+                <TimePicker
+                  label="종료 시간"
+                  slotProps={{
+                    field: {
+                      sx: {
+                        width: '100%',
+                        fontSize: '1.6rem',
+                      },
+                    },
+                  }}
+                  ampm={false}
+                  name="endTime"
+                  value={dayjs(`2023-01-01T${editedSchedule.endTime}`)}
+                  onChange={(newValue) =>
+                    setEditedSchedule((prev) => ({
+                      ...prev,
+                      endTime: newValue ? newValue.format('HH:mm') : '',
+                    }))
+                  }
+                />
+              </DateTimeContainer>
+            </LocalizationProvider>
+            <TextField
+              label="설명"
+              multiline
+              rows={4}
+              fullWidth
+              sx={{ mt: '2rem', fontSize: '1.6rem' }}
               name="description"
               value={editedSchedule.description}
               onChange={handleInputChange}
-              placeholder="설명"
+              InputProps={{ style: { fontSize: 16 } }}
+              InputLabelProps={{ style: { fontSize: 16 } }}
             />
-          </EditForm>
+          </Form>
         ) : (
           <ScheduleDetailWrapper>
-            <p className={`category  ${schedule.category.replace(' ', '-')}`}>
-              {schedule.category}
-            </p>
+            <p className={`category ${schedule.category.replace(' ', '-')}`}>{schedule.category}</p>
             <p className="title">{schedule.title}</p>
             <p className="start-date">
               {schedule.startDate.slice(5, 7)}월 {schedule.startDate.slice(-2)}일{' '}
@@ -159,54 +241,42 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
             <p className="description">{schedule.description}</p>
           </ScheduleDetailWrapper>
         )}
-      </ModalContent>
-    </ModalWrapper>
+      </ModalWrapper>
+    </BasicDialog>
   );
 }
 
 const ModalWrapper = styled.div`
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-`;
-
-const ModalContent = styled.div`
-  border: 1px solid var(--border-sec);
-  background-color: white;
-  padding: 20px;
-  padding-bottom: 100px;
-  width: 100%;
-  max-width: 568px;
-  height: 100%;
-  overflow-y: auto;
-  box-sizing: border-box;
+  font-size: 1.6rem;
 `;
 
 const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-bottom: 20px;
+  align-items: center;
+  margin-bottom: 2rem;
+`;
+
+const TitleContainer = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
 `;
 
 const ActionButtons = styled.div`
-  button {
-    margin-left: 10px;
-  }
-  svg {
-    font-size: var(--font-size-large);
-  }
-`;
-
-const EditForm = styled.div`
   display: flex;
-  flex-direction: column;
+  gap: 1rem;
 `;
 
+const DateTimeContainer = styled.div`
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  > * {
+    flex: 1;
+  }
+`;
 const ScheduleDetailWrapper = styled.div`
   p {
     margin-bottom: 1rem;
@@ -249,4 +319,9 @@ const ScheduleDetailWrapper = styled.div`
 const CloseButton = styled.button`
   font-size: var(--font-size-xlarge);
   cursor: pointer;
+`;
+
+const Heading = styled.h2`
+  font-size: var(--font-size-xlarge);
+  font-weight: bold;
 `;
