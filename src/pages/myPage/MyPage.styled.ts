@@ -1,22 +1,22 @@
 import styled from 'styled-components';
-import profileBackgroundImg from '../../styles/images/profile_background.jpg';
 
 export const MyPageContainer = styled.div`
-  width: calc(100% + 1.6rem);
-  margin: -0.8rem -0.8rem;
+  width: calc(102% + 2.6rem);
+  margin: -1.8rem -1.8rem;
 
   .header-image {
-    height: 300px;
-    background-image: url(${profileBackgroundImg});
+    height: 250px;
+    background-color: var(--color-pri-moreWhite);
     background-size: cover;
     background-position: center;
   }
 
   .profile-container {
     text-align: center;
+    height: calc(100vh - 318px);
     padding: 20px;
     background-color: white;
-    border-radius: 8px;
+    border-radius: 10px;
     margin-top: -50px;
 
     & img {
@@ -32,31 +32,54 @@ export const MyPageContainer = styled.div`
     height: 100px;
     border-radius: 50%;
     background-color: #e0e0e0;
-    margin: -50px auto 20px;
+    margin: -50px auto 10px;
   }
 
   h2 {
     margin: 0;
-    color: #333;
-  }
-
-  & ul.list {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 10px;
-    width: 100vw;
-    font-size: var(--font-small);
-    padding: 0 2.5rem;
   }
 
   .info-container {
-    text-align: left;
-    margin: 20px 0;
+    margin: 28px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 11%;
+    & ul {
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      gap: 16px;
+      width: 80vw;
+      font-size: var(--font-size-primary);
+      font-weight: var(--font-weight-medium);
+      padding: 0 2.5rem;
+
+      & li {
+        padding: 0.1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-start;
+        text-align: left;
+      }
+
+      & li div {
+        width: 150px;
+      }
+
+      & li div:last-child {
+        width: 215px;
+        margin-left: 10px;
+      }
+    }
   }
 
   .button-container {
-    margin: 20px 0;
+    margin: 40px 0;
+  }
+
+  & .message {
+    font-size: var(--font-size-small);
   }
 
   & button.css-8fb7o1-JoyButton-root {
@@ -66,6 +89,7 @@ export const MyPageContainer = styled.div`
     width: 120px;
     height: 30px;
     font-size: var(--font-size-primary);
+    font-weight: var(--font-weight-medium);
     border-radius: 5px;
     cursor: pointer;
   }
