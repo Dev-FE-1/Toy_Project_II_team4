@@ -1,4 +1,4 @@
-import { logout } from '../../slices/authSlice';
+import { logout } from '../slices/authSlice';
 import { useDispatch } from 'react-redux';
 
 export function useLogout() {

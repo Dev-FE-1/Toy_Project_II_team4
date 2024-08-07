@@ -1,6 +1,6 @@
 import Btn from '../../components/button/Button';
 import AccordionList from './AccordionList';
-import { useBasicModal } from '../../components/modal/useBasicModal';
+import { useBasicModal } from '../../hooks/useBasicModal';
 import { CloseButton } from '../../components/modal/CloseButton';
 import FormWrap from './FormWrap';
 import Heading from '../../components/Heading/Heading';
