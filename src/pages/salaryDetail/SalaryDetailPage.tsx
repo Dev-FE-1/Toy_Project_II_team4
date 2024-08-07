@@ -83,7 +83,7 @@ export default function SalaryDetailPage() {
           <h2>급여명세서</h2>
         </Styled.LSection>
         <Styled.RSection>
-          <SelectedModal month={salaryData.payday.slice(5, 7)} />
+          <SelectedModal day={salaryData.payday} />
           <IconBtn icontype="download" onClick={handleDownload} />
         </Styled.RSection>
       </Styled.Header>
