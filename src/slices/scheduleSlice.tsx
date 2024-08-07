@@ -28,13 +28,21 @@ export const scheduleSlice = createSlice({
       state.schedules = action.payload;
     },
     addSchedule: (state, action: PayloadAction<ISchedule>) => {
-      console.log('Adding schedule:', action.payload);
-      //   state.schedules.push(action.payload);
       state.schedules = [...state.schedules, action.payload];
-      console.log('New state:', JSON.parse(JSON.stringify(state.schedules)));
+    },
+    updateSchedule: (state, action: PayloadAction<ISchedule>) => {
+      const scheduleIndex = state.schedules.findIndex(
+        (schedule) => schedule.dateId === action.payload.dateId
+      );
+      if (scheduleIndex !== -1) {
+        state.schedules[scheduleIndex] = action.payload;
+      }
+    },
+    deleteSchedule: (state, action: PayloadAction<number>) => {
+      state.schedules = state.schedules.filter((schedule) => schedule.dateId !== action.payload);
     },
   },
 });
 
-export const { setSchedules, addSchedule } = scheduleSlice.actions;
+export const { setSchedules, addSchedule, updateSchedule, deleteSchedule } = scheduleSlice.actions;
 export default scheduleSlice.reducer;

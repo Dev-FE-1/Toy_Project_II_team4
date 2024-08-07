@@ -1,18 +1,43 @@
 import React, { useState } from 'react';
-import Heading from '../../components/Heading/Heading';
 import './Calendar.css';
-import { useCalendar } from './hooks/useCalendar';
-import { useSchedule } from './hooks/useSchedule';
+import styled from 'styled-components';
+import { useCalendar } from '../../hooks/useCalendar';
+import { useSchedule } from '../../hooks/useSchedule';
+import Heading from '../../components/Heading/Heading';
 import { CalendarHeader } from './CalendarHeader';
 import { CalendarFilter } from './CalendarFilter';
 import { CalendarDate } from './CalendarDate';
 import { ScheduleList } from './ScheduleList';
-import styled from 'styled-components';
+import { AddScheduleModal } from './AddScheduleModal';
+import { useDispatch, useSelector } from 'react-redux';
+import { addSchedule } from '../../slices/scheduleSlice';
+
+interface ISchedule {
+  dateId: number;
+  category: string;
+  scheduleType: 'company' | 'personal';
+  description: string;
+  title: string;
+  startDate: string;
+  startTime: string;
+  endDate: string;
+  endTime: string;
+}
 
 export default function CalendarPage(): React.ReactElement {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
 
+  const dispatch = useDispatch();
+
+  const schedules = useSelector((state: RootState) => state.schedules.schedules);
+
+  const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
+  const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
+  const onAddSchedule = (newSchedule: ISchedule) => {
+    dispatch(addSchedule(newSchedule));
+  };
   const calendarHook = useCalendar({
     setCurrentDate,
     selectedDate,
@@ -31,6 +56,7 @@ export default function CalendarPage(): React.ReactElement {
           setShowCompanySchedule={scheduleHook.setShowCompanySchedule}
           setShowPersonalSchedule={scheduleHook.setShowPersonalSchedule}
           goToToday={calendarHook.moveDate.goToToday}
+          openAddScheduleModal={openAddScheduleModal}
         />
         <CalendarDate
           currentDate={currentDate}
@@ -41,6 +67,11 @@ export default function CalendarPage(): React.ReactElement {
         <ScheduleList
           selectedDate={selectedDate}
           getScheduleListForSelectedDate={scheduleHook.getScheduleListForSelectedDate}
+        />
+        <AddScheduleModal
+          isOpen={isAddScheduleModalOpen}
+          onClose={closeAddScheduleModal}
+          onAddSchedule={onAddSchedule}
         />
       </Calendar>
     </>
