@@ -30,10 +30,6 @@ export function ScheduleList({
     setSelectedSchedule(schedule);
   };
 
-  const onCloseModal = (): void => {
-    setSelectedSchedule(null);
-  };
-
   return (
     <>
       <SelectedDateInfo className="selected-date-info">
@@ -76,7 +72,7 @@ export function ScheduleList({
 export const SelectedDateInfo = styled.p`
   padding: 20px 0;
   border-top: 1px solid #ddd;
-  font-size: 1.6rem;
+  font-size: var(--font-primary);
 `;
 
 export const ScheduleListWrapper = styled.div`
@@ -87,9 +83,11 @@ export const ScheduleListWrapper = styled.div`
 `;
 
 export const ScheduleCard = styled.li`
-  margin-bottom: 10px;
+  background-color: var(--color-white);
+  margin-bottom: 8px;
+  height: 2.4rem;
   border: 1px solid var(--border-sec);
-  padding: 10px;
+  padding: 1rem;
   border-radius: 5px;
   cursor: pointer;
   display: flex;
@@ -97,26 +95,23 @@ export const ScheduleCard = styled.li`
 
   &::before {
     content: '';
-    width: 5px;
-    height: 100%;
-    margin-right: 10px;
-    border-radius: 2px;
+    margin-right: 1rem;
   }
 
   &.방송-출연 {
-    border-left: 6px solid #3473e1;
+    border-left: 6px solid #3473e14d;
   }
   &.촬영 {
-    border-left: 6px solid #ffcb34;
+    border-left: 6px solid #ffcb344d;
   }
   &.팬-이벤트 {
-    border-left: 6px solid #039c00;
+    border-left: 6px solid #039c004d;
   }
   &.공연 {
-    border-left: 6px solid #dc5f00;
+    border-left: 6px solid #dc5f004d;
   }
   &.개인 {
-    border-left: 6px solid #ddd;
+    border-left: 6px solid #ddddddb2;
   }
 
   .schedule-card-content {
@@ -127,9 +122,10 @@ export const ScheduleCard = styled.li`
 
   .schedule-title {
     font-weight: bold;
+    font-size: var(--font-primary);
   }
 
   .schedule-time {
-    color: #666;
+    color: var(--font-tar);
   }
 `;

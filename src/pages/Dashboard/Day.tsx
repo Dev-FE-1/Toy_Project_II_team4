@@ -49,7 +49,12 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
 }
 
 const DayWrapper = styled.div`
-  padding: 1rem;
+  &:first-child {
+    padding: 0 1rem 0 0;
+  }
+  &:last-child {
+    padding: 0 0 0 1rem;
+  }
   flex-grow: 1;
 
   &:first-child {
@@ -72,24 +77,24 @@ const ScheduleWrapper = styled.div`
 `;
 
 const ScheduleBox = styled.div`
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-primary);
   padding: 0.5rem;
   border-radius: 4px;
 
   &.방송-출연 {
-    background-color: rgba(52, 115, 225, 0.3);
+    background-color: #3473e14d;
   }
   &.촬영 {
-    background-color: rgba(255, 203, 52, 0.3);
+    background-color: #ffcb344d;
   }
   &.팬-이벤트 {
-    background-color: rgba(3, 156, 0, 0.3);
+    background-color: #039c004d;
   }
   &.공연 {
-    background-color: rgba(220, 95, 0, 0.3);
+    background-color: #dc5f004d;
   }
   &.개인 {
-    background-color: rgba(221, 221, 221, 0.3);
+    background-color: #ddddddb3;
   }
 `;
 
