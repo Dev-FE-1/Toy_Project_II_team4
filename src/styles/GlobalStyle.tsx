@@ -16,6 +16,7 @@ export default function GlobalStyle() {
           /* Color system */
           '--color-pri': '#3282F6',
           '--color-pri-white': '#8AB3EC;',
+          '--color-pri-moreWhite': '#ecf5fe',
           '--color-sec': '#E8F3FF',
           '--color-tar': '#686d76',
           '--color-blue': '#3473e1',
@@ -27,6 +28,7 @@ export default function GlobalStyle() {
 
           '--font-pri': '#333333',
           '--font-sec': '#9fa1ab',
+          '--font-tar': '#686d76',
 
           '--border-pri': '#9a9a9a',
           '--border-sec': '#eeeeee',
@@ -44,13 +46,15 @@ export default function GlobalStyle() {
         },
         html: {
           fontSize: '10px',
-          backgroundColor: '#eeeeee', // 페이지 전체 배경색을 빨간색으로 설정
+          backgroundColor: 'var(--font-pri)',
         },
         body: {
           fontWeight: 400,
           maxWidth: '568px',
           margin: '0 auto',
-          backgroundColor: 'var(--color-white)',
+          // backgroundColor: '#ecf5fe',
+          // backgroundImage: 'linear-gradient(180deg, #ecf5fe 0%, #f3f4f6 100%)',
+          backgroundColor: '#f3f4f6',
         },
         '#root': {
           minHeight: '100vh', // root 요소가 최소한 뷰포트 높이만큼 차지하도록 설정
