@@ -25,7 +25,7 @@ function SalaryAdjustment() {
           <styled.modalWrapper>
             <Heading title="급여 정정신청" />
             <h2 className="modal-title">07월 급여 정정</h2>
-            <FormWrap />
+            <FormWrap handleClose={() => handleClose()} />
           </styled.modalWrapper>
         </BasicDialog>
       </div>

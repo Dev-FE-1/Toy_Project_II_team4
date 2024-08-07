@@ -20,7 +20,7 @@ const salaryAdSlice = createSlice({
       })
       .addCase(fetchSalaryAdData.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        state.data = action.payload;
+        state.data = action.payload.reverse();
       })
       .addCase(fetchSalaryAdData.rejected, (state, action) => {
         state.status = 'failed';
@@ -31,12 +31,22 @@ const salaryAdSlice = createSlice({
       })
       .addCase(deleteSalaryAdData.fulfilled, (state, action) => {
         state.status = 'succeeded';
-        console.log(action.payload);
-        state.data = action.payload;
+        state.data = action.payload.reverse();
       })
       .addCase(deleteSalaryAdData.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message || 'error: extraReducers delete 실패';
+      })
+      .addCase(addSalaryAdData.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(addSalaryAdData.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.data = action.payload.reverse();
+      })
+      .addCase(addSalaryAdData.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message || 'error: extraReducers add 실패';
       });
   },
 });
@@ -69,9 +79,25 @@ export const deleteSalaryAdData = createAsyncThunk(
   }
 );
 
-interface Data {
+export const addSalaryAdData = createAsyncThunk(
+  'salaryAd/addSalaryAdData',
+  async (newState: Data) => {
+    const snapshot = await get(ref(firebaseDB, PATH));
+    const state = snapshot.val() as Data[];
+    newState.id = String(state.length);
+    const updated = [...state, newState];
+    try {
+      await set(dbRef, updated);
+      return updated;
+    } catch (error) {
+      throw new Error(error instanceof Error ? error.message : 'update 실패');
+    }
+  }
+);
+
+export interface Data {
   id: string;
-  category: '주말 / 공휴일 근무 수당' | '야간 근무 수당(22:00-06:00)' | '연차 누락' | '경비 처리';
+  category: Category;
   description: string;
   endTime: string;
   month: string;
@@ -85,6 +111,12 @@ export interface SalaryAdState {
   status: 'idle' | 'loading' | 'failed' | 'succeeded';
   error: string | null;
 }
+
+export type Category =
+  | '주말 / 공휴일 근무 수당'
+  | '야간 근무 수당(22:00-06:00)'
+  | '연차 누락'
+  | '경비 처리';
 
 // export const { addItem, delItem } = salaryAdSlice.actions;
 export default salaryAdSlice.reducer;

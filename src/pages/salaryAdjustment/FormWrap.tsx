@@ -5,8 +5,11 @@ import Cate1 from './Cate1';
 import Cate2 from './Cate2';
 import { useState } from 'react';
 import { Form } from 'react-router-dom';
-import { useBasicModal } from '../../components/modal/useBasicModal';
+
 import getCurrentDate from '../../utils/getCurrentDate';
+import { addSalaryAdData, Category, Data } from '../../slices/salaryAdSlice';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
 
 const MONTH = '2024-07';
 const menuItems = [
@@ -16,8 +19,8 @@ const menuItems = [
   { text: '경비 처리', value: '경비 처리' },
 ];
 
-function FormWrap() {
-  const { handleClose } = useBasicModal();
+function FormWrap({ handleClose }: FormWrapProps) {
+  const dispatch = useDispatch<AppDispatch>();
   const [selected, setselected] = useState<SelectedType>('주말 / 공휴일 근무 수당');
   const handleChange = (event: SelectChangeEvent<string | number>) => {
     setselected(event.target.value as SelectedType);
@@ -26,10 +29,9 @@ function FormWrap() {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-
-    const category = formData.get('category');
+    const category = formData.get('category') as Category;
     const sDate = formData.get('sDate') as string;
-    const description = formData.get('description') || '';
+    const description = (formData.get('description') as string) || '';
     let startTime = '';
     let endTime = '';
 
@@ -66,7 +68,8 @@ function FormWrap() {
       endTime = `${eDate} 18:00`;
     }
 
-    const submitData = {
+    const submitData: Data = {
+      id: '',
       category,
       description,
       startTime,
@@ -76,9 +79,19 @@ function FormWrap() {
       requestTime: getCurrentDate(),
     };
 
-    alert('신청이 완료되었습니다.');
-    console.log(submitData);
+    dispatch(addSalaryAdData(submitData))
+      .unwrap()
+      .then((result) => {
+        if (result) {
+          alert('신청이 완료되었습니다.');
+          handleClose();
+        }
+      })
+      .catch((error) => {
+        alert(`예기치 못한 오류가 발생했습니다. \n ${error}`);
+      });
   };
+
   return (
     <Form onSubmit={onSubmit}>
       <SelectBox
@@ -119,9 +132,9 @@ function FormWrap() {
         <Btn
           label="취소"
           btnsize="sm"
-          onClick={handleClose}
           sx={{ fontSize: '1.5rem', mr: '1rem' }}
           btntype="outlined"
+          onClick={() => handleClose()}
         />
         <Btn type="submit" label="확인" btnsize="md" sx={{ fontSize: '1.5rem' }} />
       </div>
@@ -136,3 +149,7 @@ type SelectedType =
   | '경비 처리';
 
 export default FormWrap;
+
+interface FormWrapProps {
+  handleClose: () => void;
+}
