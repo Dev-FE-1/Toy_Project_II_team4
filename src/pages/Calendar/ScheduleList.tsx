@@ -92,10 +92,14 @@ export const ScheduleCard = styled.li`
   cursor: pointer;
   display: flex;
   align-items: center;
+  transition: all 0.5s;
 
   &::before {
     content: '';
     margin-right: 1rem;
+  }
+  &:hover {
+    transform: translateX(6px);
   }
 
   &.방송-출연 {
