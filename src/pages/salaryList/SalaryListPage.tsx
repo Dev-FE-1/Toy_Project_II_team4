@@ -22,10 +22,10 @@ export default function SalaryListPage(){
   if (error) {return <div>Error: {error.message}</div>}
 
   const salaryList = data?.salaryDetails[userId] || [] 
-  salaryList.sort((a,b) => b.id-a.id)
+  const sortedSalaryList = [...salaryList].sort((a,b) => b.id-a.id)
 
   const handleApplicationBtn = (id:number) => {
-    if(salaryList.find((item) => item.id === id)){
+    if(sortedSalaryList.find((item) => item.id === id)){
       navigate(`/salary-detail/${id}`)
     }else{
           console.error('급여 명세서가 없습니다.')
@@ -35,7 +35,7 @@ export default function SalaryListPage(){
   return(
     <Styled.Salary>
       <Heading title="급여정산"/>
-      <NoticeCard userId={userId}/>
+      <NoticeCard salaryList={sortedSalaryList}/>
         <Styled.YearSelect>
         <SelectBox 
           labelId="SalaryYear" 
@@ -44,7 +44,7 @@ export default function SalaryListPage(){
           menuItems={years}
         />
       </Styled.YearSelect>
-        {salaryList.map((el)=>
+        {sortedSalaryList.map((el)=>
           (<Styled.ListCardBox key={el.id} $state={el.state} 
             onClick={()=>{handleApplicationBtn(el.id)}}>
             <Styled.List $state={el.state}>

@@ -3,7 +3,7 @@ import IconBtn from "../../components/iconButton/IconButton";
 import * as Styled from './SalaryDetail.style';
 import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
-import React, { useRef } from "react";
+import { useRef } from "react";
 import {SalaryDataItem} from '../salaryList/api/fetchSalaryInfo';
 import useSalaryDetails from "../salaryList/useSalaryDetails";
 import MoveMonth from "./MoveMonth";

@@ -1,22 +1,18 @@
 import * as Styled from './NoticeCard.style';
 import Btn from '../../components/button/Button';
-import useSalaryDetails from './useSalaryDetails';
+import { SalaryDataItem } from './api/fetchSalaryInfo';
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 
 type noticeData = {
-  userId:string;
+  salaryList? : Array<SalaryDataItem> 
   button?: boolean;
   label?: React.ReactNode;
 };
 
 
-export default function NoticeCard({ userId, button = false, label}: noticeData) {
-  const navigate = useNavigate()
-  const {data} = useSalaryDetails()
-
-  const salaryList = data?.salaryDetails[userId] || []
-  salaryList.sort((a,b) => b.id-a.id) 
+export default function NoticeCard({ salaryList=[], button = false, label}: noticeData) {
+  const navigate = useNavigate() 
 
   const handleApplicationBtn = (id:number) => {
     if(salaryList.find((item) => item.id === id)){
