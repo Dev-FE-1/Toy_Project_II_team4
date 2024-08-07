@@ -1,7 +1,7 @@
 import NavButton from './NavButton';
 import * as Styled from './NavBar.style';
 import { navbarItems } from './NavLinks';
-import { useNavBar } from './useNavbar';
+import { useNavBar } from '../../hooks/useNavbar';
 
 export default function NavBar() {
   const { selected } = useNavBar();

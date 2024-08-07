@@ -18,10 +18,6 @@ export const router = createBrowserRouter([
     errorElement: <div>404 Not Found</div>,
     children: [
       {
-        path: ROUTE_PATHS.LOGIN,
-        element: <LoginPage />,
-      },
-      {
         path: ROUTE_PATHS.HOME,
         element: <Dashboard />,
       },
@@ -46,5 +42,9 @@ export const router = createBrowserRouter([
         element: <SalaryDetailPage />,
       },
     ],
+  },
+  {
+    path: ROUTE_PATHS.LOGIN,
+    element: <LoginPage />,
   },
 ]);

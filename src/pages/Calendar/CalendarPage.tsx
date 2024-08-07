@@ -9,9 +9,8 @@ import { CalendarFilter } from './CalendarFilter';
 import { CalendarDate } from './CalendarDate';
 import { ScheduleList } from './ScheduleList';
 import { AddScheduleModal } from './AddScheduleModal';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { addSchedule } from '../../slices/scheduleSlice';
-
 interface ISchedule {
   dateId: number;
   category: string;
@@ -30,8 +29,6 @@ export default function CalendarPage(): React.ReactElement {
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
 
   const dispatch = useDispatch();
-
-  const schedules = useSelector((state: RootState) => state.schedules.schedules);
 
   const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
   const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);

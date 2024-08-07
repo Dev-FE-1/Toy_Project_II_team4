@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { navbarItems } from './NavLinks';
+import { navbarItems } from '../components/nav/NavLinks';
 import { useLocation } from 'react-router-dom';
 
 export function useNavBar() {
