@@ -3,7 +3,6 @@ import { getFormatDate } from '../utils/FormatDate';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../store/store';
 import { fetchSchedules, addSchedule, ISchedule, ScheduleState } from '../slices/scheduleSlice';
-import Loading from '../components/loading/Loading';
 
 interface useScheduleProps {
   selectedDate: Date;

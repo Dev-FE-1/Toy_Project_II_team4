@@ -11,7 +11,7 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
   const schedules = useSelector<RootState, ISchedule[]>((state) => state.schedules.schedules);
 
   useEffect(() => {
-    dispatch(fetchSchedules());
+    void dispatch(fetchSchedules());
   }, [dispatch]);
 
   const date = new Date();

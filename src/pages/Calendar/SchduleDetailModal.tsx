@@ -31,7 +31,7 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
       onClose();
     }
   };
-
+  console.log(schedule);
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
@@ -59,8 +59,8 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
           <ActionButtons>
             {isEditing ? (
               <>
-                <ActionButton onClick={handleUpdateSchedule}>저장</ActionButton>
-                <ActionButton onClick={() => setIsEditing(false)}>취소</ActionButton>
+                <button onClick={handleUpdateSchedule}>저장</button>
+                <button onClick={() => setIsEditing(false)}>취소</button>
               </>
             ) : (
               <>
@@ -70,89 +70,95 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
             )}
           </ActionButtons>
         </ModalHeader>
-        <ModalBody>
-          {isEditing ? (
-            <EditForm>
-              <input
-                type="text"
-                name="title"
-                value={editedSchedule.title}
-                onChange={handleInputChange}
-                placeholder="제목"
-                required
-              />
-              <select
-                name="category"
-                value={editedSchedule.category}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="">카테고리 선택</option>
-                {['공연', '팬 이벤트', '방송 출연', '촬영'].map((category) => (
-                  <option key={category} value={category}>
-                    {category}
-                  </option>
-                ))}
-              </select>
-              <select
-                name="scheduleType"
-                value={editedSchedule.scheduleType}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="company">회사</option>
-                <option value="personal">개인</option>
-              </select>
-              <input
-                type="date"
-                name="startDate"
-                value={editedSchedule.startDate}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="time"
-                name="startTime"
-                value={editedSchedule.startTime}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="date"
-                name="endDate"
-                value={editedSchedule.endDate}
-                onChange={handleInputChange}
-                required
-              />
-              <input
-                type="time"
-                name="endTime"
-                value={editedSchedule.endTime}
-                onChange={handleInputChange}
-                required
-              />
-              <textarea
-                name="description"
-                value={editedSchedule.description}
-                onChange={handleInputChange}
-                placeholder="설명"
-              />
-            </EditForm>
-          ) : (
-            <>
-              <ScheduleCategory>{schedule.category}</ScheduleCategory>
-              <ScheduleTitle>{schedule.title}</ScheduleTitle>
-              <p>
-                시작: {schedule.startDate} {schedule.startTime}
-              </p>
-              <p>
-                종료: {schedule.endDate} {schedule.endTime}
-              </p>
-              <br />
-              <p>설명: {schedule.description}</p>
-            </>
-          )}
-        </ModalBody>
+        {isEditing ? (
+          <EditForm>
+            <input
+              type="text"
+              name="title"
+              value={editedSchedule.title}
+              onChange={handleInputChange}
+              placeholder="제목"
+              required
+            />
+            <select
+              name="category"
+              value={editedSchedule.category}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="">카테고리 선택</option>
+              {['공연', '팬 이벤트', '방송 출연', '촬영'].map((category) => (
+                <option key={category} value={category}>
+                  {category}
+                </option>
+              ))}
+            </select>
+            <select
+              name="scheduleType"
+              value={editedSchedule.scheduleType}
+              onChange={handleInputChange}
+              required
+            >
+              <option value="company">회사</option>
+              <option value="personal">개인</option>
+            </select>
+            <input
+              type="date"
+              name="startDate"
+              value={editedSchedule.startDate}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="time"
+              name="startTime"
+              value={editedSchedule.startTime}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="date"
+              name="endDate"
+              value={editedSchedule.endDate}
+              onChange={handleInputChange}
+              required
+            />
+            <input
+              type="time"
+              name="endTime"
+              value={editedSchedule.endTime}
+              onChange={handleInputChange}
+              required
+            />
+            <textarea
+              name="description"
+              value={editedSchedule.description}
+              onChange={handleInputChange}
+              placeholder="설명"
+            />
+          </EditForm>
+        ) : (
+          <ScheduleDetailWrapper>
+            <p className={`category  ${schedule.category.replace(' ', '-')}`}>
+              {schedule.category}
+            </p>
+            <p className="title">{schedule.title}</p>
+            <p className="start-date">
+              {schedule.startDate.slice(5, 7)}월 {schedule.startDate.slice(-2)}일{' '}
+              {+schedule.startTime.slice(0, 2) > 12
+                ? `오후 ${(+schedule.startTime.slice(0, 2) - 12).toString().padStart(2, '0')}${schedule.startTime.slice(-3)}`
+                : `오전 ${schedule.startTime}`}
+              ~
+            </p>
+            <p className="end-date">
+              {schedule.endDate.slice(5, 7)}월 {schedule.endDate.slice(-2)}일{' '}
+              {+schedule.endTime.slice(0, 2) > 12
+                ? `오후 ${(+schedule.endTime.slice(0, 2) - 12).toString().padStart(2, '0')}${schedule.endTime.slice(-3)}`
+                : `오전 ${schedule.endTime}`}
+            </p>
+            <p className="description">{schedule.description}</p>
+          </ScheduleDetailWrapper>
+        )}
       </ModalContent>
     </ModalWrapper>
   );
@@ -196,32 +202,50 @@ const ActionButtons = styled.div`
   }
 `;
 
-const ModalBody = styled.div`
-  h2 {
-    margin-bottom: 10px;
-  }
-  p {
-    margin-bottom: 5px;
-  }
-`;
-
 const EditForm = styled.div`
   display: flex;
   flex-direction: column;
 `;
-const ScheduleCategory = styled.span`
-  background-color: #dc5f00;
-  color: white;
-  padding: 0.4rem;
-  border-radius: 10px;
-`;
-const ScheduleTitle = styled.h2`
-  display: inline-block;
-  margin-bottom: 14px;
-  margin-left: 5px;
+
+const ScheduleDetailWrapper = styled.div`
+  p {
+    margin-bottom: 1rem;
+  }
+  .category {
+    display: inline-block;
+    padding: 6px 8px;
+    font-weight: bold;
+    border-radius: 8px;
+    color: var(--font-pri);
+    font-size: 1.4rem;
+    margin-bottom: 2rem;
+
+    &.방송-출연 {
+      background-color: #3473e14d;
+    }
+    &.촬영 {
+      background-color: #ffcb344d;
+    }
+    &.팬-이벤트 {
+      background-color: #039c004d;
+    }
+    &.공연 {
+      background-color: #dc5f004d;
+    }
+    &.개인 {
+      background-color: #ddddddb2;
+    }
+  }
+  .title {
+    font-size: 2.4rem;
+    font-weight: bold;
+    margin-bottom: 2rem;
+  }
+  .end-date {
+    margin-bottom: 4rem;
+  }
 `;
 
-export const ActionButton = styled.button``;
 const CloseButton = styled.button`
   font-size: var(--font-size-xlarge);
   cursor: pointer;

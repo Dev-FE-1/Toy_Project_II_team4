@@ -46,11 +46,6 @@ export default function CalendarPage(): React.ReactElement {
   if (scheduleHook.status === 'loading') {
     return <Loading />;
   }
-
-  // if (scheduleHook.status === 'failed') {
-  //   return <div>Error: {error}</div>;
-  // }
-
   return (
     <>
       <Heading title="업무관리" />
@@ -85,8 +80,6 @@ export default function CalendarPage(): React.ReactElement {
 }
 
 export const Calendar = styled.div`
-  width: 95%;
-  margin: 0 auto;
   margin-bottom: 30px;
-  font-size: 1.8rem;
+  font-size: var(--font-size-large);
 `;
