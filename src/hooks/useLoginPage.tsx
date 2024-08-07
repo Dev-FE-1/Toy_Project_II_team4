@@ -1,13 +1,13 @@
 // import { login } from './login';
-import { login } from '../../slices/authSlice';
+import { login } from '../slices/authSlice';
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { auth } from '../../api/firebaseApp';
+import { auth } from '../api/firebaseApp';
 import { useState } from 'react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store/store';
+import { RootState, AppDispatch } from '../store/store';
 
 const validate = {
   emailEmty: (email: string) => email.length === 0,

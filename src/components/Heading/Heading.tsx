@@ -9,12 +9,10 @@ export default function Heading({ title }: { title: string }) {
 }
 
 const HeadingWrapper = styled.div`
-  height: 54px;
-  border-bottom: 1px solid #ddd;
   display: flex;
   align-items: center;
-
-  h2 {
-    margin-left: 8px;
-  }
+  background: #fff;
+  margin: -1.5rem;
+  margin-bottom: 0;
+  padding: 1.2rem 1.5rem;
 `;

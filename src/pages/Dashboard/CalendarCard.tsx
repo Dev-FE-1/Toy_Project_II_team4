@@ -25,10 +25,7 @@ export default function CalendarCard() {
 
 const CalendarCardWrapper = styled(CardBox)`
   display: flex;
-  border: 1px solid var(--border-sec);
   height: 19.5rem;
-  padding: 0;
   overflow: hidden;
   position: relative;
-  margin: 1rem 0;
 `;
