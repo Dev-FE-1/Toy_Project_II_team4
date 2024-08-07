@@ -14,13 +14,13 @@ export const MUIButton = muiStyled(Button)<{ selected: boolean }>`
   flex: 1;
   height: 80px;
   min-width: 0;
-  background-color: ${(props) => (props.selected ? 'var(--color-pri)' : 'transparent')};
-  color: ${(props) => (props.selected ? '#fff' : '#333')};
+  /* background-color: ${(props) => (props.selected ? 'var(--color-pri)' : 'transparent')}; */
+  color: ${(props) => (props.selected ? 'var(--color-pri)' : '#333')};
 
   &:hover,
   &:active {
-    background-color: var(--color-pri);
-    color: var(--color-white);
+    /* background-color: var(--color-pri); */
+    color: var(--color-pri);
   }
 `;
 
