@@ -41,7 +41,7 @@ export const MyPageContainer = styled.div`
   }
 
   .info-container {
-    margin: 20px 0;
+    margin: 28px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,7 +65,7 @@ export const MyPageContainer = styled.div`
 
       & li div {
         width: 150px;
-        margin-left: 25px;
+        margin-left: 18px;
       }
 
       & li div:last-child {
@@ -76,7 +76,7 @@ export const MyPageContainer = styled.div`
   }
 
   .button-container {
-    margin: 20px 0;
+    margin: 40px 0;
   }
 
   & .message {
