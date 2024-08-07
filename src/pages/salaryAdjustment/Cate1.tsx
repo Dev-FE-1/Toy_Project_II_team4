@@ -1,5 +1,8 @@
 import SDataPicker from '../../components/datepicker/DatePicker';
+import dayjs from 'dayjs';
 function Cate1() {
+  const minDate = dayjs(new Date(new Date().getFullYear(), 6, 1));
+  const maxDate = dayjs(new Date(new Date().getFullYear(), 7, 0));
   return (
     <>
       <SDataPicker
@@ -12,7 +15,9 @@ function Cate1() {
             },
           },
         }}
-        format="YYYY - MM - DD"
+        format="YYYY-MM-DD"
+        minDate={minDate}
+        maxDate={maxDate}
       />
     </>
   );

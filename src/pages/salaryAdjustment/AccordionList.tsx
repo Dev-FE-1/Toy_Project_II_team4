@@ -1,11 +1,12 @@
 import IconBtn from '../../components/iconButton/IconButton';
-import { AccordionSummary, AccordionDetails, Card } from '@mui/material';
+import { AccordionSummary, AccordionDetails } from '@mui/material';
 import { ExpandMore } from '@mui/icons-material';
 import { deleteSalaryAdData, fetchSalaryAdData } from '../../slices/salaryAdSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
-import { useEffect } from 'react';
 import CardBox from '../../components/cardBox/CardBox';
+
+import { useEffect } from 'react';
 
 import * as styled from './SalaryAdjustment.style';
 
@@ -37,8 +38,6 @@ function AccordionList() {
     }
   };
   if (data.length !== 0) {
-    console.log(data);
-
     return (
       <>
         {data.map((item) => {
@@ -49,23 +48,37 @@ function AccordionList() {
                 aria-controls="panel1-content"
                 id="panel1-header"
               >
-                <styled.AccordionTitle>
-                  <div className="title-wrap">
-                    <p className="title">{item.category}</p>
+                <div className="title">
+                  <div className="title-inner">
+                    <p>{`[${item.month.split('-')[1]}월 급여명세서] ${item.category}`}</p>
                     <span className="date">{item.requestTime}</span>
                   </div>
                   <styled.Schip label={item.status} size="small" />
-                </styled.AccordionTitle>
-                <div className="icons">
-                  <IconBtn icontype="edit" onClick={handleEdit} />
-                  <IconBtn icontype="delete" onClick={handleDelete} />
                 </div>
+                {item.status === '결재대기' && (
+                  <div className="icons">
+                    <IconBtn icontype="edit" onClick={handleEdit} />
+                    <IconBtn icontype="delete" onClick={handleDelete} />
+                  </div>
+                )}
               </AccordionSummary>
               <AccordionDetails>
                 <ul>
-                  <li>결재 상태 : {item.status}</li>
-                  <li>신청일: {item.requestTime}</li>
-                  <li>신청 내용: {item.description}</li>
+                  <li>
+                    <span>카테고리 : </span>[{item.category}]
+                  </li>
+                  <li>
+                    <span>신청 내용 : </span>
+                    {item.description}
+                  </li>
+                  <li>
+                    <span>정정 대상일 : </span>
+                    {item.startTime.split(' ')[0]}
+                  </li>
+                  <li>
+                    <span>결재 상태 : </span>
+                    {item.status}
+                  </li>
                 </ul>
               </AccordionDetails>
             </styled.SAccordion>
