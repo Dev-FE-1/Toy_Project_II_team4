@@ -12,6 +12,12 @@ export default function SalaryCard() {
   if (error) {
     return <div>Error: {error.message}</div>;
   }
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
 
   const salary = data?.salaryDetails[userId] || [];
   const sortedSalaryList = [...salary].sort((a, b) => b.id - a.id);
