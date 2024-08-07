@@ -15,26 +15,24 @@ export function MyPage() {
           />
         </div>
         <h2>김지훈</h2>
-        <p>관리 2팀/로드 매니저</p>
+        <span className="message">언제든지 긍정적인 마인드로!😆😆</span>
         <div className="info-container">
           <ul className="list">
             <li>
-              <h5>
-                <strong>이메일 </strong> jihoon@sajo.com
-              </h5>
+              <div className="property">이메일</div>
+              <div>jihoon@sajo.com</div>
             </li>
             <li>
-              <h5>
-                <strong>휴대폰 번호 </strong> 010-1234-1234
-              </h5>
+              <div>휴대폰 번호</div>
+              <div> 010-1234-1234</div>
             </li>
             <li>
-              <h5>
-                <strong>직급 </strong> 관리 2팀/로드 매니저
-              </h5>
+              <div>직급</div>
+              <div>관리 2팀/로드 매니저</div>
             </li>
             <li>
-              <h5>언제든지 긍정적인 마인드로!😆😆</h5>
+              <div>담당</div>
+              <div>블루핑크 담당</div>
             </li>
           </ul>
         </div>
