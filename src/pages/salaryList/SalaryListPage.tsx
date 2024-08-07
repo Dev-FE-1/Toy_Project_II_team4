@@ -24,10 +24,12 @@ export default function SalaryListPage(){
 
   const salaryList = data?.salaryDetails[userId] || [] 
   const filteredItem = salaryList.filter((item) => Number(item.payday.slice(0,4)) === Number(selectedYear))
-  const sortedSalaryList = [...filteredItem].sort((a,b) => b.id-a.id)
+  const sortedData = [...filteredItem].sort((a,b) => b.id-a.id)
+  const latestSalaryList = [...salaryList].sort((a, b) => new Date(b.payday).getTime() - new Date(a.payday).getTime());
+  const latestData = latestSalaryList.length > 0 ? [latestSalaryList[0]] : [];
 
   const handleApplicationBtn = (id:number) => {
-    if(sortedSalaryList.find((item) => item.id === id)){
+    if(sortedData.find((item) => item.id === id)){
       navigate(`/salary-detail/${id}`)
     }else{
       navigate('/payments')
@@ -37,7 +39,7 @@ export default function SalaryListPage(){
   return(
     <Styled.Salary>
       <Heading title="급여정산"/>
-      <NoticeCard salaryList={sortedSalaryList}/>
+      <NoticeCard salaryList={latestData}/>
         <Styled.YearSelect>
         <SelectBox 
           labelId="SalaryYear" 
@@ -45,10 +47,24 @@ export default function SalaryListPage(){
           label="year" 
           menuItems={years}
           value={selectedYear}
-          onChange={(e) => setSelectedYear(Number(e.target.value))}
+          onChange={(e) => setSelectedYear(Number(e.target.value))
+          }
+          sx={{'& .MuiInputLabel-root': {
+              fontSize: 'var(--font-size-primary)', 
+            },
+            '& .MuiSelect-select': {
+              fontSize: 'var(--font-size-small)', 
+            },
+            '& .MuiSelect-icon': {
+              fontSize: '2rem',
+              right: '2rem',
+              transform: 'translateY(-50%)',
+              top: '40%'
+            }
+          }}
         />
       </Styled.YearSelect>
-        {sortedSalaryList.map((el)=>
+        {sortedData.map((el)=>
           (<Styled.ListCardBox key={el.id} $state={el.state} 
             onClick={()=>{handleApplicationBtn(el.id)}}>
             <Styled.List $state={el.state}>
