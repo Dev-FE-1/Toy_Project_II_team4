@@ -5,8 +5,8 @@ import { deleteSalaryAdData, fetchSalaryAdData } from '../../slices/salaryAdSlic
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import CardBox from '../../components/cardBox/CardBox';
-
 import { useEffect } from 'react';
+import Loading from '../../components/loading/Loading';
 
 import * as styled from './SalaryAdjustment.style';
 import Btn from '../../components/button/Button';
@@ -20,17 +20,17 @@ function AccordionList() {
   }, [dispatch]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
 
-  const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    confirm('수정 하시겠습니까?');
-  };
+  // const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   e.stopPropagation();
+  //   confirm('수정 하시겠습니까?');
+  // };
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     const id = String(e.currentTarget.closest('.accordion')?.getAttribute('data-id'));
