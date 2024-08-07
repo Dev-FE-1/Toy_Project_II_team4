@@ -1,18 +1,18 @@
 .schedule-box.방송-출연 {
-  background-color: rgba(52, 115, 225, 0.3); /* 기존 색상에 투명도 추가 */
+  background-color: #3473e14d;
 }
 
 .schedule-box.촬영 {
-  background-color: rgba(255, 203, 52, 0.3); /* 기존 색상에 투명도 추가 */
+  background-color: #ffcb344d;
 }
 
 .schedule-box.팬-이벤트 {
-  background-color: rgba(3, 156, 0, 0.3); /* 기존 색상에 투명도 추가 */
+  background-color: #039c004d;
 }
 
 .schedule-box.공연 {
-  background-color: rgba(220, 95, 0, 0.3); /* 기존 색상에 투명도 추가 */
+  background-color: #dc5f004d;
 }
 .schedule-box.개인 {
-  background-color: #ddd;
+  background-color: #ddddddb3;
 }
