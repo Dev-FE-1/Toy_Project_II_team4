@@ -5,12 +5,11 @@ export const YearSelect = styled.div`
   min-width:20%;
 
   & > div > div > div {
-    height: 40px;
+    height: 30px;
     min-height: 1.4375em;
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
-    outline:none;
   }
   & .MuiOutlinedInput-notchedOutline {
     border: none;
@@ -57,10 +56,10 @@ export const List = styled.div<{$state:boolean}>`
   & > .title {
     font-weight: ${({$state}) => $state === true? 'var(--font-weight-bold)' : 'var(font-weight-semibold)'};
     line-height: 3.2rem;
-    font-size: 1.5rem;
+    font-size: var(--font-size-primary);
   }
   & > .date {
-    font-size: 13px;
+    font-size: var(--font-size-small);
     color: ${({$state}) => $state === true? 'var(--font-pri)' : 'var(--font-sec)'};
     text-align:left;
   }
