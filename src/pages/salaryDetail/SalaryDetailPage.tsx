@@ -63,10 +63,22 @@ export default function SalaryDetailPage() {
         .then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const pdf = new jsPDF();
-          const imgProps = pdf.getImageProperties(imgData);
+
           const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+
+          const imgProps = pdf.getImageProperties(imgData);
+          const imgWidth = imgProps.width;
+          const imgHeight = imgProps.height;
+
+          const scale = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+          const newImgWidth = imgWidth * scale;
+          const newImgHeight = imgHeight * scale;
+
+          const x = (pdfWidth - newImgWidth) / 2;
+          const y = (pdfHeight - newImgHeight) / 2;
+
+          pdf.addImage(imgData, 'PNG', x, y, newImgWidth, newImgHeight);
           pdf.save(
             `${employeeProfile.name || '급여명세서'}_${salaryData.payday.slice(5, 7)}월_급여명세서.pdf`
           );
