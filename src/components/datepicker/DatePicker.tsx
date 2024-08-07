@@ -31,6 +31,7 @@ export default function SDataPicker({ dateType, ...props }: pickerProps) {
               slotProps={DTPstyle}
               value={startDate}
               onChange={(newvalue) => setStartDate(newvalue)}
+              name="sDate"
               {...props}
             />
             <Separator>-</Separator>
@@ -38,7 +39,9 @@ export default function SDataPicker({ dateType, ...props }: pickerProps) {
               slotProps={DTPstyle}
               value={endDate}
               onChange={(newvalue) => setEndDate(newvalue)}
+              name="eDate"
               {...props}
+              minDate={startDate || undefined} // 시작 날짜가 설정되면 minDate를 설정
             />
           </DatePickerContainer>
         </LocalizationProvider>
