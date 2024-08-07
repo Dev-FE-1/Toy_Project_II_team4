@@ -8,6 +8,7 @@ interface CalendarFilterProps {
   setShowCompanySchedule: (show: boolean) => void;
   setShowPersonalSchedule: (show: boolean) => void;
   goToToday: () => void;
+  openAddScheduleModal: () => void;
 }
 
 export function CalendarFilter({
@@ -16,6 +17,7 @@ export function CalendarFilter({
   setShowCompanySchedule,
   setShowPersonalSchedule,
   goToToday,
+  openAddScheduleModal,
 }: CalendarFilterProps): JSX.Element {
   return (
     <CalendarFilterWrapper className="calendar-filter">
@@ -33,6 +35,7 @@ export function CalendarFilter({
       </div>
       <div className="calendar-buttons">
         <DateButton content="today" onClick={goToToday} />
+        <DateButton content="일정추가" onClick={openAddScheduleModal} />
       </div>
     </CalendarFilterWrapper>
   );

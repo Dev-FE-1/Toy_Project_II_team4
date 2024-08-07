@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
+
 interface ISchedule {
   dateId: number;
   category: string;
@@ -11,15 +13,24 @@ interface ISchedule {
   endDate: string;
   endTime: string;
 }
-interface IAddScheduleModalProps {
+
+interface AddScheduleModalProps {
   isOpen: boolean;
   onClose: () => void;
   onAddSchedule: (schedule: ISchedule) => void;
 }
 
-export function AddScheduleModal({ isOpen, onClose, onAddSchedule }: IAddScheduleModalProps) {
+const categoryOptions = ['공연', '팬 이벤트', '방송 출연', '촬영'];
+
+export function AddScheduleModal({
+  isOpen,
+  onClose,
+  onAddSchedule,
+}: AddScheduleModalProps): JSX.Element | null {
+  const schedules: ISchedule[] = useSelector((state: RootState) => state.schedules.schedules);
+
   const [newSchedule, setNewSchedule] = useState<ISchedule>({
-    dateId: Date.now(),
+    dateId: schedules.length + 1,
     category: '',
     scheduleType: 'company',
     description: '',
@@ -30,7 +41,9 @@ export function AddScheduleModal({ isOpen, onClose, onAddSchedule }: IAddSchedul
     endTime: '',
   });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     setNewSchedule((prev) => ({ ...prev, [name]: value }));
   };
@@ -41,13 +54,26 @@ export function AddScheduleModal({ isOpen, onClose, onAddSchedule }: IAddSchedul
     onClose();
   };
 
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      onClose();
+    }
+  };
+
   if (!isOpen) return null;
 
   return (
-    <AddScheduleModalWrapper>
-      <div className="modal-overlay">
-        <div className="modal-content">
-          <h2>일정 추가</h2>
+    <ModalWrapper onClick={handleOverlayClick}>
+      <ModalContent>
+        <ModalHeader>
+          <CloseButton onClick={onClose}>&times;</CloseButton>
+          <ActionButtons>
+            <button type="submit" onClick={handleSubmit}>
+              추가
+            </button>
+          </ActionButtons>
+        </ModalHeader>
+        <ModalBody>
           <form onSubmit={handleSubmit}>
             <input
               type="text"
@@ -57,14 +83,45 @@ export function AddScheduleModal({ isOpen, onClose, onAddSchedule }: IAddSchedul
               placeholder="제목"
               required
             />
-            <input
-              type="se"
-              name="category"
-              value={newSchedule.category}
-              onChange={handleInputChange}
-              placeholder="카테고리"
-              required
-            />
+            <div className="radio-group">
+              <label>
+                <input
+                  type="radio"
+                  name="scheduleType"
+                  value="company"
+                  checked={newSchedule.scheduleType === 'company'}
+                  onChange={handleInputChange}
+                  required
+                />
+                회사
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  name="scheduleType"
+                  value="personal"
+                  checked={newSchedule.scheduleType === 'personal'}
+                  onChange={handleInputChange}
+                  required
+                />
+                개인
+              </label>
+            </div>
+            {newSchedule.scheduleType === 'company' && (
+              <select
+                name="category"
+                value={newSchedule.category}
+                onChange={handleInputChange}
+                required
+              >
+                <option value="">카테고리 선택</option>
+                {categoryOptions.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            )}
             <textarea
               name="description"
               value={newSchedule.description}
@@ -99,53 +156,79 @@ export function AddScheduleModal({ isOpen, onClose, onAddSchedule }: IAddSchedul
               onChange={handleInputChange}
               required
             />
-            <button type="submit">추가</button>
-            <button type="button" onClick={onClose}>
-              취소
-            </button>
           </form>
-        </div>
-      </div>
-    </AddScheduleModalWrapper>
+        </ModalBody>
+      </ModalContent>
+    </ModalWrapper>
   );
 }
 
-export const AddScheduleModalWrapper = styled.div`
-  .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  /* background-color: rgba(0, 0, 0, 0.5); */
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+`;
 
-  .modal-content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 5px;
-    width: 40%;
-    position: absolute;
-    bottom: 0;
-    padding-bottom: 120px;
-    height: 50%;
-  }
+const ModalContent = styled.div`
+  border: 1px solid var(--border-pri);
+  background-color: white;
+  padding: 20px;
+  padding-bottom: 100px;
+  border-radius: 10px 10px 0 0;
+  max-width: 568px;
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  box-sizing: border-box;
+`;
 
-  .modal-content form {
+const ModalHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+`;
+
+const CloseButton = styled.button`
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+`;
+
+const ActionButtons = styled.div`
+  button {
+    margin-left: 10px;
+  }
+`;
+
+const ModalBody = styled.div`
+  form {
     display: flex;
     flex-direction: column;
   }
 
-  .modal-content input,
-  .modal-content textarea {
+  input,
+  textarea,
+  select {
     margin-bottom: 10px;
     padding: 5px;
   }
 
-  .modal-content button {
-    margin-top: 10px;
+  .radio-group {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
   }
 `;
