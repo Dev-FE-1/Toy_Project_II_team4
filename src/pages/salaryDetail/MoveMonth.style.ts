@@ -11,7 +11,7 @@ export const Movemonth = styled.div`
 
   .up-date{
     font-weight:var(--font-weight-bold);
-    font-size:1.3rem;
+    font-size:var(--font-size-primary);
     margin:0 5px;
 
     .css-i4bv87-MuiSvgIcon-root{
