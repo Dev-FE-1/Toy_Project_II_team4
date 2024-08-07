@@ -31,7 +31,13 @@ export default function GlobalStyle() {
           '--border-pri': '#9a9a9a',
           '--border-sec': '#eeeeee',
 
-          '--page-gray' : '#F0F3F8',
+          '--page-gray': '#F0F3F8',
+
+          /* font size system */
+          '--font-size-primary': '1.5rem',
+          '--font-size-small': '1.2rem',
+          '--font-size-large': '1.8rem',
+          '--font-size-xlarge': '2.2rem',
         },
         '*': {
           fontFamily: 'var(--font-family-primary)',
@@ -60,12 +66,12 @@ export default function GlobalStyle() {
           fontWeight: 'var(--font-weight-bold)',
         },
         h2: {
-          fontSize: '2.2rem',
+          fontSize: 'var(--font-size-xlarge)',
           lineHeight: '3.3rem',
           fontWeight: 'var(--font-weight-semibold)',
         },
         h3: {
-          fontSize: '1.8rem',
+          fontSize: 'var(--font-size-large)',
           lineHeight: '2.7rem',
           fontWeight: 'var(--font-weight-medium)',
         },
@@ -75,12 +81,12 @@ export default function GlobalStyle() {
           fontWeight: 'var(--font-weight-medium)',
         },
         h5: {
-          fontSize: '1.4rem',
+          fontSize: 'var(--font-size-primary)',
           lineHeight: '2.1rem',
           fontWeight: 'var(--font-weight-medium)',
         },
         h6: {
-          fontSize: '1.2rem',
+          fontSize: 'var(--font-size-small)',
           lineHeight: '1.8rem',
           fontWeight: 'var(--font-weight-medium)',
         },
