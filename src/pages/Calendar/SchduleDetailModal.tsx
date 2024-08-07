@@ -139,9 +139,8 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
             </EditForm>
           ) : (
             <>
-              <h2>{schedule.title}</h2>
-              <h3>{schedule.category}</h3>
-              <br />
+              <ScheduleCategory>{schedule.category}</ScheduleCategory>
+              <ScheduleTitle>{schedule.title}</ScheduleTitle>
               <p>
                 시작: {schedule.startDate} {schedule.startTime}
               </p>
@@ -177,7 +176,8 @@ const ModalContent = styled.div`
   border-radius: 10px 10px 0 0;
   width: 100%;
   max-width: 568px;
-  height: 50%;
+  height: 100%;
+  /* height: 50%; */
   overflow-y: auto;
   box-sizing: border-box;
 `;
@@ -214,4 +214,15 @@ const EditForm = styled.div`
   display: flex;
   flex-direction: column;
 `;
-EditForm;
+const ScheduleCategory = styled.span`
+  background-color: #dc5f00;
+  color: white;
+  padding: 0.4rem;
+  border-radius: 10px;
+`;
+const ScheduleTitle = styled.h2`
+  display: inline-block;
+  margin-bottom: 14px;
+  margin-left: 5px;
+
+`;
