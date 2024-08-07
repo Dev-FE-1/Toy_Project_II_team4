@@ -4,6 +4,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import { DialogProps } from '@mui/material';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import { useTheme } from '@mui/material/styles';
 
 interface BasicDialogProps extends Omit<DialogProps, 'children'> {
   children?: React.ReactNode;
@@ -19,10 +21,12 @@ export default function BasicDialog({
   title,
   ...props
 }: BasicDialogProps) {
+  const theme = useTheme();
+  const fullScreen = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <div>
       {modalOpenButton}
-      <Dialog {...props}>
+      <Dialog fullScreen={fullScreen} {...props}>
         {title && <DialogTitle>{title}</DialogTitle>}
         <DialogContent>{children}</DialogContent>
         <DialogActions>{modalCloseButton}</DialogActions>
