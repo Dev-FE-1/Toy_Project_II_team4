@@ -11,9 +11,7 @@ export function login(email: string, password: string) {
 
 export function logout() {
   signOut(auth)
-    .then(() => {
-      console.log('logout');
-    })
+    .then(() => {})
     .catch((error) => {
       console.log(error);
     });
