@@ -6,7 +6,7 @@ export const SalaryCardBox = styled.div`
   padding: 1.2rem 4rem 2rem 4rem;
   margin: 1rem;
   border-radius:2rem;
-  box-shadow: 0px 1px 0px 0.2px var(--border-pri);
+  border: 1px solid var(--border-sec);
   margin: 2rem auto;
   box-sizing:border-box;
 

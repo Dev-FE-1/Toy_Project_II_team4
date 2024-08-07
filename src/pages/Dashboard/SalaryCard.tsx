@@ -1,37 +1,35 @@
-import { useNavigate } from 'react-router-dom';
 import NoticeCard from '../salaryList/NoticeCard';
-import dayjs from 'dayjs';
 import styled from 'styled-components';
+import useSalaryDetails from '../salaryList/useSalaryDetails';
 
 export default function SalaryCard() {
-  const currentDate = new Date();
-  const DueDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), 25);
-  const originDate = dayjs(DueDate);
-  const finalMonth = originDate.format('MM월 ');
-  const finalDay = originDate.format('DD일');
+  const userId = 'sajo1234567';
+  const { data, error, isLoading } = useSalaryDetails();
 
-  const navigate = useNavigate();
+  if (isLoading) { return <div>Loading...</div>; }
+  if (error) { return <div>Error: {error.message}</div>; }
 
-  const goToSalaryPage = () => navigate(`/salary-detail/3`);
+  const salary = data?.salaryDetails[userId] || [];
+  const sortedSalaryList = [...salary].sort((a, b) => b.id - a.id);
+
   return (
-    <SalaryCardWrapper
-      date={finalMonth}
-      day={finalDay}
+    <SalaryCardWrapper>
+    <NoticeCard
+      salaryList={sortedSalaryList}
       button={true}
       label={<h5>급여명세서 조회</h5>}
-      onClick={goToSalaryPage}
     />
+    </SalaryCardWrapper>
   );
 }
 
-export const SalaryCardWrapper = styled(NoticeCard)`
-  /* 하단 스타일이 적용이 되고 있지 않습니다. */
-  display: flex;
-  border: 1px solid var(--border-sec);
+export const SalaryCardWrapper = styled.div`
+& > div{
   height: 19.5rem;
   padding: 0;
   overflow: hidden;
   position: relative;
   margin: 1rem 0;
   color: red;
+}
 `;
