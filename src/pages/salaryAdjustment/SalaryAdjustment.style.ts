@@ -19,50 +19,101 @@ export const Wrapper = styled.div`
 `;
 
 export const SAccordion = muiStyled(Accordion)`
-  .MuiAccordionSummary-root .title {
-    display: flex;
+  &{
+    box-shadow:none;
+    background:transparent;
   }
+  
+  &::before{
+    content: none;
+  }
+  &.Mui-expanded {
+    margin-top:0
+  }
+  
+  .MuiAccordionSummary-root {
+    margin-bottom:1.5rem;
+    background:var(--color-white);
+    border-radius:.8rem;
+    padding:2rem;
+    border:1px solid var(--color-white);
+  }
+  .MuiAccordionSummary-root:hover {
+    border: 1px solid var(--color-pri);
+  }
+
+  /* 터치 지원 장치에서 hover 효과를 비활성화 */
+  @media (pointer: coarse) {
+    .MuiAccordionSummary-root:hover {
+      border: 1px solid var(--color-white); /* 터치 장치에서 기본 상태 */
+    }
+  }
+
+  .MuiAccordionSummary-root.Mui-expanded {
+    border:1px solid var(--color-pri);
+  }
+  
   .MuiAccordionSummary-content{
-    display:flex;
     justify-content:space-between;
+    align-items:center;
+    margin:0;
   }
-  .MuiAccordionSummary-root .title .title-inner {
+  .MuiAccordionSummary-content.Mui-expanded {
+    margin:0;
+  }
+  .MuiAccordionSummary-root .title {
     text-align: left;
   }
-  .MuiAccordionSummary-root .title .title-inner p {
+  .MuiAccordionSummary-root .title p {
     font-weight: 600;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.7rem;
   }
-  .MuiAccordionSummary-root .title .title-inner .date {
+  .MuiAccordionSummary-root .title .date {
     color: var(--font-sec);
+  }
+  .MuiAccordionDetails-root{
+    border-radius:.8rem;
+    padding:2rem;
+    background:var(--color-white);
+    border:1px solid var(--color-pri);
   }
   .MuiAccordionDetails-root ul {
     text-align: left;
   }
   .MuiAccordionDetails-root ul li {
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
   }
     .MuiAccordionDetails-root ul li span{
     font-weight:bold;
+  }
+  .MuiAccordionDetails-root .icons{
+    display:flex;
+    justify-content:flex-end
+  }
+  .MuiAccordionDetails-root .icons .MuiButtonBase-root{
+    background: #3282f6;
+    border-radius: 0.5rem;
+    display: flex;
+    color: #fff;
   }
 `;
 
 export const Schip = muiStyled(Chip)`
   & {
-    margin-left: 1rem;
-    margin-top: -3px;
-    background-color: ${({ label }) => {
+    margin-right:0.5rem;
+    ${({ label }) => {
       switch (label) {
         case '반려':
-          return 'red';
+          return 'background-color: #ffe8e8;color:#f63232';
         case '결재완료':
-          return 'var(--color-green)';
+          return 'background-color:#e8ffe8;;color:#328f36';
         case '결재대기':
         default:
-          return 'var(--color-blue)';
+          return 'background-color: var(--color-sec);color:var(--color-pri);';
       }
     }};
-    color: var(--color-white);
+
+    
   }
   .MuiChip-label {
     font-size: 1.2rem;
