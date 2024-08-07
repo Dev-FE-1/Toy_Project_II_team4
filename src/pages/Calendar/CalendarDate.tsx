@@ -46,9 +46,18 @@ export function CalendarDate({
       const dateString = getFormatDate(date).dateString;
 
       // 현재 날짜의 스케줄 (시작 날짜<현재 날짜<종료 날짜)
-      const daySchedules = schedules.filter(
-        (schedule) => schedule.startDate <= dateString && dateString <= schedule.endDate
-      );
+      const daySchedules = schedules
+        .filter((schedule) => schedule.startDate <= dateString && dateString <= schedule.endDate)
+        .sort((a, b) => a.startTime.localeCompare(b.startTime))
+        .slice(0, 3)
+        .map((schedule) => (
+          <ScheduleBox
+            key={schedule.dateId}
+            className={`schedule-box ${schedule.category.replace(' ', '-')}`}
+          >
+            {schedule.title}
+          </ScheduleBox>
+        ));
 
       daysArray.push(
         <div
@@ -61,19 +70,7 @@ export function CalendarDate({
           {/* 날짜 */}
           <div className="date-number">{i}</div>
           {/* 스케줄 리스트 */}
-          <div className="schedule-container">
-            {daySchedules
-              .sort((a, b) => a.startTime.localeCompare(b.startTime))
-              .slice(0, 3)
-              .map((schedule) => (
-                <ScheduleBox
-                  key={schedule.dateId}
-                  className={`schedule-box ${schedule.category.replace(' ', '-')}`}
-                >
-                  {schedule.title}
-                </ScheduleBox>
-              ))}
-          </div>
+          <div className="schedule-container">{daySchedules}</div>
         </div>
       );
     }
@@ -130,7 +127,7 @@ export const CalendarDateWrapper = styled.div`
   }
 
   .weekday {
-    color: #ccc;
+    color: var(--font-sec);
     width: calc(100% / 7);
     padding: 8px 4px;
     display: flex;
@@ -138,6 +135,7 @@ export const CalendarDateWrapper = styled.div`
     box-sizing: border-box;
   }
   .day {
+    color: var(--font-pri);
     width: calc(100% / 7);
     padding: 4px;
     box-sizing: border-box;
