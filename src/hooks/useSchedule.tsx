@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import { getFormatDate } from '../../../utils/FormatDate';
+import { getFormatDate } from '../utils/FormatDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { setSchedules, addSchedule } from '../../../slices/scheduleSlice';
+import { RootState } from '../store/store';
+import { setSchedules, addSchedule } from '../slices/scheduleSlice';
 
 interface ISchedule {
   dateId: number;
@@ -40,6 +40,7 @@ export function useSchedule({ selectedDate }: useScheduleProps) {
 
     void fetchSchedules();
   }, [dispatch]);
+
   useEffect(() => {
     const filtered = schedules.filter(
       (schedule) =>

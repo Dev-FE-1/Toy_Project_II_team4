@@ -1,9 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { getDaysInMonth, getFirstDayOfMonth, getFormatDate } from '../../utils/FormatDate';
 import styled from 'styled-components';
-import { useDispatch } from 'react-redux';
-import { addSchedule } from '../../slices/scheduleSlice';
-import { AddScheduleModal } from './AddScheduleModal';
 
 interface ISchedule {
   dateId: number;
@@ -30,16 +27,7 @@ export function CalendarDate({
   onSelectDate,
   schedules,
 }: CalendarDateProps): JSX.Element {
-  const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
-  const dispatch = useDispatch();
-
   const weekdays: string[] = ['일', '월', '화', '수', '목', '금', '토'];
-
-  const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
-  const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
-  const onAddSchedule = (newSchedule: ISchedule) => {
-    dispatch(addSchedule(newSchedule));
-  };
 
   //캘린더 날짜 렌더링
   const renderDays = (): React.ReactElement[][] => {
@@ -128,14 +116,6 @@ export function CalendarDate({
           );
         })}
       </div>
-      <AddScheduleButton className="add-schedule-button" onClick={openAddScheduleModal}>
-        +
-      </AddScheduleButton>
-      <AddScheduleModal
-        isOpen={isAddScheduleModalOpen}
-        onClose={closeAddScheduleModal}
-        onAddSchedule={onAddSchedule}
-      />
     </CalendarDateWrapper>
   );
 }
@@ -161,10 +141,10 @@ export const CalendarDateWrapper = styled.div`
     width: calc(100% / 7);
     padding: 4px;
     box-sizing: border-box;
-    height: 100px;
+    height: 10rem;
   }
   .date-number {
-    height: 30px;
+    height: 3rem;
     aspect-ratio: 1;
     display: flex;
     justify-content: center;
@@ -177,12 +157,12 @@ export const CalendarDateWrapper = styled.div`
   .current-month-day {
     cursor: pointer;
     &:hover {
-      background-color: #f0f0f0;
+      background-color: var(--page-gray);
     }
   }
 
   .day.selected .date-number {
-    background-color: blue;
+    background-color: var(--color-pri);
     border-radius: 50%;
     color: white;
     font-weight: bold;
