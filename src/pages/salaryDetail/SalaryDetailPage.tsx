@@ -103,9 +103,7 @@ export default function SalaryDetailPage() {
           work={salaryData.work}
         />
         <Styled.Info>
-          <Styled.Listline />
           <ListWrapper details={salaryData.details} />
-          <Styled.Listline />
         </Styled.Info>
       </div>
     </>
