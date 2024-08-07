@@ -1,24 +1,28 @@
 import { useEffect, useState } from 'react';
 import { getFormatDate } from '../utils/FormatDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { fetchSchedules, addSchedule, ISchedule } from '../slices/scheduleSlice';
+import { RootState, AppDispatch } from '../store/store';
+import { fetchSchedules, addSchedule, ISchedule, ScheduleState } from '../slices/scheduleSlice';
+import Loading from '../components/loading/Loading';
 
 interface useScheduleProps {
   selectedDate: Date;
 }
 
 export function useSchedule({ selectedDate }: useScheduleProps) {
-  const dispatch = useDispatch();
-  const schedules = useSelector((state: RootState) => state.schedules.schedules);
+  const dispatch = useDispatch<AppDispatch>();
+  const { schedules, status, error }: ScheduleState = useSelector(
+    (state: RootState) => state.schedules
+  );
   const [filteredSchedules, setFilteredSchedules] = useState<ISchedule[]>([]);
   const [showCompanySchedule, setShowCompanySchedule] = useState(true);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(true);
 
-  console.log(schedules);
   useEffect(() => {
-    dispatch(fetchSchedules());
-  }, [dispatch]);
+    if (status === 'idle') {
+      void dispatch(fetchSchedules());
+    }
+  }, [status, dispatch]);
 
   useEffect(() => {
     const filtered = schedules.filter(
@@ -42,10 +46,12 @@ export function useSchedule({ selectedDate }: useScheduleProps) {
 
   // 일정 추가
   const onAddSchedule = (newSchedule: ISchedule) => {
-    dispatch(addSchedule(newSchedule));
+    void dispatch(addSchedule(newSchedule));
   };
 
   return {
+    status,
+    error,
     filteredSchedules,
     showCompanySchedule,
     showPersonalSchedule,

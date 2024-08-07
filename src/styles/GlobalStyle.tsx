@@ -28,6 +28,7 @@ export default function GlobalStyle() {
 
           '--font-pri': '#333333',
           '--font-sec': '#9fa1ab',
+          '--font-tar': '#686d76',
 
           '--border-pri': '#9a9a9a',
           '--border-sec': '#eeeeee',

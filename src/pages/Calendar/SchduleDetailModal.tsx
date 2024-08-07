@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import IconBtn from '../../components/iconButton/IconButton';
 import styled from 'styled-components';
 import { useDispatch } from 'react-redux';
 import { updateSchedule, deleteSchedule } from '../../slices/scheduleSlice';
@@ -39,7 +40,7 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
   };
 
   const handleUpdateSchedule = () => {
-    dispatch(updateSchedule(editedSchedule));
+    dispatch<AppDispatch>(updateSchedule(editedSchedule));
     setIsEditing(false);
   };
 
@@ -58,13 +59,13 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
           <ActionButtons>
             {isEditing ? (
               <>
-                <button onClick={handleUpdateSchedule}>저장</button>
-                <button onClick={() => setIsEditing(false)}>취소</button>
+                <ActionButton onClick={handleUpdateSchedule}>저장</ActionButton>
+                <ActionButton onClick={() => setIsEditing(false)}>취소</ActionButton>
               </>
             ) : (
               <>
-                <button onClick={() => setIsEditing(true)}>수정</button>
-                <button onClick={handleDeleteSchedule}>삭제</button>
+                <IconBtn icontype="edit" onClick={() => setIsEditing(true)} />
+                <IconBtn icontype="delete" onClick={handleDeleteSchedule} />
               </>
             )}
           </ActionButtons>
@@ -173,11 +174,9 @@ const ModalContent = styled.div`
   background-color: white;
   padding: 20px;
   padding-bottom: 100px;
-  border-radius: 10px 10px 0 0;
   width: 100%;
   max-width: 568px;
   height: 100%;
-  /* height: 50%; */
   overflow-y: auto;
   box-sizing: border-box;
 `;
@@ -188,16 +187,12 @@ const ModalHeader = styled.div`
   margin-bottom: 20px;
 `;
 
-const CloseButton = styled.button`
-  background: none;
-  border: none;
-  font-size: 24px;
-  cursor: pointer;
-`;
-
 const ActionButtons = styled.div`
   button {
     margin-left: 10px;
+  }
+  svg {
+    font-size: var(--font-size-large);
   }
 `;
 
@@ -224,5 +219,10 @@ const ScheduleTitle = styled.h2`
   display: inline-block;
   margin-bottom: 14px;
   margin-left: 5px;
+`;
 
+export const ActionButton = styled.button``;
+const CloseButton = styled.button`
+  font-size: var(--font-size-xlarge);
+  cursor: pointer;
 `;

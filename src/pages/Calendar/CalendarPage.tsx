@@ -10,6 +10,7 @@ import { CalendarDate } from './CalendarDate';
 import { ScheduleList } from './ScheduleList';
 import { AddScheduleModal } from './AddScheduleModal';
 import { useDispatch } from 'react-redux';
+import Loading from '../../components/loading/Loading';
 import { addSchedule } from '../../slices/scheduleSlice';
 interface ISchedule {
   dateId: number;
@@ -33,7 +34,7 @@ export default function CalendarPage(): React.ReactElement {
   const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
   const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
   const onAddSchedule = (newSchedule: ISchedule) => {
-    dispatch(addSchedule(newSchedule));
+    void dispatch(addSchedule(newSchedule));
   };
   const calendarHook = useCalendar({
     setCurrentDate,
@@ -41,6 +42,14 @@ export default function CalendarPage(): React.ReactElement {
     setSelectedDate,
   });
   const scheduleHook = useSchedule({ selectedDate });
+
+  if (scheduleHook.status === 'loading') {
+    return <Loading />;
+  }
+
+  // if (scheduleHook.status === 'failed') {
+  //   return <div>Error: {error}</div>;
+  // }
 
   return (
     <>
