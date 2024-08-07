@@ -5,6 +5,7 @@ import { verifyLoginStatus } from '../pages/login/verifyLoginStatus';
 
 export default function AppLayout() {
   verifyLoginStatus();
+
   return (
     <Styled.AppLayoutWrapper>
       <Styled.MainContent>
