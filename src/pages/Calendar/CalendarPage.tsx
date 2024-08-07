@@ -44,7 +44,6 @@ export default function CalendarPage(): React.ReactElement {
 
   return (
     <>
-      <Heading title="업무관리" />
       <Calendar className="calendar">
         <CalendarHeader currentDate={currentDate} {...calendarHook.moveDate} />
         <CalendarFilter
