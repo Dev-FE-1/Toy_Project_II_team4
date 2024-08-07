@@ -6,6 +6,7 @@ import NoticeCard from './NoticeCard';
 import useSalaryDetails from './useSalaryDetails';
 import Heading from '../../components/Heading/Heading';
 import { useState } from 'react';
+import Loading from '../../components/loading/Loading';
 
 const years = [
   { value: '2022', text: '2022' },
@@ -20,7 +21,7 @@ export default function SalaryListPage() {
   const { data, error, isLoading } = useSalaryDetails();
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
   if (error) {
     return <div>Error: {error.message}</div>;
