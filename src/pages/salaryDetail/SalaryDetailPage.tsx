@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
 import jsPDF from 'jspdf';
@@ -14,12 +14,13 @@ import SelectedModal from './DetailMonthModal';
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
+  const location = useLocation();
   const userId = 'sajo1234567';
 
   const { data, error, isLoading } = useSalaryDetails();
   const detailRef = useRef<HTMLDivElement>(null);
-
   const [salaryData, setSalaryData] = useState<SalaryDataItem | null>(null);
+  const [returnPath, setReturnPath] = useState<string>('/'); // Default path
 
   useEffect(() => {
     if (data && id) {
@@ -42,6 +43,17 @@ export default function SalaryDetailPage() {
     }
   }, [error]);
 
+  useEffect(() => {
+    const from = (location.state as { from?: string })?.from;
+    if (from === 'home') {
+      setReturnPath('/home');
+    } else if (from === 'payments') {
+      setReturnPath('/payments');
+    } else {
+      setReturnPath('/payments');
+    }
+  }, [location.state]);
+
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
@@ -54,7 +66,7 @@ export default function SalaryDetailPage() {
   const employeeProfile = employees[userId]?.profile || {};
 
   const handleCloseButton = () => {
-    navigate('/payments');
+    navigate(returnPath);
   };
 
   const handleDownload = () => {
@@ -63,10 +75,22 @@ export default function SalaryDetailPage() {
         .then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
           const pdf = new jsPDF();
-          const imgProps = pdf.getImageProperties(imgData);
+
           const pdfWidth = pdf.internal.pageSize.getWidth();
-          const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-          pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+          const pdfHeight = pdf.internal.pageSize.getHeight();
+
+          const imgProps = pdf.getImageProperties(imgData);
+          const imgWidth = imgProps.width;
+          const imgHeight = imgProps.height;
+
+          const scale = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+          const newImgWidth = imgWidth * scale;
+          const newImgHeight = imgHeight * scale;
+
+          const x = (pdfWidth - newImgWidth) / 2;
+          const y = (pdfHeight - newImgHeight) / 2;
+
+          pdf.addImage(imgData, 'PNG', x, y, newImgWidth, newImgHeight);
           pdf.save(
             `${employeeProfile.name || '급여명세서'}_${salaryData.payday.slice(5, 7)}월_급여명세서.pdf`
           );

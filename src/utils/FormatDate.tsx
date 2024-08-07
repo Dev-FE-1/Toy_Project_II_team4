@@ -1,6 +1,10 @@
 interface FormatDateProps {
   dateString: string;
   dayAndWeekday: string;
+  Year: string;
+  Month: string;
+  date: string;
+  weekDay: string;
 }
 
 //date 달의 총 일수
@@ -26,5 +30,9 @@ export const getFormatDate = (date: Date): FormatDateProps => {
   return {
     dateString: `${year}-${month}-${day}`,
     dayAndWeekday: `${day}일 ${weekday}요일`,
+    Year: `${year}`,
+    Month: `${month}`,
+    date: `${day}`,
+    weekDay: `${weekday}요일`,
   };
 };

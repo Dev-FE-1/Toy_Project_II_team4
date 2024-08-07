@@ -43,19 +43,21 @@ export default function ProfileCard() {
 }
 
 const ProfileCardWrapper = styled(CardBox)`
-  border: 1px solid var(--border-sec);
-  height: 19.5rem;
-  padding: 0;
+  height: 18rem;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   position: relative;
-  margin: 10px 0;
+  margin-top: 0;
 `;
 
 const ProfileTop = styled.div`
+  width: 100%;
   height: 6.4rem;
   background-color: var(--color-sec);
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 const ProfileContent = styled.div`
@@ -67,15 +69,14 @@ const ProfileLeft = styled.div`
   flex: 6;
   display: flex;
   flex-direction: column;
-  justify-content: end;
-  margin: 0 0 1rem 2rem;
+  justify-content: flex-end;
 `;
 
 const ProfileRight = styled.div`
   flex: 5;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 const ProfileLeftName = styled.h3`
