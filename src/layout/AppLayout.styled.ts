@@ -9,6 +9,6 @@ export const AppLayoutWrapper = styled.div`
 export const MainContent = styled.main`
   flex: 1;
   overflow: auto;
-  padding: 0.8rem;
-  padding-bottom: 80px;
+  padding: 1.5rem;
+  padding-bottom: 8rem;
 `;

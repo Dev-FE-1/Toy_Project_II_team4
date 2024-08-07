@@ -1,13 +1,14 @@
+import { CardBox } from '../../components/cardBox/CardBox.style';
 import styled from 'styled-components';
 
-export const SalaryCardBox = styled.div`
-  background-color: var(--color-white);
+export const SalaryCardBox = styled(CardBox)`
+  /* background-color: var(--color-white);
   padding: 1.2rem 4rem 2rem 4rem;
   margin: 1rem;
   border-radius: 2rem;
   border: 1px solid var(--border-sec);
   margin: 2rem auto;
-  box-sizing: border-box;
+  box-sizing: border-box; */
 
   .imoge {
     font-size: 60px;
