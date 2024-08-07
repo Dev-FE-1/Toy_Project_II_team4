@@ -34,7 +34,6 @@ export function useLoginPage() {
     },
     mode: 'onChange',
   });
-
   const dispatch = useDispatch<AppDispatch>();
   const { loading } = useSelector((state: RootState) => state.auth);
 
