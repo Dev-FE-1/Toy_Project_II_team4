@@ -9,7 +9,6 @@ export const NavBarWrapper = styled.nav`
   left: 0;
   right: 0;
   height: 8rem;
-  /* border-top: 1px solid var(--border-sec); */
 `;
 
 export const MyToolbar = styled.div`
