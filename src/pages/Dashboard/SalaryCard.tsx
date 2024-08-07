@@ -9,12 +9,7 @@ export default function SalaryCard() {
 
   if (isLoading) {
     return <LoadingCard />;
-  }
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
-  if (isLoading) {
-    return <div>Loading...</div>;
+
   }
   if (error) {
     return <div>Error: {error.message}</div>;
