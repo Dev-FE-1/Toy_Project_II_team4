@@ -43,9 +43,7 @@ export default function ProfileCard() {
 }
 
 const ProfileCardWrapper = styled(CardBox)`
-  /* border: 1px solid var(--border-sec); */
   height: 18rem;
-  /* padding: 0; */
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -101,7 +99,7 @@ const ProfileLeftIntroduce = styled.h6`
   text-decoration: underline;
 `;
 
-const ProfileImage = styled.img`
+export const ProfileImage = styled.img`
   height: 10rem;
   position: absolute;
   top: 1rem;

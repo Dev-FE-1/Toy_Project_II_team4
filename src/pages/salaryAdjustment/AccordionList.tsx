@@ -5,10 +5,11 @@ import { deleteSalaryAdData, fetchSalaryAdData } from '../../slices/salaryAdSlic
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../store/store';
 import CardBox from '../../components/cardBox/CardBox';
-
 import { useEffect } from 'react';
+import Loading from '../../components/loading/Loading';
 
 import * as styled from './SalaryAdjustment.style';
+import Btn from '../../components/button/Button';
 
 function AccordionList() {
   const dispatch = useDispatch<AppDispatch>();
@@ -19,17 +20,17 @@ function AccordionList() {
   }, [dispatch]);
 
   if (status === 'loading') {
-    return <div>Loading...</div>;
+    return <Loading />;
   }
 
   if (status === 'failed') {
     return <div>Error: {error}</div>;
   }
 
-  const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-    confirm('수정 하시겠습니까?');
-  };
+  // const handleEdit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  //   e.stopPropagation();
+  //   confirm('수정 하시겠습니까?');
+  // };
   const handleDelete = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.stopPropagation();
     const id = String(e.currentTarget.closest('.accordion')?.getAttribute('data-id'));
@@ -49,18 +50,10 @@ function AccordionList() {
                 id="panel1-header"
               >
                 <div className="title">
-                  <div className="title-inner">
-                    <p>{`[${item.month.split('-')[1]}월 급여명세서] ${item.category}`}</p>
-                    <span className="date">{item.requestTime}</span>
-                  </div>
-                  <styled.Schip label={item.status} size="small" />
+                  <p>{`[${item.month.split('-')[1]}월 급여명세서] ${item.category}`}</p>
+                  <span className="date">{item.requestTime}</span>
                 </div>
-                {item.status === '결재대기' && (
-                  <div className="icons">
-                    <IconBtn icontype="edit" onClick={handleEdit} />
-                    <IconBtn icontype="delete" onClick={handleDelete} />
-                  </div>
-                )}
+                <styled.Schip label={item.status} size="small" />
               </AccordionSummary>
               <AccordionDetails>
                 <ul>
@@ -80,6 +73,12 @@ function AccordionList() {
                     {item.status}
                   </li>
                 </ul>
+                {item.status === '결재대기' && (
+                  <div className="icons">
+                    {/* <IconBtn icontype="edit" onClick={handleEdit} /> */}
+                    <IconBtn icontype="delete" onClick={handleDelete} />
+                  </div>
+                )}
               </AccordionDetails>
             </styled.SAccordion>
           );
