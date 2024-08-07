@@ -6,6 +6,9 @@ import { DatePickerContainer, Separator } from '../../components/datepicker/Date
 import dayjs from 'dayjs';
 
 function Cate2() {
+  const minDate = dayjs(new Date(new Date().getFullYear(), 6, 1));
+  const maxDate = dayjs(new Date(new Date().getFullYear(), 7, 0));
+
   return (
     <>
       <SDataPicker
@@ -19,7 +22,10 @@ function Cate2() {
             },
           },
         }}
-        format="YYYY - MM - DD"
+        format="YYYY-MM-DD"
+        name="sDate"
+        minDate={minDate}
+        maxDate={maxDate}
       />
       <LocalizationProvider dateAdapter={AdapterDayjs}>
         <DatePickerContainer>
@@ -35,6 +41,8 @@ function Cate2() {
             }}
             minTime={dayjs().hour(22).minute(0).second(0)}
             maxTime={dayjs().endOf('day')}
+            ampm={false}
+            name="sTime"
           />
           <Separator>-</Separator>
           <TimePicker
@@ -53,7 +61,9 @@ function Cate2() {
               },
             }}
             minTime={dayjs().hour(24).minute(0).second(0)}
-            maxTime={dayjs().hour(8)}
+            maxTime={dayjs().hour(6).minute(0).second(0)}
+            ampm={false}
+            name="eTime"
           />
         </DatePickerContainer>
       </LocalizationProvider>
