@@ -30,7 +30,7 @@ export default function SalaryListPage(){
     if(sortedSalaryList.find((item) => item.id === id)){
       navigate(`/salary-detail/${id}`)
     }else{
-          console.error('급여 명세서가 없습니다.')
+      navigate('/payments')
     }
   }
 
