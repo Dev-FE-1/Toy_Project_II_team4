@@ -5,7 +5,7 @@ export interface SalaryDetailItem {
   label: string;
   value: string;
   type?: 'main' | 'sub';
-  content?:string;
+  content?: string;
 }
 
 export interface SalaryDataItem {
@@ -14,6 +14,8 @@ export interface SalaryDataItem {
   payday: string;
   state: boolean;
   title: string;
+  level: string;
+  work: string;
   details: SalaryDetailItem[];
 }
 
@@ -44,22 +46,21 @@ export async function fetchSalaryDetails(): Promise<{
       get(salaryDetailsRef),
     ]);
 
-    const salaryDetails = salaryDetailsSnapshot.exists() 
+    const salaryDetails = salaryDetailsSnapshot.exists()
       ? (salaryDetailsSnapshot.val() as SalaryDetails)
       : {};
 
-    const employees = employeesSnapshot.exists() 
-      ? (employeesSnapshot.val() as Employees)
-      : {};
+    const employees = employeesSnapshot.exists() ? (employeesSnapshot.val() as Employees) : {};
 
     return {
-      salaryDetails, employees
-      };
-    } catch (error) {
-      console.error('Error fetching data:', error);
-      return {
-        salaryDetails: {},
-        employees: {},
-      };
-    }
+      salaryDetails,
+      employees,
+    };
+  } catch (error) {
+    console.error('Error fetching data:', error);
+    return {
+      salaryDetails: {},
+      employees: {},
+    };
+  }
 }
