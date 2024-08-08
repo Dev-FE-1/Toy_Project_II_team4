@@ -2,7 +2,6 @@ import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import { CloseButton } from '../../components/modal/CloseButton';
 import { useBasicModal } from '../../hooks/useBasicModal';
-import * as styled from '../salaryAdjustment/SalaryAdjustment.style';
 import Heading from '../../components/Heading/Heading';
 import FormWrap from '../salaryAdjustment/FormWrap';
 import dayjs from 'dayjs';
@@ -31,11 +30,9 @@ export default function SelectedModal({ day }: { day: string }) {
       modalCloseButton={<CloseButton handleClose={handleClose} />}
       open={open}
     >
-      <styled.modalWrapper>
-        <Heading title="급여 정정신청" />
-        <h2 className="modal-title">{day.slice(0, 4)}월 급여 정정</h2>
-        <FormWrap handleClose={() => handleClose()} />
-      </styled.modalWrapper>
+      <Heading title="급여 정정신청" />
+      <h2 className="modal-title">{day.slice(0, 4)}월 급여 정정</h2>
+      <FormWrap handleClose={() => handleClose()} />
     </BasicDialog>
   );
 }
