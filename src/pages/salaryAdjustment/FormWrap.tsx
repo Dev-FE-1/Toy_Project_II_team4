@@ -103,6 +103,15 @@ function FormWrap({ handleClose }: FormWrapProps) {
         value={selected}
         onChange={handleChange}
         name="category"
+        MenuProps={{
+          PaperProps: {
+            sx: {
+              '& .MuiMenuItem-root': {
+                fontSize: 'var(--font-size-small)',
+              },
+            },
+          },
+        }}
       />
       <TextField
         label="제목"
