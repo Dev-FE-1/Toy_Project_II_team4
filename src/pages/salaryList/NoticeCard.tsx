@@ -1,26 +1,21 @@
 import * as Styled from './NoticeCard.style';
 import Btn from '../../components/button/Button';
 import { SalaryDataItem } from './api/fetchSalaryInfo';
-import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
 
 type noticeData = {
   salaryList?: Array<SalaryDataItem>;
   button?: boolean;
   label?: React.ReactNode;
+  handleBtn?: (id: number) => void;
 };
 
-export default function NoticeCard({ salaryList = [], button = false, label }: noticeData) {
-  const navigate = useNavigate();
-
-  const handleApplicationBtn = (id: number) => {
-    if (salaryList.find((item) => item.id === id)) {
-      navigate(`/salary-detail/${id}`);
-    } else {
-      console.error('급여 명세서가 없습니다.');
-    }
-  };
-
+export default function NoticeCard({
+  salaryList = [],
+  button = false,
+  label,
+  handleBtn,
+}: noticeData) {
   if (salaryList.length === 0) {
     return (
       <Styled.SalaryCardBox>
@@ -52,7 +47,7 @@ export default function NoticeCard({ salaryList = [], button = false, label }: n
           btnsize="md"
           size="lg"
           label={label || <></>}
-          onClick={() => handleApplicationBtn(firstPayData.id)}
+          onClick={() => handleBtn && handleBtn(firstPayData.id)}
         />
       )}
     </Styled.SalaryCardBox>
