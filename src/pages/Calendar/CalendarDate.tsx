@@ -118,6 +118,9 @@ export function CalendarDate({
 }
 
 export const CalendarDateWrapper = styled.div`
+  background-color: white;
+  margin: 0 -1.5rem;
+  padding: 0 1rem;
   .weekdays {
     display: flex;
   }

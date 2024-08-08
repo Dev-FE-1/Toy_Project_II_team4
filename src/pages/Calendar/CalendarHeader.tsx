@@ -24,7 +24,9 @@ export const CalendarHeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 20px 0;
   font-size: 2.2rem;
   font-weight: bold;
+  background-color: white;
+  margin: -0.5rem -1.5rem;
+  padding: 2rem;
 `;
