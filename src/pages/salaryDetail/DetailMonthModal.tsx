@@ -33,7 +33,7 @@ export default function SelectedModal({ day }: { day: string }) {
     >
       <styled.modalWrapper>
         <Heading title="급여 정정신청" />
-        <h2 className="modal-title">{day.slice(0, 4)}월 급여 정정</h2>
+        <h2 className="modal-title">{day.slice(5, 7)}월 급여 정정</h2>
         <FormWrap handleClose={() => handleClose()} />
       </styled.modalWrapper>
     </BasicDialog>

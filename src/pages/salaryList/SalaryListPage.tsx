@@ -54,7 +54,7 @@ export default function SalaryListPage() {
       <Styled.YearSelect>
         <SelectBox
           labelId="SalaryYear"
-          id="year-select"
+          id="year"
           label="year"
           menuItems={years}
           value={selectedYear}
