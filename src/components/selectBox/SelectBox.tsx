@@ -9,7 +9,7 @@ import {
 } from '@mui/material';
 import { useState } from 'react';
 
-function SelectBox({ menuItems, labelId, id, label, ...props }: SelectBoxProps) {
+function SelectBox({ menuItems, labelId, id, label, onChange, ...props }: SelectBoxProps) {
   const [selected, setselected] = useState<string | number>('');
   const handleChange = (event: SelectChangeEvent<string | number>) => {
     setselected(event.target.value);
@@ -50,6 +50,6 @@ interface SelectBoxProps extends Omit<SelectProps<string | number>, 'children'> 
   id: string;
   label: string;
   menuItems: Option[];
+  onChange: (event: SelectChangeEvent<string | number | HTMLSelectElement>) => void;
 }
-
 export default SelectBox;
