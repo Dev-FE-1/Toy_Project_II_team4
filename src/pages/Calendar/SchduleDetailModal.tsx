@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { updateSchedule, deleteSchedule, ISchedule } from '../../slices/scheduleSlice';
 import { AppDispatch } from '../../store/store';
@@ -14,7 +14,8 @@ import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
-
+import { ChangeEvent } from 'react';
+import { SelectChangeEvent } from '@mui/material/Select';
 interface ScheduleDetailModalProps {
   schedule: ISchedule;
   onClose: () => void;
@@ -32,7 +33,9 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e:
+      | ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      | SelectChangeEvent<string | number | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setEditedSchedule((prev) => ({ ...prev, [name]: value }));
