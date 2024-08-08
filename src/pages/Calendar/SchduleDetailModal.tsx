@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateSchedule, deleteSchedule } from '../../slices/scheduleSlice';
+import { updateSchedule, deleteSchedule, ISchedule } from '../../slices/scheduleSlice';
+import { AppDispatch } from '../../store/store';
 import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import IconBtn from '../../components/iconButton/IconButton';
@@ -14,18 +15,6 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 
-interface ISchedule {
-  dateId: number;
-  category: string;
-  scheduleType: 'company' | 'personal';
-  description: string;
-  title: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-}
-
 interface ScheduleDetailModalProps {
   schedule: ISchedule;
   onClose: () => void;
@@ -38,8 +27,7 @@ const categoryOptions = [
 ];
 
 export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalProps): JSX.Element {
-  const dispatch = useDispatch();
-
+  const dispatch = useDispatch<AppDispatch>();
   const [isEditing, setIsEditing] = useState(false);
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
@@ -50,15 +38,24 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
     setEditedSchedule((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdateSchedule = () => {
-    dispatch(updateSchedule(editedSchedule));
-    setIsEditing(false);
+  const handleUpdateSchedule = async () => {
+    try {
+      await dispatch(updateSchedule(editedSchedule)).unwrap();
+      setIsEditing(false);
+      onClose();
+    } catch (error) {
+      console.error('==> ', error);
+    }
   };
 
-  const handleDeleteSchedule = () => {
+  const handleDeleteSchedule = async () => {
     if (window.confirm('정말로 이 일정을 삭제하시겠습니까?')) {
-      dispatch(deleteSchedule(schedule.dateId));
-      onClose();
+      try {
+        await dispatch(deleteSchedule(schedule.dateId)).unwrap();
+        onClose();
+      } catch (error) {
+        console.error('==> ', error);
+      }
     }
   };
 

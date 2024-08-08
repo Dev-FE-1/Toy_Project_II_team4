@@ -11,7 +11,7 @@ export function useMyPage() {
     email: 'jihoon@sajo.com',
     phone: '010-1234-1234',
     position: '관리 2팀/로드 매니저',
-    responsibility: '블루핑크 담당',
+    responsibility: '블루핑크',
   });
 
   const handleEdit = () => setIsEditing(true);

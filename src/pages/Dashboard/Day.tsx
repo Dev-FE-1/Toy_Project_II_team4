@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
@@ -70,8 +69,9 @@ const ScheduleBox = styled.div`
   font-size: var(--font-size-primary);
   padding: 0.5rem;
   border-radius: 4px;
-  height: 2rem;
-
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
   &.방송-출연 {
     border-left: 6px solid #3473e14d;
   }

@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { addSchedule, ISchedule } from '../../slices/scheduleSlice';
 import BasicDialog from '../../components/modal/BasicModal';
 import styled from 'styled-components';
 import SelectBox from '../../components/selectBox/SelectBox';
 import Btn from '../../components/button/Button';
 import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Form } from 'react-router-dom';
-import { addSchedule, ISchedule } from '../../slices/scheduleSlice';
 import SDataPicker from '../../components/datepicker/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
@@ -28,10 +28,8 @@ const categoryOptions = [
 
 export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const schedules = useSelector((state: RootState) => state.schedules.schedules);
-
   const [newSchedule, setNewSchedule] = useState<ISchedule>({
-    dateId: schedules.length + 1,
+    dateId: Date.now(),
     category: '공연',
     scheduleType: 'company',
     description: '',
@@ -64,6 +62,18 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addSchedule(newSchedule));
+
+    setNewSchedule({
+      dateId: 0,
+      category: '공연',
+      scheduleType: 'company',
+      description: '',
+      title: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTime: '',
+    });
     onClose();
   };
 
@@ -311,7 +321,7 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 `;
 
 const TitleContainer = styled.div`

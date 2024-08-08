@@ -39,20 +39,22 @@ export function ScheduleList({
         <ScheduleListWrapper className="schedule-list">
           {getScheduleListForSelectedDate().length > 0 ? (
             <ul className="schedule-cards">
-              {getScheduleListForSelectedDate().map((schedule) => (
-                <ScheduleCard
-                  key={schedule.dateId}
-                  className={`schedule-card ${schedule.category.replace(' ', '-')}`}
-                  onClick={() => onOpenModal(schedule)}
-                >
-                  <div className="schedule-card-content">
-                    <span className="schedule-title">{schedule.title}</span>
-                    <span className="schedule-time">
-                      {schedule.startTime} - {schedule.endTime}
-                    </span>
-                  </div>
-                </ScheduleCard>
-              ))}
+              {getScheduleListForSelectedDate()
+                .sort((a, b) => a.startTime.localeCompare(b.startTime))
+                .map((schedule) => (
+                  <ScheduleCard
+                    key={schedule.dateId}
+                    className={`schedule-card ${schedule.category.replace(' ', '-')}`}
+                    onClick={() => onOpenModal(schedule)}
+                  >
+                    <div className="schedule-card-content">
+                      <span className="schedule-title">{schedule.title}</span>
+                      <span className="schedule-time">
+                        {schedule.startTime} - {schedule.endTime}
+                      </span>
+                    </div>
+                  </ScheduleCard>
+                ))}
             </ul>
           ) : (
             <p>일정이 없습니다.</p>
