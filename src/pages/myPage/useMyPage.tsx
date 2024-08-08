@@ -17,6 +17,7 @@ export function useMyPage() {
   const handleEdit = () => setIsEditing(true);
   const handleCancel = () => setIsEditing(false);
 
+  // TODO handleSave 함수 내에서 입력값 유효성 검사 및 오류 처리를 구현하세요.
   const handleSave = (updatedProfile: ProfileType) => {
     setProfile(updatedProfile);
     setIsEditing(false);

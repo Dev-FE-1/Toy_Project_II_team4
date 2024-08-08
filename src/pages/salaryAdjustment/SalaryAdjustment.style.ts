@@ -2,6 +2,17 @@ import { Accordion, Chip } from '@mui/material';
 import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
 
+export const modalWrapper = styled.div`
+  width: 568px;
+  height: 100vh;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 24px;
+  background-color: #fff;
+`;
+
 export const Wrapper = styled.div`
   font-size: var(--font-size-primary);
   .loading {
