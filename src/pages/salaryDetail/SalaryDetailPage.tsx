@@ -10,7 +10,6 @@ import MoveMonth from './MoveMonth';
 import SalaryCard from './SalaryCard';
 import ListWrapper from './ListWrapper';
 import SelectedModal from './DetailMonthModal';
-import NoticeCard from '../salaryList/NoticeCard'; // Import NoticeCard
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
@@ -45,7 +44,6 @@ export default function SalaryDetailPage() {
   }, [error]);
 
   useEffect(() => {
-    // Determine the previous page based on location state or referrer
     const from = (location.state as { from?: string })?.from;
     if (from === 'home') {
       setReturnPath('/home');
@@ -68,8 +66,7 @@ export default function SalaryDetailPage() {
   const employeeProfile = employees[userId]?.profile || {};
 
   const handleCloseButton = () => {
-    console.log(returnPath);
-    navigate(returnPath); // Navigate to the determined return path
+    navigate(returnPath);
   };
 
   const handleDownload = () => {
@@ -133,11 +130,6 @@ export default function SalaryDetailPage() {
           <ListWrapper details={salaryData.details} />
         </Styled.Info>
       </div>
-      <NoticeCard
-        salaryList={data.salaryDetails[userId]}
-        button={true}
-        label={<h5>급여명세서 조회</h5>}
-      />
     </>
   );
 }
