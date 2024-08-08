@@ -39,14 +39,13 @@ export default function SalaryListPage() {
   );
   const latestData = latestSalaryList.length > 0 ? [latestSalaryList[0]] : [];
 
-  const salaryIdSet = new Set(sortedData.map((item) => item.id));
-  const handleApplicationBtn = (id: number) => {
-    if (salaryIdSet.has(id)) {
-      navigate(`/salary-detail/${id}`);
+  function handleApplicationBtn(id: number) {
+    if (salaryList.find((item) => item.id === id)) {
+      navigate(`/salary-detail/${id}`, { state: { from: 'payments' } });
     } else {
-      navigate('/payments');
+      console.error('급여 명세서가 없습니다.');
     }
-  };
+  }
 
   return (
     <Styled.Salary>
