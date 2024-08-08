@@ -32,7 +32,7 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
 
   return (
     <DayWrapper>
-      <DayText>{getFormatDate(targetDate).dayAndWeekday}</DayText>
+      <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
       <ScheduleWrapper>
         {daySchedules.map((schedule) => (
           <ScheduleBox
@@ -66,11 +66,11 @@ const DayText = styled.div`
   font-size: var(--font-size-large);
   font-weight: bold;
   border-bottom: 2px solid var(--border-sec);
-  padding-bottom: 1rem;
+  padding-bottom: 2rem;
 `;
 
 const ScheduleWrapper = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
@@ -80,21 +80,22 @@ const ScheduleBox = styled.div`
   font-size: var(--font-size-primary);
   padding: 0.5rem;
   border-radius: 4px;
+  height: 2rem;
 
   &.방송-출연 {
-    background-color: #3473e14d;
+    border-left: 6px solid #3473e14d;
   }
   &.촬영 {
-    background-color: #ffcb344d;
+    border-left: 6px solid #ffcb344d;
   }
   &.팬-이벤트 {
-    background-color: #039c004d;
+    border-left: 6px solid #039c004d;
   }
   &.공연 {
-    background-color: #dc5f004d;
+    border-left: 6px solid #dc5f004d;
   }
   &.개인 {
-    background-color: #ddddddb3;
+    border-left: 6px solid #ddddddb3;
   }
 `;
 
