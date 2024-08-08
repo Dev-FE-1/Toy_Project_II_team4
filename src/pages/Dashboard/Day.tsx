@@ -4,10 +4,31 @@ import { RootState, AppDispatch } from '../../store/store';
 import { fetchSchedules, ISchedule } from '../../slices/scheduleSlice';
 import { useEffect } from 'react';
 import { getFormatDate } from '../../utils/FormatDate';
+import { IF } from '../../utils/IFElse';
+
+// 해당 날짜의 스케줄 필터
+// (시작 날짜<현재 날짜<종료 날짜)
+const filterSchedules = (
+  schedules: ISchedule[] | undefined,
+  formattedDate: string
+): ISchedule[] => {
+  // 스케줄 이 배열이 아닌 경우 빈 배열 반환
+  if (!Array.isArray(schedules)) {
+    return [];
+  }
+
+  return schedules
+    .filter(
+      (schedule: ISchedule) =>
+        schedule.startDate <= formattedDate && formattedDate <= schedule.endDate
+    )
+    .sort((a, b) => a.startTime.localeCompare(b.startTime))
+    .slice(0, 4);
+};
 
 export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
   const dispatch = useDispatch<AppDispatch>();
-  const schedules = useSelector<RootState, ISchedule[]>((state) => state.schedules.schedules);
+  const { schedules, status } = useSelector((state: RootState) => state.schedules);
 
   useEffect(() => {
     void dispatch(fetchSchedules());
@@ -20,28 +41,52 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
   // 해당 날짜의 스케줄 필터
   // (시작 날짜<현재 날짜<종료 날짜)
   // 총 4개의 일정까지 표시
-  const daySchedules = schedules
-    .filter(
-      (schedule: ISchedule) =>
-        schedule.startDate <= formattedDate.dateString &&
-        formattedDate.dateString <= schedule.endDate
-    )
-    .sort((a, b) => a.startTime.localeCompare(b.startTime))
-    .slice(0, 4);
+
+  // 오늘 날짜의 스케줄 필터
+  const daySchedules = filterSchedules(schedules, formattedDate.dateString);
+
+  if (status === 'loading') {
+    return (
+      <DayWrapper>
+        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
+        <ScheduleWrapper>
+          <ScheduleBox>일정 불러오는 중...</ScheduleBox>
+        </ScheduleWrapper>
+      </DayWrapper>
+    );
+  }
+
+  if (status === 'failed') {
+    return (
+      <DayWrapper>
+        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
+        <ScheduleWrapper>
+          <ScheduleBox>일정 불러오기 실패</ScheduleBox>
+        </ScheduleWrapper>
+      </DayWrapper>
+    );
+  }
 
   return (
     <DayWrapper>
       <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
       <ScheduleWrapper>
-        {daySchedules.map((schedule) => (
-          <ScheduleBox
-            key={schedule.dateId}
-            className={`schedule-box ${schedule.category.replace(' ', '-')}`}
-          >
-            <ScheduleTime>{schedule.startTime}</ScheduleTime>
-            <ScheduleTitle>{schedule.title}</ScheduleTitle>
-          </ScheduleBox>
-        ))}
+        <IF condition={daySchedules.length === 0}>
+          <IF.Then>
+            <ScheduleBox>일정 불러오는 중...</ScheduleBox>
+          </IF.Then>
+          <IF.Else>
+            {daySchedules.map((schedule) => (
+              <ScheduleBox
+                key={schedule.dateId}
+                className={`schedule-box ${schedule.category.replace(' ', '-')}`}
+              >
+                <ScheduleTime>{schedule.startTime}</ScheduleTime>
+                <ScheduleTitle>{schedule.title}</ScheduleTitle>
+              </ScheduleBox>
+            ))}
+          </IF.Else>
+        </IF>
       </ScheduleWrapper>
     </DayWrapper>
   );

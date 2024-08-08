@@ -61,11 +61,19 @@ export const scheduleSlice = createSlice({
   },
 });
 
+export const isObjectConvertToArray = (data: any) => {
+  if (typeof data === 'object' && !Array.isArray(data)) {
+    return Object.values(data);
+  } else {
+    return data;
+  }
+};
+
 export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
   try {
     const snapshot = await get(dbRef);
     if (snapshot.exists()) {
-      return snapshot.val() as ISchedule[];
+      return isObjectConvertToArray(snapshot.val());
     } else {
       return [];
     }
