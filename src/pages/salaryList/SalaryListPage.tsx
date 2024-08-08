@@ -54,8 +54,8 @@ export default function SalaryListPage() {
       <Styled.YearSelect>
         <SelectBox
           labelId="SalaryYear"
-          id="year"
-          label="year"
+          id="SalaryYear"
+          label=" "
           menuItems={years}
           value={selectedYear}
           onChange={(e) => setSelectedYear(Number(e.target.value))}
@@ -64,13 +64,13 @@ export default function SalaryListPage() {
               fontSize: 'var(--font-size-primary)',
             },
             '& .MuiSelect-select': {
-              fontSize: 'var(--font-size-small)',
+              fontSize: '1.025',
             },
             '& .MuiSelect-icon': {
               fontSize: '2rem',
-              right: '1rem',
+              right: '0.3rem',
               transform: 'translateY(-50%)',
-              top: '40%',
+              top: '42%',
             },
           }}
         />

@@ -37,7 +37,7 @@ export default function MoveMonth({ date, id, salaryData }: useMonthNavigationPr
         }}
       />
       <span className="up-date">
-        {currentMonth.format('YYYY.MM')}
+        {currentMonth.subtract(1, 'month').format('YYYY.MM')}
         <CalendarTodayIcon />
       </span>
       <ChevronRightIcon
