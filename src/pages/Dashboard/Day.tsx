@@ -49,17 +49,7 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
 }
 
 const DayWrapper = styled.div`
-  &:first-child {
-    padding: 0 1rem 0 0;
-  }
-  &:last-child {
-    padding: 0 0 0 1rem;
-  }
   flex-grow: 1;
-
-  &:first-child {
-    border-right: 1px solid var(--border-sec);
-  }
 `;
 
 const DayText = styled.div`

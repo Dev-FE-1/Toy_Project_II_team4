@@ -72,7 +72,7 @@ export function ScheduleList({
 export const SelectedDateInfo = styled.p`
   padding: 20px 0;
   border-top: 1px solid #ddd;
-  font-size: var(--font-primary);
+  font-size: var(--font-size-primary);
 `;
 
 export const ScheduleListWrapper = styled.div`
@@ -126,10 +126,11 @@ export const ScheduleCard = styled.li`
 
   .schedule-title {
     font-weight: bold;
-    font-size: var(--font-primary);
+    font-size: var(--font-size-large);
   }
 
   .schedule-time {
     color: var(--font-tar);
+    font-size: var(--font-size-primary);
   }
 `;
