@@ -4,6 +4,9 @@ import { styled as muiStyled } from '@mui/material/styles';
 
 export const Wrapper = styled.div`
   font-size: 1.5rem;
+  .loading {
+    height: calc(100vh - 210px);
+  }
   .btnArea {
     display: flex;
     justify-content: flex-end;
