@@ -56,6 +56,9 @@ npm run start
 6. **마이페이지**: 마이페이지에서 개인 정보를 확인하고 수정할 수 있는 기능을 제공합니다.
 
 ## 📌 기술 스택
+<details>
+  <summary>열기</summary>
+  <div markdown="1">
 
 ### 프론트엔드
 
@@ -100,8 +103,13 @@ npm run start
 - **ESLint**: 8.57.0
 - **Prettier**: 3.3.3
 
-### 📌 폴더 구조
+  </div>
+</details>
+
+
+## 📌 폴더 구조
 <details>
+  <summary>열기</summary>
 <div markdown="1">
 
 ```bash
@@ -174,5 +182,8 @@ npm run start
 
 ## 프로젝트 개발 문서
 
+- [프로젝트 정의서](https://www.notion.so/4-SAJO-ENT-557b0dd51fa04f508fd874767d2f9cb1?p=d4a00dd2c614433f81c7f06f8edaeacb&pm=s)
+- [요구사항 정의서](https://www.notion.so/4-SAJO-ENT-557b0dd51fa04f508fd874767d2f9cb1?p=0c87b6d1d0454e3f95614f5d6667781a&pm=s)
+- [기능정의서](https://www.notion.so/4-SAJO-ENT-557b0dd51fa04f508fd874767d2f9cb1?p=d4f59757ccf34784996e5f5c52fdf57e&pm=s)
 - [커밋 작성 가이드](./document/커밋작성가이드.md)
 - [4조 와이어프레임 Figma](https://www.figma.com/design/jT5wqMl73uJmI0ss6SEMlw/%ED%86%A0%EC%9D%B4%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B82_4%EC%A1%B0?node-id=3-399&t=YnnKgBAasqVjwjDT-1)
