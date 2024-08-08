@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { styled as muiStyled } from '@mui/material/styles';
 
 export const Wrapper = styled.div`
-  font-size: 1.5rem;
+  font-size: var(--font-size-primary);
   .loading {
     height: calc(100vh - 210px);
   }
@@ -11,10 +11,6 @@ export const Wrapper = styled.div`
     display: flex;
     justify-content: flex-end;
     margin: 2rem 0;
-  }
-  .btn-area .MuiButton-root {
-    width: 10rem;
-    font-size: 1.5rem;
   }
 `;
 
@@ -117,17 +113,5 @@ export const Schip = muiStyled(Chip)`
   }
   .MuiChip-label {
     font-size: 1.2rem;
-  }
-`;
-
-export const modalWrapper = styled.div`
-  .modal-title {
-    padding: 3rem 0;
-    text-align: center;
-    font-weight: bold;
-  }
-  .modal-btnArea {
-    display: flex;
-    justify-content: center;
   }
 `;

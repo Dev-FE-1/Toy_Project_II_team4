@@ -3,7 +3,6 @@ import NoticeCard from '../salaryList/NoticeCard';
 import useSalaryDetails from '../salaryList/useSalaryDetails';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
 export default function SalaryCard() {
   const userId = 'sajo1234567';
   const { data, isLoading } = useSalaryDetails();
