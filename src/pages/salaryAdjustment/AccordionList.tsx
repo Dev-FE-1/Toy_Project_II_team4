@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import Loading from '../../components/loading/Loading';
 
 import * as styled from './SalaryAdjustment.style';
+import Btn from '../../components/button/Button';
 
 function AccordionList() {
   const dispatch = useDispatch<AppDispatch>();
