@@ -2,11 +2,12 @@ import * as Styled from './MoveMonth.style';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useMonthNavigation, useMonthNavigationProps } from '../../hooks/useMonthNavigation';
 
 export default function MoveMonth({ date, id, salaryData }: useMonthNavigationProps) {
   const navigate = useNavigate();
+  const location = useLocation();
 
   const { currentMonth, setCurrentMonth, prevDisabled, nextDisabled } = useMonthNavigation({
     date,
@@ -27,26 +28,31 @@ export default function MoveMonth({ date, id, salaryData }: useMonthNavigationPr
     }
   };
 
+  const fromHome = (location.state as { from?: string })?.from === 'home';
   return (
     <Styled.Movemonth>
-      <ChevronLeftIcon
-        onClick={handlePrevMonth}
-        style={{
-          cursor: prevDisabled ? 'default' : 'pointer',
-          visibility: prevDisabled ? 'hidden' : 'inherit',
-        }}
-      />
+      {!fromHome && (
+        <ChevronLeftIcon
+          onClick={handlePrevMonth}
+          style={{
+            cursor: prevDisabled ? 'default' : 'pointer',
+            visibility: prevDisabled ? 'hidden' : 'inherit',
+          }}
+        />
+      )}
       <span className="up-date">
         {currentMonth.subtract(1, 'month').format('YYYY.MM')}
         <CalendarTodayIcon />
       </span>
-      <ChevronRightIcon
-        onClick={handleNextMonth}
-        style={{
-          cursor: nextDisabled ? 'default' : 'pointer',
-          visibility: nextDisabled ? 'hidden' : 'inherit',
-        }}
-      />
+      {!fromHome && (
+        <ChevronRightIcon
+          onClick={handleNextMonth}
+          style={{
+            cursor: nextDisabled ? 'default' : 'pointer',
+            visibility: nextDisabled ? 'hidden' : 'inherit',
+          }}
+        />
+      )}
     </Styled.Movemonth>
   );
 }
