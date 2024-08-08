@@ -9,10 +9,41 @@ function Cate1() {
         label="날짜 선택"
         dateType="range"
         slotProps={{
+          layout: {
+            sx: {
+              '& .MuiDayCalendar-weekDayLabel': {
+                fontSize: 'var(--font-size-small)',
+              },
+              '& .MuiPickersCalendarHeader-labelContainer': {
+                fontSize: 'var(--font-size-primary)',
+              },
+              '& .MuiPickersDay-root': {
+                fontSize: 'var(--font-size-small)',
+              },
+              '& .MuiDialogActions-root .MuiButtonBase-root': {
+                fontSize: 'var(--font-size-small)',
+                background: 'var(--color-pri)',
+                color: 'var(--color-white)',
+              },
+              '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
+                background: 'var(--color-sec)',
+                color: 'var(--color-pri)',
+              },
+            },
+          },
+          calendarHeader: {
+            format: 'YYYY-MM',
+          },
           field: {
             sx: {
               flex: '1',
             },
+          },
+          toolbar: {
+            hidden: true,
+          },
+          textField: {
+            required: true,
           },
         }}
         format="YYYY-MM-DD"
