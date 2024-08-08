@@ -1,7 +1,6 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
-import html2canvas from 'html2canvas';
 import { useRef, useEffect, useState } from 'react';
 import { SalaryDataItem } from '../salaryList/api/fetchSalaryInfo';
 import useSalaryDetails from '../salaryList/useSalaryDetails';
