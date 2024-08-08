@@ -10,6 +10,7 @@ import MoveMonth from './MoveMonth';
 import SalaryCard from './SalaryCard';
 import ListWrapper from './ListWrapper';
 import SelectedModal from './DetailMonthModal';
+import Loading from '../../components/loading/Loading';
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
@@ -55,7 +56,11 @@ export default function SalaryDetailPage() {
   }, [location.state]);
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   if (!data || !salaryData) {
@@ -107,7 +112,7 @@ export default function SalaryDetailPage() {
           <h2>급여명세서</h2>
         </Styled.LSection>
         <Styled.RSection>
-          <SelectedModal day={salaryData.payday} />
+          <SelectedModal month={salaryData.payday} />
           <IconBtn icontype="download" onClick={handleDownload} />
         </Styled.RSection>
       </Styled.Header>
