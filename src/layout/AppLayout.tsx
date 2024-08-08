@@ -14,7 +14,6 @@ export default function AppLayout() {
   const { user } = useSelector((state: RootState) => state.auth);
   const [isLogin, setIsLogin] = useState(false);
 
-  console.log(user);
   useEffect(() => {
     auth.onAuthStateChanged((user) => {
       if (!user) {
