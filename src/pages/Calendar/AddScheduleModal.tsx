@@ -13,10 +13,12 @@ import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface AddScheduleModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onAddSchedule: (newSchedule: ISchedule) => void;
 }
 
 const categoryOptions = [
@@ -43,7 +45,9 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e:
+      | SelectChangeEvent<string | number | HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setNewSchedule((prev) => ({ ...prev, [name]: value }));
@@ -68,7 +72,7 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   };
 
   return (
-    <BasicDialog open={isOpen} modalCloseButton={<CloseButton handleClose={onClose} />}>
+    <BasicDialog open={isOpen} modalCloseButton={<CloseButton onClick={onClose} />}>
       <ModalWrapper>
         <ModalHeader>
           <TitleContainer>

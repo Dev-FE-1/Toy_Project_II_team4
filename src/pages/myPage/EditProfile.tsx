@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, SyntheticEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import Btn from '../../components/button/Button';
 import * as Styled from './EditProfile.styled';
 import { ProfileType } from './MyPageView';
@@ -24,8 +24,10 @@ export interface handleChangeProps {
 export function EditProfile({ initialProfile, onSave, onCancel }: EditProfileProps) {
   const [profile, setProfile] = useState(initialProfile);
 
+  // TODO handleSubmit 함수 내에서 입력값 유효성 검사 및 오류 처리를 구현하세요.
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+
     setProfile((prev) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {

@@ -2,17 +2,35 @@ import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import { CloseButton } from '../../components/modal/CloseButton';
 import { useBasicModal } from '../../hooks/useBasicModal';
-import * as styled from '../salaryAdjustment/SalaryAdjustment.style';
 import Heading from '../../components/Heading/Heading';
 import FormWrap from '../salaryAdjustment/FormWrap';
 import dayjs from 'dayjs';
+import styled from 'styled-components';
 
-export default function SelectedModal({ day }: { day: string }) {
+const ModalWrapper = styled.div`
+  .modal-title {
+    padding: 3rem 0;
+    text-align: center;
+    font-weight: bold;
+  }
+  .modal-btnArea {
+    display: flex;
+    justify-content: center;
+  }
+  .MuiSelect-select,
+  .MuiInputBase-root,
+  .MuiFormLabel-root {
+    font-size: var(--font-size-small);
+  }
+`;
+
+export default function SelectedModal({ month }: { month: string }) {
   const { open, handleOpen, handleClose } = useBasicModal();
 
   const today = dayjs();
-  const payday = dayjs(day, 'YYYY.MM.DD');
+  const payday = dayjs(month, 'YYYY.MM.DD');
   const isBeforeCurrentMonth = payday.isBefore(today, 'day');
+  const salaryMonth = payday.subtract(1, 'month').format('MM');
 
   const currentMonth = today.month();
   const paydayMonth = payday.month();
@@ -31,11 +49,11 @@ export default function SelectedModal({ day }: { day: string }) {
       modalCloseButton={<CloseButton handleClose={handleClose} />}
       open={open}
     >
-      <styled.modalWrapper>
+      <ModalWrapper>
         <Heading title="급여 정정신청" />
-        <h2 className="modal-title">{day.slice(0, 4)}월 급여 정정</h2>
+        <h2 className="modal-title">{salaryMonth}월 급여 정정</h2>
         <FormWrap handleClose={() => handleClose()} />
-      </styled.modalWrapper>
+      </ModalWrapper>
     </BasicDialog>
   );
 }

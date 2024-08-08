@@ -13,7 +13,8 @@ import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
-
+import { AppDispatch } from '../../store/store';
+import { SelectChangeEvent } from '@mui/material';
 interface ISchedule {
   dateId: number;
   category: string;
@@ -38,13 +39,15 @@ const categoryOptions = [
 ];
 
 export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalProps): JSX.Element {
-  const dispatch = useDispatch();
-  
+  const dispatch = useDispatch<AppDispatch>();
+
   const [isEditing, setIsEditing] = useState(false);
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      | SelectChangeEvent<string | number | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setEditedSchedule((prev) => ({ ...prev, [name]: value }));
