@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import profileBackgroundImg from '../../styles/images/profile_background.jpg';
 
 export const MyPageContainer = styled.div`
   width: calc(102% + 2.6rem);
@@ -7,7 +6,7 @@ export const MyPageContainer = styled.div`
 
   .header-image {
     height: 250px;
-    background-image: url(${profileBackgroundImg});
+    background-color: var(--color-pri-moreWhite);
     background-size: cover;
     background-position: center;
   }
@@ -45,6 +44,7 @@ export const MyPageContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-left: 11%;
     & ul {
       display: flex;
       flex-direction: column;
@@ -65,12 +65,11 @@ export const MyPageContainer = styled.div`
 
       & li div {
         width: 150px;
-        margin-left: 18px;
       }
 
       & li div:last-child {
         width: 215px;
-        margin-left: 15px;
+        margin-left: 10px;
       }
     }
   }
