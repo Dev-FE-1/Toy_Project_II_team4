@@ -7,6 +7,23 @@ import FormWrap from '../salaryAdjustment/FormWrap';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
+const ModalWrapper = styled.div`
+  .modal-title {
+    padding: 3rem 0;
+    text-align: center;
+    font-weight: bold;
+  }
+  .modal-btnArea {
+    display: flex;
+    justify-content: center;
+  }
+  .MuiSelect-select,
+  .MuiInputBase-root,
+  .MuiFormLabel-root {
+    font-size: var(--font-size-small);
+  }
+`;
+
 export default function SelectedModal({ month }: { month: string }) {
   const { open, handleOpen, handleClose } = useBasicModal();
 
@@ -40,19 +57,3 @@ export default function SelectedModal({ month }: { month: string }) {
     </BasicDialog>
   );
 }
-const ModalWrapper = styled.div`
-  .modal-title {
-    padding: 3rem 0;
-    text-align: center;
-    font-weight: bold;
-  }
-  .modal-btnArea {
-    display: flex;
-    justify-content: center;
-  }
-  .MuiSelect-select,
-  .MuiInputBase-root,
-  .MuiFormLabel-root {
-    font-size: var(--font-size-small);
-  }
-`;
