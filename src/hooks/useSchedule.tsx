@@ -1,45 +1,27 @@
 import { useEffect, useState } from 'react';
 import { getFormatDate } from '../utils/FormatDate';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../store/store';
-import { setSchedules, addSchedule } from '../slices/scheduleSlice';
-
-interface ISchedule {
-  dateId: number;
-  category: string;
-  scheduleType: 'company' | 'personal';
-  description: string;
-  title: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-}
+import { RootState, AppDispatch } from '../store/store';
+import { fetchSchedules, addSchedule, ISchedule, ScheduleState } from '../slices/scheduleSlice';
 
 interface useScheduleProps {
   selectedDate: Date;
 }
 
 export function useSchedule({ selectedDate }: useScheduleProps) {
-  const dispatch = useDispatch();
-  const schedules = useSelector((state: RootState) => state.schedules.schedules);
+  const dispatch = useDispatch<AppDispatch>();
+  const { schedules, status, error }: ScheduleState = useSelector(
+    (state: RootState) => state.schedules
+  );
   const [filteredSchedules, setFilteredSchedules] = useState<ISchedule[]>([]);
   const [showCompanySchedule, setShowCompanySchedule] = useState(true);
   const [showPersonalSchedule, setShowPersonalSchedule] = useState(true);
 
   useEffect(() => {
-    const fetchSchedules = async () => {
-      try {
-        const response = await fetch('/data/calendar.json');
-        const data = (await response.json()) as { schedule: ISchedule[] };
-        dispatch(setSchedules(data.schedule));
-      } catch (error) {
-        console.error('Error loading schedules:', error);
-      }
-    };
-
-    void fetchSchedules();
-  }, [dispatch]);
+    if (status === 'idle') {
+      void dispatch(fetchSchedules());
+    }
+  }, [status, dispatch]);
 
   useEffect(() => {
     const filtered = schedules.filter(
@@ -63,10 +45,12 @@ export function useSchedule({ selectedDate }: useScheduleProps) {
 
   // 일정 추가
   const onAddSchedule = (newSchedule: ISchedule) => {
-    dispatch(addSchedule(newSchedule));
+    void dispatch(addSchedule(newSchedule));
   };
 
   return {
+    status,
+    error,
     filteredSchedules,
     showCompanySchedule,
     showPersonalSchedule,

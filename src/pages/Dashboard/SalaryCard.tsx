@@ -7,6 +7,7 @@ export default function SalaryCard() {
   const userId = 'sajo1234567';
   const { data, error, isLoading } = useSalaryDetails();
 
+  console.log(data);
   if (isLoading) {
     return <LoadingCard />;
   }
