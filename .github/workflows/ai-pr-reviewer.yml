@@ -20,16 +20,6 @@ jobs:
   review:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: oven-sh/setup-bun@v1
-      - run: bun install
-      - name: Compile TypeScript
-        run: |
-          tsc -b
-          if [ $? -ne 0 ]; then
-            echo "TypeScript compilation failed with errors."
-            exit 1
-          fi
       - uses: coderabbitai/ai-pr-reviewer@latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

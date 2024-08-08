@@ -25,8 +25,8 @@ jobs:
           VITE_FIREBASE_MEASUREMENT_ID: ${{ secrets.VITE_FIREBASE_MEASUREMENT_ID }}
           VITE_FIREBASE_DATABASE_URL: ${{ secrets.VITE_FIREBASE_DATABASE_URL }}
         run: bun run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        id: hosting_deploy
+      - id: hosting_deploy
+        uses: FirebaseExtended/action-hosting-deploy@v0
         continue-on-error: true
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
@@ -44,7 +44,7 @@ jobs:
               issue_number: context.issue.number,
               owner: context.repo.owner,
               repo: context.repo.repo,
-              body: `🚀 Preview available at: https://${steps.hosting_deploy.outputs.holdingPageUrl}`
+              body: `🚀 Preview available at: https://${context.payload.hosting_deploy.outputs.holdingPageUrl}`
             })
       - name: Comment PR with Deployment Failure
         if: steps.hosting_deploy.outcome == 'failure'
