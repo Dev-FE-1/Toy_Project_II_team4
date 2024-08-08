@@ -100,7 +100,9 @@ npm run start
 - **ESLint**: 8.57.0
 - **Prettier**: 3.3.3
 
-## 📌 폴더 구조
+<details>
+<summary>📌 폴더 구조</summary>
+<div markdown="1">
 
 ```bash
 📦src
@@ -158,6 +160,9 @@ npm run start
  ┣ 📜main.tsx
  ┗ 📜vite-env.d.ts
 ```
+</div>
+</details>
+
 
 ## 프로젝트 관련 이동 링크
 
