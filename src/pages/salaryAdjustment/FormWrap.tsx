@@ -22,8 +22,8 @@ const menuItems = [
 function FormWrap({ handleClose }: FormWrapProps) {
   const dispatch = useDispatch<AppDispatch>();
   const [selected, setselected] = useState<SelectedType>('주말 / 공휴일 근무 수당');
-  const handleChange = (event: SelectChangeEvent<string | number>) => {
-    setselected(event.target.value as SelectedType);
+  const handleChange = (e: SelectChangeEvent<string | number | HTMLSelectElement>) => {
+    setselected(e.target.value as SelectedType);
   };
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
