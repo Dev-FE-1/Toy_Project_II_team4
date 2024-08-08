@@ -100,8 +100,8 @@ npm run start
 - **ESLint**: 8.57.0
 - **Prettier**: 3.3.3
 
+### 📌 폴더 구조
 <details>
-<summary>📌 폴더 구조</summary>
 <div markdown="1">
 
 ```bash
