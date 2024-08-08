@@ -34,17 +34,25 @@ const handleFirebaseError = (error: unknown): string => {
   return '';
 };
 
-export const fetchSchedules = createAsyncThunk<ISchedule[], void, { rejectValue: string }>(
-  'schedules/fetchSchedules',
-  async (_, { rejectWithValue }) => {
-    try {
-      const snapshot = await get(dbRef);
-      return snapshot.exists() ? (snapshot.val() as ISchedule[]) : [];
-    } catch (error) {
-      return rejectWithValue(handleFirebaseError(error));
+const convertToArray = (data: any | null): ISchedule[] => {
+  if (typeof data !== 'object' || data === null) return [];
+  if (Array.isArray(data)) return data;
+  if (typeof data === 'object') return Object.values(data);
+  return [];
+};
+
+export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
+  try {
+    const snapshot = await get(dbRef);
+    if (snapshot.exists()) {
+      return convertToArray(snapshot.val());
+    } else {
+      return [];
     }
+  } catch (error) {
+    throw new Error(error instanceof Error ? error.message : 'Fetch schedules failed');
   }
-);
+});
 
 export const addSchedule = createAsyncThunk<ISchedule[], ISchedule, { rejectValue: string }>(
   'schedules/addSchedule',
@@ -112,7 +120,7 @@ export const scheduleSlice = createSlice({
       })
       .addCase(fetchSchedules.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload || '스케줄을 가져오는데 실패했습니다';
+        state.error = action.payload as string;
       })
       .addCase(addSchedule.fulfilled, (state, action) => {
         state.status = 'succeeded';
@@ -130,64 +138,5 @@ export const scheduleSlice = createSlice({
 });
 
 export const { resetStatus } = scheduleSlice.actions;
-export const fetchSchedules = createAsyncThunk('schedules/fetchSchedules', async () => {
-  try {
-    const snapshot = await get(dbRef);
-    if (snapshot.exists()) {
-      return isObjectConvertToArray(snapshot.val());
-    } else {
-      return [];
-    }
-  } catch (error) {
-    throw new Error(error instanceof Error ? error.message : 'Fetch schedules failed');
-  }
-});
-
-export const addSchedule = createAsyncThunk(
-  'schedules/addSchedule',
-  async (newSchedule: ISchedule) => {
-    try {
-      const snapshot = await get(dbRef);
-      const schedules = snapshot.exists() ? (snapshot.val() as ISchedule[]) : [];
-      const updatedSchedules = [...schedules, newSchedule];
-      await set(dbRef, updatedSchedules);
-      return updatedSchedules;
-    } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'Add schedule failed');
-    }
-  }
-);
-
-export const updateSchedule = createAsyncThunk(
-  'schedules/updateSchedule',
-  async (updatedSchedule: ISchedule) => {
-    try {
-      const snapshot = await get(dbRef);
-      const schedules = snapshot.exists() ? (snapshot.val() as ISchedule[]) : [];
-      const updatedSchedules = schedules.map((schedule) =>
-        schedule.dateId === updatedSchedule.dateId ? updatedSchedule : schedule
-      );
-      await set(dbRef, updatedSchedules);
-      return updatedSchedules;
-    } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'Update schedule failed');
-    }
-  }
-);
-
-export const deleteSchedule = createAsyncThunk(
-  'schedules/deleteSchedule',
-  async (dateId: number) => {
-    try {
-      const snapshot = await get(dbRef);
-      const schedules = snapshot.exists() ? (snapshot.val() as ISchedule[]) : [];
-      const updatedSchedules = schedules.filter((schedule) => schedule.dateId !== dateId);
-      await set(dbRef, updatedSchedules);
-      return updatedSchedules;
-    } catch (error) {
-      throw new Error(error instanceof Error ? error.message : 'Delete schedule failed');
-    }
-  }
-);
 
 export default scheduleSlice.reducer;
