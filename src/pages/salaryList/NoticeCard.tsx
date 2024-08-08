@@ -27,7 +27,7 @@ export default function NoticeCard({
 
   const firstPayData = salaryList[0];
   const originDate = dayjs(firstPayData.payday, 'YYYY.MM.DD');
-  const finalDate = originDate.format('MM월 ');
+  const finalDate = originDate.subtract(1, 'month').format('MM월 ');
   const finalDay = originDate.subtract(2, 'day').format('DD일');
 
   return (
