@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
 import jsPDF from 'jspdf';
@@ -10,16 +10,18 @@ import MoveMonth from './MoveMonth';
 import SalaryCard from './SalaryCard';
 import ListWrapper from './ListWrapper';
 import SelectedModal from './DetailMonthModal';
+import NoticeCard from '../salaryList/NoticeCard'; // Import NoticeCard
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
   const { id } = useParams<{ id?: string }>();
+  const location = useLocation();
   const userId = 'sajo1234567';
 
   const { data, error, isLoading } = useSalaryDetails();
   const detailRef = useRef<HTMLDivElement>(null);
-
   const [salaryData, setSalaryData] = useState<SalaryDataItem | null>(null);
+  const [returnPath, setReturnPath] = useState<string>('/'); // Default path
 
   useEffect(() => {
     if (data && id) {
@@ -42,6 +44,18 @@ export default function SalaryDetailPage() {
     }
   }, [error]);
 
+  useEffect(() => {
+    // Determine the previous page based on location state or referrer
+    const from = (location.state as { from?: string })?.from;
+    if (from === 'home') {
+      setReturnPath('/home');
+    } else if (from === 'payments') {
+      setReturnPath('/payments');
+    } else {
+      setReturnPath('/payments');
+    }
+  }, [location.state]);
+
   if (isLoading) {
     return <div>로딩 중...</div>;
   }
@@ -54,7 +68,8 @@ export default function SalaryDetailPage() {
   const employeeProfile = employees[userId]?.profile || {};
 
   const handleCloseButton = () => {
-    navigate('/payments');
+    console.log(returnPath);
+    navigate(returnPath); // Navigate to the determined return path
   };
 
   const handleDownload = () => {
@@ -118,6 +133,11 @@ export default function SalaryDetailPage() {
           <ListWrapper details={salaryData.details} />
         </Styled.Info>
       </div>
+      <NoticeCard
+        salaryList={data.salaryDetails[userId]}
+        button={true}
+        label={<h5>급여명세서 조회</h5>}
+      />
     </>
   );
 }
