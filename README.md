@@ -14,7 +14,7 @@
 | 고낙연 | [@nakyeonko3](https://github.com/nakyeonko3)     |
 
 <details>
-<summary>## 목차</summary>
+<summary>목차</summary>
 <div markdown="1">
 - [Toy_Project_II_team4](#toy_project_ii_team4)
   - [팀 구성](#팀-구성)
