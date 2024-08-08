@@ -1,7 +1,6 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
-import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { useRef, useEffect, useState } from 'react';
 import { SalaryDataItem } from '../salaryList/api/fetchSalaryInfo';
@@ -74,8 +73,11 @@ export default function SalaryDetailPage() {
     navigate(returnPath);
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (detailRef.current) {
+      const { default: html2canvas } = await import('html2canvas');
+      const { jsPDF } = await import('jspdf');
+
       html2canvas(detailRef.current)
         .then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
