@@ -6,12 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { auth } from '../api/firebaseApp';
 import { useState } from 'react';
 import {} from 'react-redux';
-import { RootState } from '../store/store';
-import { useSelector } from 'react-redux';
 
 export default function AppLayout() {
   const navigate = useNavigate();
-  const { user } = useSelector((state: RootState) => state.auth);
+
   const [isLogin, setIsLogin] = useState(false);
 
   useEffect(() => {
