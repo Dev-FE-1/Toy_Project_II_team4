@@ -46,6 +46,9 @@ export const CalendarFilterWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   margin-bottom: 20px;
+  background-color: white;
+  margin: 0 -1.5rem;
+  padding: 1.5rem;
 
   .calendar-checkbox {
     display: flex;

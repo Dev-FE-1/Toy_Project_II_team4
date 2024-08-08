@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { updateSchedule, deleteSchedule } from '../../slices/scheduleSlice';
+import { updateSchedule, deleteSchedule, ISchedule } from '../../slices/scheduleSlice';
+import { AppDispatch } from '../../store/store';
 import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import IconBtn from '../../components/iconButton/IconButton';
@@ -13,19 +14,6 @@ import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
-import { AppDispatch } from '../../store/store';
-import { SelectChangeEvent } from '@mui/material';
-interface ISchedule {
-  dateId: number;
-  category: string;
-  scheduleType: 'company' | 'personal';
-  description: string;
-  title: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-}
 
 interface ScheduleDetailModalProps {
   schedule: ISchedule;
@@ -40,28 +28,34 @@ const categoryOptions = [
 
 export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-
   const [isEditing, setIsEditing] = useState(false);
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
   const handleInputChange = (
-    e:
-      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
-      | SelectChangeEvent<string | number | HTMLSelectElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setEditedSchedule((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleUpdateSchedule = () => {
-    dispatch(updateSchedule(editedSchedule));
-    setIsEditing(false);
+  const handleUpdateSchedule = async () => {
+    try {
+      await dispatch(updateSchedule(editedSchedule)).unwrap();
+      setIsEditing(false);
+      onClose();
+    } catch (error) {
+      console.error('==> ', error);
+    }
   };
 
-  const handleDeleteSchedule = () => {
+  const handleDeleteSchedule = async () => {
     if (window.confirm('정말로 이 일정을 삭제하시겠습니까?')) {
-      dispatch(deleteSchedule(schedule.dateId));
-      onClose();
+      try {
+        await dispatch(deleteSchedule(schedule.dateId)).unwrap();
+        onClose();
+      } catch (error) {
+        console.error('==> ', error);
+      }
     }
   };
 
@@ -106,7 +100,12 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
               name="scheduleType"
               value={editedSchedule.scheduleType}
               onChange={handleInputChange}
-              sx={{ mb: '2rem', fontSize: '1.6rem' }}
+              sx={{
+                mb: '2rem',
+                '& .MuiFormControlLabel-label': {
+                  fontSize: 'var(--font-size-large)',
+                },
+              }}
             >
               <FormControlLabel value="company" control={<Radio />} label="회사" />
               <FormControlLabel value="personal" control={<Radio />} label="개인" />
@@ -117,10 +116,23 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
                 id="category"
                 label="카테고리"
                 menuItems={categoryOptions}
-                sx={{ marginBottom: '20px', fontSize: '1.6rem' }}
+                sx={{
+                  marginBottom: '20px',
+                  fontSize: '1.4rem',
+                }}
+                MenuProps={{
+                  PaperProps: {
+                    sx: {
+                      '& .MuiMenuItem-root': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                    },
+                  },
+                }}
                 value={editedSchedule.category}
                 onChange={handleInputChange}
                 name="category"
+                required
               />
             )}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -129,11 +141,32 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
                   label="시작 날짜"
                   dateType="single"
                   slotProps={{
-                    field: {
+                    layout: {
                       sx: {
                         width: '100%',
-                        fontSize: '1.6rem',
+                        '& .MuiDayCalendar-weekDayLabel': {
+                          fontSize: 'var(--font-size-small)',
+                        },
+                        '& .MuiPickersCalendarHeader-labelContainer': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiPickersDay-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
                       },
+                    },
+                    textField: {
+                      sx: {
+                        '& .MuiInputBase-input': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiFormLabel-root.MuiInputLabel-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
+                      },
+                    },
+                    calendarHeader: {
+                      format: 'YYYY-MM',
                     },
                   }}
                   format="YYYY-MM-DD"
@@ -149,10 +182,31 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
                 <TimePicker
                   label="시작 시간"
                   slotProps={{
-                    field: {
+                    layout: {
                       sx: {
                         width: '100%',
-                        fontSize: '1.6rem',
+                        '& .MuiDialogActions-root .MuiButtonBase-root': {
+                          fontSize: 'var(--font-size-primary)',
+                          margin: '0 auto',
+                          width: '100%',
+                        },
+                        '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
+                          background: 'var(--color-sec)',
+                          color: 'var(--color-pri)',
+                        },
+                        '& .MuiMultiSectionDigitalClockSection-item': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                      },
+                    },
+                    textField: {
+                      sx: {
+                        '& .MuiInputBase-input': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiFormLabel-root.MuiInputLabel-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
                       },
                     },
                   }}
@@ -172,11 +226,32 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
                   label="종료 날짜"
                   dateType="single"
                   slotProps={{
-                    field: {
+                    layout: {
                       sx: {
                         width: '100%',
-                        fontSize: '1.6rem',
+                        '& .MuiDayCalendar-weekDayLabel': {
+                          fontSize: 'var(--font-size-small)',
+                        },
+                        '& .MuiPickersCalendarHeader-labelContainer': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiPickersDay-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
                       },
+                    },
+                    textField: {
+                      sx: {
+                        '& .MuiInputBase-input': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiFormLabel-root.MuiInputLabel-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
+                      },
+                    },
+                    calendarHeader: {
+                      format: 'YYYY-MM',
                     },
                   }}
                   format="YYYY-MM-DD"
@@ -192,10 +267,31 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
                 <TimePicker
                   label="종료 시간"
                   slotProps={{
-                    field: {
+                    layout: {
                       sx: {
                         width: '100%',
-                        fontSize: '1.6rem',
+                        '& .MuiDialogActions-root .MuiButtonBase-root': {
+                          fontSize: 'var(--font-size-primary)',
+                          margin: '0 auto',
+                          width: '100%',
+                        },
+                        '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
+                          background: 'var(--color-sec)',
+                          color: 'var(--color-pri)',
+                        },
+                        '& .MuiMultiSectionDigitalClockSection-item': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                      },
+                    },
+                    textField: {
+                      sx: {
+                        '& .MuiInputBase-input': {
+                          fontSize: 'var(--font-size-primary)',
+                        },
+                        '& .MuiFormLabel-root.MuiInputLabel-root': {
+                          fontSize: 'var(--font-size-small)',
+                        },
                       },
                     },
                   }}

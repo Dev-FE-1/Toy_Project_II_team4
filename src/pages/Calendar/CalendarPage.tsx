@@ -3,40 +3,21 @@ import './Calendar.css';
 import styled from 'styled-components';
 import { useCalendar } from '../../hooks/useCalendar';
 import { useSchedule } from '../../hooks/useSchedule';
-// import Heading from '../../components/Heading/Heading';
 import { CalendarHeader } from './CalendarHeader';
 import { CalendarFilter } from './CalendarFilter';
 import { CalendarDate } from './CalendarDate';
 import { ScheduleList } from './ScheduleList';
 import { AddScheduleModal } from './AddScheduleModal';
-import { useDispatch } from 'react-redux';
 import Loading from '../../components/loading/Loading';
-import { addSchedule } from '../../slices/scheduleSlice';
-import { AppDispatch } from '../../store/store';
-interface ISchedule {
-  dateId: number;
-  category: string;
-  scheduleType: 'company' | 'personal';
-  description: string;
-  title: string;
-  startDate: string;
-  startTime: string;
-  endDate: string;
-  endTime: string;
-}
 
 export default function CalendarPage(): React.ReactElement {
   const [currentDate, setCurrentDate] = useState<Date>(new Date());
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
 
-  const dispatch = useDispatch<AppDispatch>();
-
   const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
   const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
-  const onAddSchedule = (newSchedule: ISchedule) => {
-    void dispatch(addSchedule(newSchedule));
-  };
+
   const calendarHook = useCalendar({
     setCurrentDate,
     selectedDate,
@@ -69,11 +50,7 @@ export default function CalendarPage(): React.ReactElement {
           selectedDate={selectedDate}
           getScheduleListForSelectedDate={scheduleHook.getScheduleListForSelectedDate}
         />
-        <AddScheduleModal
-          isOpen={isAddScheduleModalOpen}
-          onClose={closeAddScheduleModal}
-          onAddSchedule={onAddSchedule}
-        />
+        <AddScheduleModal isOpen={isAddScheduleModalOpen} onClose={closeAddScheduleModal} />
       </Calendar>
     </>
   );
