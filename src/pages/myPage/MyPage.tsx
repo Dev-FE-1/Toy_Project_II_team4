@@ -1,16 +1,17 @@
-import Btn from '../../components/button/Button';
-import ProfileCard from '../Dashboard/ProfileCard';
-import { useLogout } from '../../hooks/useLogout';
+import { MyPageView } from './MyPageView';
+import { useMyPage } from './useMyPage';
 
 export function MyPage() {
-  const { handleLogout } = useLogout(); // TODO 하이오더 컴포넌트 필요
+  const { handleLogout, isEditing, profile, handleEdit, handleCancel, handleSave } = useMyPage();
+
   return (
-    <div>
-      <h1>마이페이지</h1>
-      <ProfileCard />
-      <div>
-        <Btn onClick={handleLogout} label="로그 아웃" />
-      </div>
-    </div>
+    <MyPageView
+      handleLogout={handleLogout}
+      isEditing={isEditing}
+      profile={profile}
+      handleEdit={handleEdit}
+      handleCancel={handleCancel}
+      handleSave={handleSave}
+    />
   );
 }

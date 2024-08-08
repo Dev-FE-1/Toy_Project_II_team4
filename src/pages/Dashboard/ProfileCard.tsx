@@ -99,7 +99,7 @@ const ProfileLeftIntroduce = styled.h6`
   text-decoration: underline;
 `;
 
-const ProfileImage = styled.img`
+export const ProfileImage = styled.img`
   height: 10rem;
   position: absolute;
   top: 1rem;

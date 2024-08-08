@@ -3,7 +3,7 @@ import './Calendar.css';
 import styled from 'styled-components';
 import { useCalendar } from '../../hooks/useCalendar';
 import { useSchedule } from '../../hooks/useSchedule';
-import Heading from '../../components/Heading/Heading';
+// import Heading from '../../components/Heading/Heading';
 import { CalendarHeader } from './CalendarHeader';
 import { CalendarFilter } from './CalendarFilter';
 import { CalendarDate } from './CalendarDate';
@@ -12,6 +12,7 @@ import { AddScheduleModal } from './AddScheduleModal';
 import { useDispatch } from 'react-redux';
 import Loading from '../../components/loading/Loading';
 import { addSchedule } from '../../slices/scheduleSlice';
+import { AppDispatch } from '../../store/store';
 interface ISchedule {
   dateId: number;
   category: string;
@@ -29,7 +30,7 @@ export default function CalendarPage(): React.ReactElement {
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [isAddScheduleModalOpen, setIsAddScheduleModalOpen] = useState<boolean>(false);
 
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const openAddScheduleModal = () => setIsAddScheduleModalOpen(true);
   const closeAddScheduleModal = () => setIsAddScheduleModalOpen(false);
@@ -48,7 +49,6 @@ export default function CalendarPage(): React.ReactElement {
   }
   return (
     <>
-      <Heading title="업무관리" />
       <Calendar className="calendar">
         <CalendarHeader currentDate={currentDate} {...calendarHook.moveDate} />
         <CalendarFilter
