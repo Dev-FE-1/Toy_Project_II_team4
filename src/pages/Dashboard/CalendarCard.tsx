@@ -18,7 +18,7 @@ export default function CalendarCard() {
   return (
     <CalendarCardWrapper>
       <Day day="today" />
-      <Day day="tomorrow" />
+      {/* <Day day="tomorrow" /> */}
     </CalendarCardWrapper>
   );
 }
