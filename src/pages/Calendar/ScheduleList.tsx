@@ -39,20 +39,22 @@ export function ScheduleList({
         <ScheduleListWrapper className="schedule-list">
           {getScheduleListForSelectedDate().length > 0 ? (
             <ul className="schedule-cards">
-              {getScheduleListForSelectedDate().map((schedule) => (
-                <ScheduleCard
-                  key={schedule.dateId}
-                  className={`schedule-card ${schedule.category.replace(' ', '-')}`}
-                  onClick={() => onOpenModal(schedule)}
-                >
-                  <div className="schedule-card-content">
-                    <span className="schedule-title">{schedule.title}</span>
-                    <span className="schedule-time">
-                      {schedule.startTime} - {schedule.endTime}
-                    </span>
-                  </div>
-                </ScheduleCard>
-              ))}
+              {getScheduleListForSelectedDate()
+                .sort((a, b) => a.startTime.localeCompare(b.startTime))
+                .map((schedule) => (
+                  <ScheduleCard
+                    key={schedule.dateId}
+                    className={`schedule-card ${schedule.category.replace(' ', '-')}`}
+                    onClick={() => onOpenModal(schedule)}
+                  >
+                    <div className="schedule-card-content">
+                      <span className="schedule-title">{schedule.title}</span>
+                      <span className="schedule-time">
+                        {schedule.startTime} - {schedule.endTime}
+                      </span>
+                    </div>
+                  </ScheduleCard>
+                ))}
             </ul>
           ) : (
             <p>일정이 없습니다.</p>
@@ -72,7 +74,7 @@ export function ScheduleList({
 export const SelectedDateInfo = styled.p`
   padding: 20px 0;
   border-top: 1px solid #ddd;
-  font-size: var(--font-primary);
+  font-size: var(--font-size-primary);
 `;
 
 export const ScheduleListWrapper = styled.div`
@@ -126,10 +128,11 @@ export const ScheduleCard = styled.li`
 
   .schedule-title {
     font-weight: bold;
-    font-size: var(--font-primary);
+    font-size: var(--font-size-large);
   }
 
   .schedule-time {
     color: var(--font-tar);
+    font-size: var(--font-size-primary);
   }
 `;

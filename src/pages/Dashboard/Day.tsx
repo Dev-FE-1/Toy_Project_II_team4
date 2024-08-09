@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState, AppDispatch } from '../../store/store';
@@ -49,17 +48,7 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
 }
 
 const DayWrapper = styled.div`
-  &:first-child {
-    padding: 0 1rem 0 0;
-  }
-  &:last-child {
-    padding: 0 0 0 1rem;
-  }
   flex-grow: 1;
-
-  &:first-child {
-    border-right: 1px solid var(--border-sec);
-  }
 `;
 
 const DayText = styled.div`
@@ -80,8 +69,9 @@ const ScheduleBox = styled.div`
   font-size: var(--font-size-primary);
   padding: 0.5rem;
   border-radius: 4px;
-  height: 2rem;
-
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
   &.방송-출연 {
     border-left: 6px solid #3473e14d;
   }

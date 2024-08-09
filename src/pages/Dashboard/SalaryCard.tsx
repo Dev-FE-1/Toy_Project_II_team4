@@ -3,17 +3,13 @@ import NoticeCard from '../salaryList/NoticeCard';
 import useSalaryDetails from '../salaryList/useSalaryDetails';
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-
 export default function SalaryCard() {
   const userId = 'sajo1234567';
-  const { data, error, isLoading } = useSalaryDetails();
+  const { data, isLoading } = useSalaryDetails();
   const navigate = useNavigate();
-  
+
   if (isLoading) {
     return <LoadingCard />;
-  }
-  if (error) {
-    return <div>Error: {error.message}</div>;
   }
 
   const salary = data?.salaryDetails[userId] || [];

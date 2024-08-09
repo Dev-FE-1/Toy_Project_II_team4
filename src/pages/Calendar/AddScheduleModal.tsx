@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { RootState, AppDispatch } from '../../store/store';
+import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../store/store';
+import { addSchedule, ISchedule } from '../../slices/scheduleSlice';
 import BasicDialog from '../../components/modal/BasicModal';
 import styled from 'styled-components';
 import SelectBox from '../../components/selectBox/SelectBox';
 import Btn from '../../components/button/Button';
 import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
 import { Form } from 'react-router-dom';
-import { addSchedule, ISchedule } from '../../slices/scheduleSlice';
 import SDataPicker from '../../components/datepicker/DatePicker';
 import { TimePicker } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
+import { SelectChangeEvent } from '@mui/material/Select';
 
 interface AddScheduleModalProps {
   isOpen: boolean;
@@ -28,11 +29,9 @@ const categoryOptions = [
 
 export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
-  const schedules = useSelector((state: RootState) => state.schedules.schedules);
-
   const [newSchedule, setNewSchedule] = useState<ISchedule>({
-    dateId: schedules.length + 1,
-    category: '',
+    dateId: Date.now(),
+    category: '공연',
     scheduleType: 'company',
     description: '',
     title: '',
@@ -43,7 +42,9 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   });
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e:
+      | SelectChangeEvent<string | number | HTMLSelectElement>
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setNewSchedule((prev) => ({ ...prev, [name]: value }));
@@ -64,11 +65,26 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     dispatch(addSchedule(newSchedule));
+
+    setNewSchedule({
+      dateId: 0,
+      category: '공연',
+      scheduleType: 'company',
+      description: '',
+      title: '',
+      startDate: '',
+      startTime: '',
+      endDate: '',
+      endTime: '',
+    });
     onClose();
   };
 
   return (
-    <BasicDialog open={isOpen} modalCloseButton={<CloseButton handleClose={onClose} />}>
+    <BasicDialog
+      open={isOpen}
+      modalCloseButton={<CloseButton handleClose={onClose} sx={{ fontSize: '1.5rem' }} />}
+    >
       <ModalWrapper>
         <ModalHeader>
           <TitleContainer>
@@ -93,14 +109,19 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
             onChange={handleInputChange}
             required
             InputProps={{ style: { fontSize: 16 } }}
-            InputLabelProps={{ style: { fontSize: 16 } }}
+            InputLabelProps={{ style: { fontSize: 15 } }}
           />
           <RadioGroup
             row
             name="scheduleType"
             value={newSchedule.scheduleType}
             onChange={handleInputChange}
-            sx={{ mb: '2rem', fontSize: '1.6rem' }}
+            sx={{
+              mb: '2rem',
+              '& .MuiFormControlLabel-label': {
+                fontSize: 'var(--font-size-large)',
+              },
+            }}
           >
             <FormControlLabel value="company" control={<Radio />} label="회사" />
             <FormControlLabel value="personal" control={<Radio />} label="개인" />
@@ -111,10 +132,23 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
               id="category"
               label="카테고리"
               menuItems={categoryOptions}
-              sx={{ marginBottom: '20px', fontSize: '1.8rem' }}
+              sx={{
+                marginBottom: '20px',
+                fontSize: '1.4rem',
+              }}
+              MenuProps={{
+                PaperProps: {
+                  sx: {
+                    '& .MuiMenuItem-root': {
+                      fontSize: 'var(--font-size-primary)',
+                    },
+                  },
+                },
+              }}
               value={newSchedule.category}
               onChange={handleInputChange}
               name="category"
+              required
             />
           )}
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -123,30 +157,70 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
                 label="시작 날짜"
                 dateType="single"
                 slotProps={{
-                  field: {
+                  layout: {
                     sx: {
                       width: '100%',
-                      fontSize: '1.6rem',
+                      '& .MuiDayCalendar-weekDayLabel': {
+                        fontSize: 'var(--font-size-small)',
+                      },
+                      '& .MuiPickersCalendarHeader-labelContainer': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiPickersDay-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
                     },
+                  },
+                  textField: {
+                    sx: {
+                      '& .MuiInputBase-input': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiFormLabel-root.MuiInputLabel-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
+                    },
+                  },
+                  calendarHeader: {
+                    format: 'YYYY-MM',
                   },
                 }}
                 format="YYYY-MM-DD"
                 name="startDate"
-                value={dayjs(newSchedule.startDate)}
                 onChange={handleDateChange('startDate')}
               />
               <TimePicker
                 label="시작 시간"
                 slotProps={{
-                  field: {
+                  layout: {
                     sx: {
                       width: '100%',
-                      fontSize: '1.6rem',
+                      '& .MuiDialogActions-root .MuiButtonBase-root': {
+                        fontSize: 'var(--font-size-primary)',
+                        margin: '0 auto',
+                        width: '100%',
+                      },
+                      '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
+                        background: 'var(--color-sec)',
+                        color: 'var(--color-pri)',
+                      },
+                      '& .MuiMultiSectionDigitalClockSection-item': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                    },
+                  },
+                  textField: {
+                    sx: {
+                      '& .MuiInputBase-input': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiFormLabel-root.MuiInputLabel-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
                     },
                   },
                 }}
                 ampm={false}
-                value={dayjs(`2023-01-01T${newSchedule.startTime}`)}
                 onChange={handleTimeChange('startTime')}
               />
             </DateTimeContainer>
@@ -155,31 +229,72 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
                 label="종료 날짜"
                 dateType="single"
                 slotProps={{
-                  field: {
+                  layout: {
                     sx: {
                       width: '100%',
-                      fontSize: '1.6rem',
+                      '& .MuiDayCalendar-weekDayLabel': {
+                        fontSize: 'var(--font-size-small)',
+                      },
+                      '& .MuiPickersCalendarHeader-labelContainer': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiPickersDay-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
                     },
+                  },
+                  textField: {
+                    sx: {
+                      '& .MuiInputBase-input': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiFormLabel-root.MuiInputLabel-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
+                    },
+                  },
+                  calendarHeader: {
+                    format: 'YYYY-MM',
                   },
                 }}
                 format="YYYY-MM-DD"
                 name="endDate"
-                value={dayjs(newSchedule.endDate)}
                 onChange={handleDateChange('endDate')}
               />
               <TimePicker
                 label="종료 시간"
                 slotProps={{
-                  field: {
+                  layout: {
                     sx: {
                       width: '100%',
-                      fontSize: '1.6rem',
+                      '& .MuiDialogActions-root .MuiButtonBase-root': {
+                        fontSize: 'var(--font-size-primary)',
+                        margin: '0 auto',
+                        width: '100%',
+                      },
+                      '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
+                        background: 'var(--color-sec)',
+                        color: 'var(--color-pri)',
+                      },
+                      '& .MuiMultiSectionDigitalClockSection-item': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                    },
+                  },
+                  textField: {
+                    sx: {
+                      '& .MuiInputBase-input': {
+                        fontSize: 'var(--font-size-primary)',
+                      },
+                      '& .MuiFormLabel-root.MuiInputLabel-root': {
+                        fontSize: 'var(--font-size-small)',
+                      },
                     },
                   },
                 }}
                 ampm={false}
-                value={dayjs(`2023-01-01T${newSchedule.endTime}`)}
                 onChange={handleTimeChange('endTime')}
+                required
               />
             </DateTimeContainer>
           </LocalizationProvider>
@@ -209,7 +324,7 @@ const ModalHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 2rem;
+  margin-bottom: 4rem;
 `;
 
 const TitleContainer = styled.div`

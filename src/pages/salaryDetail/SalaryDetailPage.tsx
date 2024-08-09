@@ -1,8 +1,6 @@
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
-import jsPDF from 'jspdf';
-import html2canvas from 'html2canvas';
 import { useRef, useEffect, useState } from 'react';
 import { SalaryDataItem } from '../salaryList/api/fetchSalaryInfo';
 import useSalaryDetails from '../salaryList/useSalaryDetails';
@@ -10,6 +8,7 @@ import MoveMonth from './MoveMonth';
 import SalaryCard from './SalaryCard';
 import ListWrapper from './ListWrapper';
 import SelectedModal from './DetailMonthModal';
+import Loading from '../../components/loading/Loading';
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
@@ -55,7 +54,11 @@ export default function SalaryDetailPage() {
   }, [location.state]);
 
   if (isLoading) {
-    return <div>로딩 중...</div>;
+    return (
+      <div>
+        <Loading />
+      </div>
+    );
   }
 
   if (!data || !salaryData) {
@@ -69,8 +72,11 @@ export default function SalaryDetailPage() {
     navigate(returnPath);
   };
 
-  const handleDownload = () => {
+  const handleDownload = async () => {
     if (detailRef.current) {
+      const { default: html2canvas } = await import('html2canvas');
+      const { jsPDF } = await import('jspdf');
+
       html2canvas(detailRef.current)
         .then((canvas) => {
           const imgData = canvas.toDataURL('image/png');
@@ -107,7 +113,7 @@ export default function SalaryDetailPage() {
           <h2>급여명세서</h2>
         </Styled.LSection>
         <Styled.RSection>
-          <SelectedModal day={salaryData.payday} />
+          <SelectedModal month={salaryData.payday} />
           <IconBtn icontype="download" onClick={handleDownload} />
         </Styled.RSection>
       </Styled.Header>
