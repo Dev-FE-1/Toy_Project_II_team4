@@ -1,4 +1,21 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+
+export const ButtonStyled = css`
+  width: 10rem;
+  height: 30px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--color-pri);
+  color: white;
+  font-size: var(--font-size-primary);
+  font-weight: var(--font-weight-bold);
+  cursor: pointer;
+`;
+
+export const ButtonStyledSecondary = css`
+  background-color: var(--color-sec);
+  color: var(--color-pri);
+`;
 
 export const MyPageContainer = styled.div`
   width: calc(102% + 2.6rem);
@@ -13,11 +30,10 @@ export const MyPageContainer = styled.div`
 
   .profile-container {
     text-align: center;
-    height: calc(100vh - 318px);
-    padding: 20px;
+    height: calc(100vh - 278px);
+
     background-color: white;
     border-radius: 10px;
-    margin-top: -50px;
 
     & img {
       width: 100%;
@@ -32,70 +48,68 @@ export const MyPageContainer = styled.div`
     height: 100px;
     border-radius: 50%;
     background-color: #e0e0e0;
-    margin: -50px auto 10px;
-  }
-
-  h2 {
-    margin: 0;
+    margin: 0px auto;
+    transform: translateY(-50px);
   }
 
   .info-container {
-    margin: 28px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 11%;
+
+    margin-left: 14%;
+    margin-top: 30px;
+    margin-bottom: 30px;
+
     & ul {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      gap: 16px;
-      width: 80vw;
+      gap: 17px;
       font-size: var(--font-size-primary);
       font-weight: var(--font-weight-medium);
       padding: 0 2.5rem;
 
       & li {
-        padding: 0.1rem;
         display: flex;
         flex-direction: row;
         justify-content: flex-start;
         text-align: left;
       }
-
-      & li div {
-        width: 150px;
+      & div {
+        margin-left: 22px;
+      }
+      & div.property {
+        width: 70px;
       }
 
       & li div:last-child {
-        width: 215px;
-        margin-left: 10px;
+        width: 170px;
       }
     }
   }
 
   .button-container {
-    margin: 40px 0;
+    width: 100%;
   }
 
+  & button {
+    ${ButtonStyled}
+    background-color: #f3493a;
+    margin: 10px 8px;
+  }
+
+  & .messageWrapper {
+    width: 300px;
+    position: absolute;
+    left: -100%;
+  }
   & .message {
     font-size: var(--font-size-small);
   }
 
-  & button.css-8fb7o1-JoyButton-root {
-    padding: 10px 20px;
-    margin: 0 10px;
-    border: none;
-    width: 120px;
-    height: 30px;
-    font-size: var(--font-size-primary);
-    font-weight: var(--font-weight-medium);
-    border-radius: 5px;
-    cursor: pointer;
-  }
-
   & button.secondary-button {
-    background-color: #f1f1f1;
-    color: #333;
+    background-color: var(--border-sec);
+    color: var(--font-pri);
   }
 `;

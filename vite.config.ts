@@ -15,9 +15,6 @@ export default defineConfig({
           if (id.includes('jspdf')) {
             return 'jspdf';
           }
-          if (id.includes('firebase')) {
-            return 'firebase';
-          }
         },
       },
     },
