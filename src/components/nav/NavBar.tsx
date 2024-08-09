@@ -1,6 +1,6 @@
 import NavButton from './NavButton';
 import * as Styled from './NavBar.style';
-import { navbarItems } from './NavItems';
+import { navbarItems } from './NavLinks';
 import { useNavBar } from '../../hooks/useNavbar';
 
 export default function NavBar() {

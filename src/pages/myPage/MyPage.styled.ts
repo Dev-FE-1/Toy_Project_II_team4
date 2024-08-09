@@ -44,12 +44,13 @@ export const MyPageContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    margin-left: 14%;
+    margin-left: 11%;
     & ul {
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
       gap: 16px;
+      width: 80vw;
       font-size: var(--font-size-primary);
       font-weight: var(--font-weight-medium);
       padding: 0 2.5rem;
@@ -62,12 +63,8 @@ export const MyPageContainer = styled.div`
         text-align: left;
       }
 
-      & .property {
-        width: 70px;
-      }
-
       & li div {
-        width: 60px;
+        width: 150px;
       }
 
       & li div:last-child {

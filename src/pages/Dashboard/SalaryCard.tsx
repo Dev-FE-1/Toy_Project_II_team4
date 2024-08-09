@@ -12,7 +12,7 @@ export default function SalaryCard() {
 
   function handleApplicationBtn(id: number) {
     if (salaryList.find((item) => item.id === id)) {
-      navigate(`/salary-detail/${id}`, { state: { from: 'home' } });
+      navigate(`/payments/${id}`, { state: { from: 'home' } });
     } else {
       console.error('급여 명세서가 없습니다.');
     }
