@@ -51,22 +51,22 @@ export function MyPageView({
               <div>{profile.email}</div>
             </li>
             <li>
-              <div>휴대폰 번호</div>
+              <div className="property">휴대폰 번호</div>
               <div>{profile.phone}</div>
             </li>
             <li>
-              <div>직급</div>
+              <div className="property">직급</div>
               <div>{profile.position}</div>
             </li>
             <li>
-              <div>담당</div>
+              <div className="property">담당</div>
               <div>{profile.responsibility}</div>
             </li>
           </ul>
         </div>
         <div className="button-container">
           <Btn label="프로필 수정" onClick={handleEdit} className="secondary-button"></Btn>
-          <Btn onClick={handleLogout} label="로그 아웃" />
+          <Btn onClick={handleLogout} label="로그아웃" />
         </div>
       </div>
     </Styled.MyPageContainer>

@@ -5,5 +5,5 @@ export const ROUTE_PATHS = {
   ADJUST_SALARY: '/salary-adjustment',
   CALENDAR: '/calendar',
   MY_PAGE: '/my-page',
-  SALARY_DETAIL: '/salary-detail/:id',
+  SALARY_DETAIL: '/payments/:id',
 } as const;
