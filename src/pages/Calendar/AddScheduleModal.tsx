@@ -14,6 +14,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { SelectChangeEvent } from '@mui/material/Select';
+import { CloseButton as XCloseButton } from '../../components/modal/CloseButton';
 
 interface AddScheduleModalProps {
   isOpen: boolean;
@@ -29,6 +30,7 @@ const categoryOptions = [
 
 export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JSX.Element {
   const dispatch = useDispatch<AppDispatch>();
+
   const [newSchedule, setNewSchedule] = useState<ISchedule>({
     dateId: Date.now(),
     category: '공연',
@@ -81,23 +83,12 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
   };
 
   return (
-    <BasicDialog
-      open={isOpen}
-      modalCloseButton={<CloseButton handleClose={onClose} sx={{ fontSize: '1.5rem' }} />}
-    >
+    <BasicDialog open={isOpen} modalCloseButton={<XCloseButton handleClose={onClose} />}>
       <ModalWrapper>
         <ModalHeader>
           <TitleContainer>
-            <CloseButton onClick={onClose}>&times;</CloseButton>
             <Heading>일정 추가</Heading>
           </TitleContainer>
-          <Btn
-            type="button"
-            label="추가"
-            btnsize="sm"
-            sx={{ fontSize: '1.6rem' }}
-            onClick={handleSubmit}
-          />
         </ModalHeader>
         <Form onSubmit={handleSubmit}>
           <TextField
@@ -294,7 +285,6 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
                 }}
                 ampm={false}
                 onChange={handleTimeChange('endTime')}
-                required
               />
             </DateTimeContainer>
           </LocalizationProvider>
@@ -311,6 +301,22 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
             InputLabelProps={{ style: { fontSize: 16 } }}
           />
         </Form>
+        <div className="modal-btnArea">
+          <Btn
+            label="취소"
+            btnsize="sm"
+            sx={{ fontSize: '1.5rem', mr: '1rem' }}
+            btntype="outlined"
+            onClick={() => onClose()}
+          />
+          <Btn
+            type="button"
+            label="추가"
+            sx={{ fontSize: '1.6rem', width: '18rem' }}
+            btnsize="md"
+            onClick={handleSubmit}
+          />
+        </div>
       </ModalWrapper>
     </BasicDialog>
   );
@@ -318,6 +324,11 @@ export function AddScheduleModal({ isOpen, onClose }: AddScheduleModalProps): JS
 
 const ModalWrapper = styled.div`
   font-size: 1.6rem;
+  .modal-btnArea {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
 `;
 
 const ModalHeader = styled.div`
@@ -341,10 +352,6 @@ const DateTimeContainer = styled.div`
   > * {
     flex: 1;
   }
-`;
-const CloseButton = styled.button`
-  font-size: var(--font-size-xlarge);
-  cursor: pointer;
 `;
 
 const Heading = styled.h2`

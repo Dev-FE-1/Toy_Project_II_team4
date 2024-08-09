@@ -7,7 +7,7 @@ import { getFormatDate } from '../../utils/FormatDate';
 
 export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
   const dispatch = useDispatch<AppDispatch>();
-  const schedules = useSelector<RootState, ISchedule[]>((state) => state.schedules.schedules);
+  const { schedules, status } = useSelector((state: RootState) => state.schedules);
 
   useEffect(() => {
     void dispatch(fetchSchedules());
@@ -28,6 +28,28 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
     )
     .sort((a, b) => a.startTime.localeCompare(b.startTime))
     .slice(0, 4);
+
+  if (status === 'loading' || daySchedules.length === 0) {
+    return (
+      <DayWrapper>
+        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
+        <ScheduleWrapper>
+          <ScheduleBox>일정 불러오는 중...</ScheduleBox>
+        </ScheduleWrapper>
+      </DayWrapper>
+    );
+  }
+
+  if (status === 'failed') {
+    return (
+      <DayWrapper>
+        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
+        <ScheduleWrapper>
+          <ScheduleBox>일정 불러오기 실패</ScheduleBox>
+        </ScheduleWrapper>
+      </DayWrapper>
+    );
+  }
 
   return (
     <DayWrapper>
