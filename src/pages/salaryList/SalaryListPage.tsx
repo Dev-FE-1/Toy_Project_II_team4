@@ -41,7 +41,7 @@ export default function SalaryListPage() {
 
   function handleApplicationBtn(id: number) {
     if (salaryList.find((item) => item.id === id)) {
-      navigate(`/salary-detail/${id}`, { state: { from: 'payments' } });
+      navigate(`/payments/${id}`, { state: { from: 'payments' } });
     } else {
       console.error('급여 명세서가 없습니다.');
     }
