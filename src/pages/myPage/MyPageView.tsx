@@ -1,4 +1,3 @@
-import Btn from '../../components/button/Button';
 import * as Styled from './MyPage.styled';
 import { EditProfile } from './EditProfile';
 
