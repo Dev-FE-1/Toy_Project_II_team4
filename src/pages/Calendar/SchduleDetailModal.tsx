@@ -6,7 +6,7 @@ import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
 import IconBtn from '../../components/iconButton/IconButton';
 import styled from 'styled-components';
-import { TextField, RadioGroup, FormControlLabel, Radio } from '@mui/material';
+import { TextField, RadioGroup, FormControlLabel, Radio, SelectChangeEvent } from '@mui/material';
 import { Form } from 'react-router-dom';
 import SelectBox from '../../components/selectBox/SelectBox';
 import SDataPicker from '../../components/datepicker/DatePicker';
@@ -32,7 +32,9 @@ export function ScheduleDetailModal({ schedule, onClose }: ScheduleDetailModalPr
   const [editedSchedule, setEditedSchedule] = useState<ISchedule>(schedule);
 
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+    e:
+      | React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+      | SelectChangeEvent<string | number | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setEditedSchedule((prev) => ({ ...prev, [name]: value }));
