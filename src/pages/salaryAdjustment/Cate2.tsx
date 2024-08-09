@@ -90,9 +90,11 @@ function Cate2() {
                     background: 'var(--color-pri)',
                     color: 'var(--color-white)',
                   },
-                  '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
-                    background: 'var(--color-sec)',
-                    color: 'var(--color-pri)',
+                  '@media (max-width: 600px)': {
+                    '& .MuiDialogActions-root .MuiButtonBase-root:first-of-type': {
+                      background: 'var(--color-sec)',
+                      color: 'var(--color-pri)',
+                    },
                   },
                 },
               },
@@ -150,9 +152,11 @@ function Cate2() {
                     background: 'var(--color-pri)',
                     color: 'var(--color-white)',
                   },
-                  '& .MuiDialogActions-root .MuiButtonBase-root:first-child': {
-                    background: 'var(--color-sec)',
-                    color: 'var(--color-pri)',
+                  '@media (max-width: 600px)': {
+                    '& .MuiDialogActions-root .MuiButtonBase-root:first-of-type': {
+                      background: 'var(--color-sec)',
+                      color: 'var(--color-pri)',
+                    },
                   },
                 },
               },

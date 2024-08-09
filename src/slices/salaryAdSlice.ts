@@ -84,7 +84,9 @@ export const addSalaryAdData = createAsyncThunk(
   async (newState: Data) => {
     const snapshot = await get(ref(firebaseDB, PATH));
     const state = snapshot.val() as Data[];
-    newState.id = String(state.length);
+    console.log(state);
+    console.log(state[state.length - 1]);
+    newState.id = String(Number(state[state.length - 1].id) + 1);
     const updated = [...state, newState];
     try {
       await set(dbRef, updated);
