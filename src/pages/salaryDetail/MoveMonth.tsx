@@ -17,14 +17,14 @@ export default function MoveMonth({ date, id, salaryData }: useMonthNavigationPr
   const handlePrevMonth = () => {
     if (!prevDisabled) {
       setCurrentMonth(currentMonth.subtract(1, 'month'));
-      navigate(`/salary-detail/${id - 1}`);
+      navigate(`/payments/${id - 1}`);
     }
   };
 
   const handleNextMonth = () => {
     if (!nextDisabled) {
       setCurrentMonth(currentMonth.add(1, 'month'));
-      navigate(`/salary-detail/${id + 1}`);
+      navigate(`/payments/${id + 1}`);
     }
   };
 
