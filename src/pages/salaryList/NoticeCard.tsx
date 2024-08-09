@@ -3,6 +3,8 @@ import Btn from '../../components/button/Button';
 import { SalaryDataItem } from './api/fetchSalaryInfo';
 import dayjs from 'dayjs';
 
+import useSalaryDetails from './useSalaryDetails';
+
 type noticeData = {
   salaryList?: Array<SalaryDataItem>;
   button?: boolean;
@@ -16,11 +18,13 @@ export default function NoticeCard({
   label,
   handleBtn,
 }: noticeData) {
-  if (salaryList.length === 0) {
+  const { isLoading } = useSalaryDetails();
+
+  if (salaryList.length === 0 || isLoading) {
     return (
       <Styled.SalaryCardBox>
         <h2>급여명세서</h2>
-        <p>급여 명세서가 없습니다.</p>
+        <p>로딩 중입니다.</p>
       </Styled.SalaryCardBox>
     );
   }
