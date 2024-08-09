@@ -41,9 +41,11 @@ export function MyPageView({
             src="https://cdn.imweb.me/upload/S20201005f584d937f796b/fd54896845aa4.png"
             alt="프로필 이미지"
           />
+          <h2>{profile.name}</h2>
+          <div className="messageWrapper">
+            <span className="message">{profile.message}</span>
+          </div>
         </div>
-        <h2>{profile.name}</h2>
-        <span className="message">{profile.message}</span>
         <div className="info-container">
           <ul className="list">
             <li>
@@ -51,22 +53,31 @@ export function MyPageView({
               <div>{profile.email}</div>
             </li>
             <li>
-              <div>휴대폰 번호</div>
+              <div className="property">휴대폰 번호</div>
               <div>{profile.phone}</div>
             </li>
             <li>
-              <div>직급</div>
+              <div className="property">직급</div>
               <div>{profile.position}</div>
             </li>
             <li>
-              <div>담당</div>
+              <div className="property">담당</div>
               <div>{profile.responsibility}</div>
             </li>
           </ul>
         </div>
         <div className="button-container">
-          <Btn label="프로필 수정" onClick={handleEdit} className="secondary-button"></Btn>
-          <Btn onClick={handleLogout} label="로그 아웃" />
+          <button
+            type="button"
+            onClick={handleEdit}
+            className="
+            secondary-button button"
+          >
+            프로필 수정
+          </button>
+          <button onClick={handleLogout} className="button">
+            로그아웃
+          </button>
         </div>
       </div>
     </Styled.MyPageContainer>

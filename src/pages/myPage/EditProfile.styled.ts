@@ -1,13 +1,23 @@
 import styled from 'styled-components';
+import { ButtonStyled } from './MyPage.styled';
 
 export const EditProfileContainer = styled.div`
   max-width: 600px;
-  margin: 0 auto;
+  margin: 100px auto;
   padding: 20px;
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
+  & .formWrapper {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    transform: translateX(-10px);
+  }
   h2 {
     text-align: center;
     color: #333;
@@ -48,13 +58,14 @@ export const EditProfileContainer = styled.div`
     display: flex;
     justify-content: center;
     margin-top: 2px;
+    margin-left: 30px;
 
     button {
+      ${ButtonStyled}
+      width: 18rem;
       padding: 10px 8px;
       margin: 0px 5px;
       border: none;
-      border-radius: 4px;
-      font-size: 16px;
       cursor: pointer;
       transition: background-color 0.3s;
 
@@ -68,8 +79,9 @@ export const EditProfileContainer = styled.div`
       }
 
       &.secondary-button {
-        background-color: #f1f1f1;
-        color: #333;
+        background-color: var(--color-sec);
+        color: var(--color-pri);
+        width: 7.3rem;
 
         &:hover {
           background-color: #e0e0e0;
