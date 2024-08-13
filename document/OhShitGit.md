@@ -196,3 +196,25 @@ git rebase -i --root
 4. **rebase 완료하기**
 
 새로운 커밋 메시지를 작성하고 텍스트 에디터를 종료하면 rebase가 완료됩니다. 이제 `git log`를 실행하면 선택한 이전 커밋들이 하나의 커밋으로 합쳐진 것을 확인할 수 있습니다.
+
+
+## 코드 리뷰용 브랜치 만들고 PR하는 방법
+전체 커밋이력이 다 나오는 PR 내역 만드는 방법
+
+### 조건
+터미널  환경이 git bash, linux, mac 을 사용해야함.
+
+1. 첫번째 커밋 해시 찾기
+
+git switch main
+git log --reverse --oneline | head -1
+
+2. 커밋해시로 브랜치 생성
+
+git switch -c <브랜치명> <첫번째커밋해시>
+
+3. 생성된 브랜치를 깃헙(원격)에 푸시
+
+git push -u origin <브랜치명>
+
+4. <브랜치명>에 main브랜치를 merge하는 PR을 하기
