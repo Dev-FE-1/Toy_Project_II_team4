@@ -12,7 +12,7 @@ type ButtonProps = MuiButtonProps & {
   label: React.ReactNode;
   btntype?: string;
   btnsize?: string;
-  round?: string;
+  round?: boolean;
   disabled?: boolean;
   children?: React.ReactNode;
 };
