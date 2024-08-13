@@ -3,10 +3,9 @@
 **[작업 내용을 간략히 적어주세요]**
 
 ## 🤖 codeRabbit AI 코드 리뷰 유무
-**AI에게 코드리뷰를 받고 싶지 않다면, 
-아래 코드 `🐰@coderabbitai: ignore`를 한 줄을 전부 다 지워주시면 됩니다.**
+**아래 코드 🤖 이모지를 지우면 AI 코드 리뷰를 무시할 수 있습니다.**
 
-🐰@coderabbitai: ignore
+@coderabbitai: i🤖gnore
 
 ## 📋 작업 내용
 
