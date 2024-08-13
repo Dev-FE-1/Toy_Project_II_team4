@@ -3,10 +3,12 @@ import Btn from '../../components/button/Button';
 import * as Styled from './SalaryList.style';
 import { useNavigate } from 'react-router-dom';
 import NoticeCard from './NoticeCard';
-import useSalaryDetails from './useSalaryDetails';
 import Heading from '../../components/Heading/Heading';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Loading from '../../components/loading/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSalaryDetails } from '../../slices/salaryDtSlice';
+import { RootState, AppDispatch } from '../../store/store';
 
 const years = [
   { value: '2022', text: '2022' },
@@ -18,16 +20,24 @@ export default function SalaryListPage() {
   const navigate = useNavigate();
   const userId = 'sajo1234567';
   const [selectedYear, setSelectedYear] = useState<number>(2024);
-  const { data, error, isLoading } = useSalaryDetails();
+  const dispatch: AppDispatch = useDispatch();
+  const { salaryDetails, status, error } = useSelector((state: RootState) => state.salaryDt);
 
-  if (isLoading) {
+  useEffect(() => {
+    if (status === 'idle') {
+      void dispatch(fetchSalaryDetails());
+    }
+  }, [dispatch, status]);
+
+  if (status === 'loading') {
     return <Loading />;
   }
-  if (error) {
-    return <div>Error: {error.message}</div>;
+
+  if (status === 'failed') {
+    return <div>Error:{error}</div>;
   }
 
-  const salaryList = data?.salaryDetails[userId] || [];
+  const salaryList = salaryDetails[userId] || [];
 
   //목록에 활용되는 데이터
   const filteredItem = salaryList.filter((item) => +item.payday.slice(0, 4) === +selectedYear);
@@ -37,7 +47,6 @@ export default function SalaryListPage() {
   const latestSalaryList = [...salaryList].sort(
     (a, b) => new Date(b.payday).getTime() - new Date(a.payday).getTime()
   );
-  const latestData = latestSalaryList.length > 0 ? [latestSalaryList[0]] : [];
 
   function handleApplicationBtn(id: number) {
     if (salaryList.find((item) => item.id === id)) {
@@ -50,7 +59,7 @@ export default function SalaryListPage() {
   return (
     <Styled.Salary>
       <Heading title="급여정산" />
-      <NoticeCard salaryList={latestData} />
+      <NoticeCard salaryList={latestSalaryList} />
       <Styled.YearSelect>
         <SelectBox
           labelId="SalaryYear"
@@ -89,9 +98,9 @@ export default function SalaryListPage() {
           </Styled.List>
           <Styled.Btn>
             {el.state === true ? (
-              <Btn round="true" btntype="outlined" size="lg" label="신청가능" />
+              <Btn round={true} btntype="outlined" size="lg" label="신청가능" />
             ) : (
-              <Btn round="true" disabled size="lg" label="지급완료" />
+              <Btn round={true} disabled size="lg" label="지급완료" />
             )}
           </Styled.Btn>
         </Styled.ListCardBox>

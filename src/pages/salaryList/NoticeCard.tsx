@@ -1,26 +1,32 @@
 import * as Styled from './NoticeCard.style';
 import Btn from '../../components/button/Button';
-import { SalaryDataItem } from './api/fetchSalaryInfo';
 import dayjs from 'dayjs';
-
-import useSalaryDetails from './useSalaryDetails';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { fetchSalaryDetails, SalaryDataItem } from '../../slices/salaryDtSlice';
+import { useEffect } from 'react';
 
 type noticeData = {
-  salaryList?: Array<SalaryDataItem>;
+  salaryList?: SalaryDataItem[];
   button?: boolean;
   label?: React.ReactNode;
   handleBtn?: (id: number) => void;
 };
 
-export default function NoticeCard({
-  salaryList = [],
-  button = false,
-  label,
-  handleBtn,
-}: noticeData) {
-  const { isLoading } = useSalaryDetails();
+export default function NoticeCard({ button = false, label, handleBtn }: noticeData) {
+  const userId = 'sajo1234567';
+  const dispatch: AppDispatch = useDispatch();
+  const { salaryDetails, status } = useSelector((state: RootState) => state.salaryDt);
 
-  if (salaryList.length === 0 || isLoading) {
+  useEffect(() => {
+    if (status === 'idle') {
+      void dispatch(fetchSalaryDetails());
+    }
+  }, [dispatch, status]);
+
+  const salaryList = salaryDetails[userId] || [];
+
+  if (status === 'loading') {
     return (
       <Styled.SalaryCardBox>
         <h2>급여명세서</h2>
@@ -29,7 +35,17 @@ export default function NoticeCard({
     );
   }
 
-  const firstPayData = salaryList[0];
+  const firstPayData = salaryList.at(-1);
+
+  if (!firstPayData) {
+    return (
+      <Styled.SalaryCardBox>
+        <h2>급여명세서</h2>
+        <p>급여 명세서가 없습니다.</p>
+      </Styled.SalaryCardBox>
+    );
+  }
+
   const originDate = dayjs(firstPayData.payday, 'YYYY.MM.DD');
   const finalDate = originDate.subtract(1, 'month').format('MM월 ');
   const finalDay = originDate.subtract(2, 'day').format('DD일');

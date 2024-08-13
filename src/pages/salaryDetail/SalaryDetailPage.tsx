@@ -2,13 +2,14 @@ import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import IconBtn from '../../components/iconButton/IconButton';
 import * as Styled from './SalaryDetail.style';
 import { useRef, useEffect, useState } from 'react';
-import { SalaryDataItem } from '../salaryList/api/fetchSalaryInfo';
-import useSalaryDetails from '../salaryList/useSalaryDetails';
 import MoveMonth from './MoveMonth';
 import SalaryCard from './SalaryCard';
 import ListWrapper from './ListWrapper';
 import SelectedModal from './DetailMonthModal';
 import Loading from '../../components/loading/Loading';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState, AppDispatch } from '../../store/store';
+import { fetchSalaryDetails, SalaryDataItem } from '../../slices/salaryDtSlice';
 
 export default function SalaryDetailPage() {
   const navigate = useNavigate();
@@ -16,14 +17,23 @@ export default function SalaryDetailPage() {
   const location = useLocation();
   const userId = 'sajo1234567';
 
-  const { data, error, isLoading } = useSalaryDetails();
+  const dispatch: AppDispatch = useDispatch();
+  const { salaryDetails, employees, status, error } = useSelector(
+    (state: RootState) => state.salaryDt
+  );
+
   const detailRef = useRef<HTMLDivElement>(null);
   const [salaryData, setSalaryData] = useState<SalaryDataItem | null>(null);
   const [returnPath, setReturnPath] = useState<string>('/'); // Default path
 
   useEffect(() => {
-    if (data && id) {
-      const salaryDetails = data.salaryDetails;
+    if (status === 'idle') {
+      void dispatch(fetchSalaryDetails());
+    }
+  }, [dispatch, status]);
+
+  useEffect(() => {
+    if (id && salaryDetails) {
       const fetchedSalaryData = salaryDetails[userId]?.find(
         (item: SalaryDataItem) => item.id === parseInt(id)
       );
@@ -34,11 +44,11 @@ export default function SalaryDetailPage() {
         setSalaryData(fetchedSalaryData);
       }
     }
-  }, [data, id, navigate, userId]);
+  }, [id, salaryDetails, navigate, userId]);
 
   useEffect(() => {
     if (error) {
-      console.error('Error fetching salary details:', error.message);
+      console.error('Error fetching salary details:', error);
     }
   }, [error]);
 
@@ -53,24 +63,14 @@ export default function SalaryDetailPage() {
     }
   }, [location.state]);
 
-  if (isLoading) {
-    return (
-      <div>
-        <Loading />
-      </div>
-    );
-  }
-
-  if (!data || !salaryData) {
-    return null;
-  }
-
-  const employees = data.employees;
   const employeeProfile = employees[userId]?.profile || {};
-
   const handleCloseButton = () => {
     navigate(returnPath);
   };
+
+  if (!salaryData) {
+    return <div>급여 데이터를 불러오는 중입니다.</div>;
+  }
 
   const handleDownload = async () => {
     if (detailRef.current) {
@@ -105,6 +105,14 @@ export default function SalaryDetailPage() {
     }
   };
 
+  if (status === 'loading') {
+    return <Loading />;
+  }
+
+  if (status === 'failed') {
+    return <div>Error:{error}</div>;
+  }
+
   return (
     <>
       <Styled.Header>
@@ -114,16 +122,12 @@ export default function SalaryDetailPage() {
         </Styled.LSection>
         <Styled.RSection>
           <SelectedModal month={salaryData.payday} />
-          <IconBtn icontype="download" onClick={handleDownload} />
+          <IconBtn icontype="download" onClick={void handleDownload} />
         </Styled.RSection>
       </Styled.Header>
       <Styled.Listline />
       <div key={salaryData.id} ref={detailRef}>
-        <MoveMonth
-          id={salaryData.id}
-          date={salaryData.payday}
-          salaryData={data.salaryDetails[userId]}
-        />
+        <MoveMonth id={salaryData.id} date={salaryData.payday} salaryData={salaryDetails[userId]} />
         <SalaryCard
           id={salaryData.id}
           name={employeeProfile.name || '이름 없음'}
