@@ -31,30 +31,6 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_TOY_PROJECT2_TEAM4_FASTCOM4 }}
-          expires: 10d
+          expires: 1d
           channelId: preview_name
           projectId: toy-project2-team4-fastcom4
-      - name: Comment PR with Preview URL
-        if: steps.hosting_deploy.outcome == 'success'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `🚀 Preview available at: https://${context.payload.hosting_deploy.outputs.holdingPageUrl}`
-            })
-      - name: Comment PR with Deployment Failure
-        if: steps.hosting_deploy.outcome == 'failure'
-        uses: actions/github-script@v6
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `❌ Deployment failed. Please check the workflow logs for more information.`
-            })
