@@ -1,6 +1,6 @@
 import BasicDialog from '../../components/modal/BasicModal';
 import Btn from '../../components/button/Button';
-import { CloseButton } from '../../components/modal/CloseButton';
+import { CloseButton } from '../../components/button/CloseButton';
 import { useBasicModal } from '../../hooks/useBasicModal';
 import Heading from '../../components/Heading/Heading';
 import FormWrap from '../salaryAdjustment/FormWrap';

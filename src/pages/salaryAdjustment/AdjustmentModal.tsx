@@ -1,4 +1,4 @@
-import { CloseButton } from '../../components/modal/CloseButton';
+import { CloseButton } from '../../components/button/CloseButton';
 import Heading from '../../components/Heading/Heading';
 import Btn from '../../components/button/Button';
 import FormWrap from './FormWrap';

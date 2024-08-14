@@ -14,7 +14,7 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import dayjs from 'dayjs';
 import { SelectChangeEvent } from '@mui/material/Select';
-import { CloseButton as XCloseButton } from '../../components/modal/CloseButton';
+import { CloseButton as XCloseButton } from '../../components/button/CloseButton';
 
 interface AddScheduleModalProps {
   isOpen: boolean;
