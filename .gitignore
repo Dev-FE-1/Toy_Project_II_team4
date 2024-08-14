@@ -27,3 +27,6 @@ dist-ssr
 premissions.json
 stats.html
 *storybook.log
+
+
+.tmp

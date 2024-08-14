@@ -24,8 +24,7 @@ export const LoginPageContainer = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    font-weight: 900;
-
+    font-weight: var('--font-weight-bold');
     & h3 {
       font-weight: 700;
     }
