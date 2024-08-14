@@ -1,8 +1,14 @@
 import { ChangeEvent, FormEvent, useState } from 'react';
 import Btn from '../../components/button/Button';
 import * as Styled from './EditProfile.styled';
-import { ProfileType } from './MyPageView';
-
+export type ProfileType = {
+  name: string;
+  email: string;
+  phone: string;
+  position: string;
+  responsibility: string;
+  message: string;
+};
 export interface EditProfileProps {
   initialProfile: ProfileType;
   onSave: (profile: {
@@ -27,8 +33,7 @@ export function EditProfile({ initialProfile, onSave, onCancel }: EditProfilePro
   // TODO handleSubmit 함수 내에서 입력값 유효성 검사 및 오류 처리를 구현하세요.
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
-
-    setProfile((prev) => ({ ...prev, [name]: value }));
+    setProfile((prev: ProfileType) => ({ ...prev, [name]: value }));
   };
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();

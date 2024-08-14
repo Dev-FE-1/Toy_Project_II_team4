@@ -16,6 +16,7 @@ export default function AppLayout() {
     auth.onAuthStateChanged((user) => {
       if (!user) {
         navigate('/login');
+        setIsLogin(false);
       } else {
         setIsLogin(true);
       }
