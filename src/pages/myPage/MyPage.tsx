@@ -1,5 +1,5 @@
 import { MyPageView } from './MyPageView';
-import { useMyPage } from './useMyPage';
+import { useMyPage } from '../../hooks/useMyPage';
 
 export function MyPage() {
   const { handleLogout, isEditing, profile, handleEdit, handleCancel, handleSave } = useMyPage();

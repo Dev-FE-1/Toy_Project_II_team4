@@ -1,16 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { filterDaySchedules } from './Day';
-import { ISchedule } from './CalendarCard';
-
-const isDayScheduleEmpty = ({
-  schedules,
-  day,
-}: {
-  schedules: ISchedule[];
-  day: 'today' | 'tomorrow';
-}) => filterDaySchedules({ schedules, day }).length === 0;
+import { RootState } from '../store/store';
+import { isDayScheduleEmpty } from '../pages/Dashboard/Day';
 
 export const useErrorMessage = ({
   day,

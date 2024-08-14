@@ -4,7 +4,15 @@ import { RootState, AppDispatch } from '../../store/store';
 import { fetchSchedules, ISchedule } from '../../slices/scheduleSlice';
 import { useEffect } from 'react';
 import { getFormatDate } from '../../utils/FormatDate';
-import { useErrorMessage } from './useErrorMessage';
+import { useErrorMessage } from '../../hooks/useErrorMessage';
+
+export const isDayScheduleEmpty = ({
+  schedules,
+  day,
+}: {
+  schedules: ISchedule[];
+  day: 'today' | 'tomorrow';
+}) => filterDaySchedules({ schedules, day }).length === 0;
 
 // Day 컴포넌트의 props
 export interface DayProps {
