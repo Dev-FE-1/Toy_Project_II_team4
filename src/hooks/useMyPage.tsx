@@ -1,6 +1,6 @@
 import { useLogout } from './useLogout';
 import { useState } from 'react';
-import { ProfileType } from '../pages/myPage/MyPageView';
+import { ProfileType } from '../pages/myPage/EditProfile';
 
 export function useMyPage() {
   const { handleLogout } = useLogout();
