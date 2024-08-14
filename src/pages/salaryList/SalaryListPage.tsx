@@ -7,7 +7,7 @@ import Heading from '../../components/Heading/Heading';
 import { useEffect, useState } from 'react';
 import Loading from '../../components/loading/Loading';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchSalaryDetails } from '../../slices/salaryDtSlice';
+import { fetchSalaryDetails, SalaryDataItem } from '../../slices/salaryDtSlice';
 import { RootState, AppDispatch } from '../../store/store';
 
 const years = [
@@ -20,6 +20,8 @@ export default function SalaryListPage() {
   const navigate = useNavigate();
   const userId = 'sajo1234567';
   const [selectedYear, setSelectedYear] = useState<number>(2024);
+  const [sortedData, setSortedData] = useState<SalaryDataItem[]>([]);
+  const [filteredData, setFilteredData] = useState<SalaryDataItem[]>([]);
   const dispatch: AppDispatch = useDispatch();
   const { salaryDetails, status, error } = useSelector((state: RootState) => state.salaryDt);
 
@@ -29,6 +31,15 @@ export default function SalaryListPage() {
     }
   }, [dispatch, status]);
 
+  //목록에 활용되는 데이터
+  const salaryList = salaryDetails[userId] || [];
+  useEffect(() => {
+    const filteredItem = salaryList.filter((item) => +item.payday.slice(0, 4) === +selectedYear);
+    const sorted = [...filteredItem].sort((a, b) => b.id - a.id);
+    setFilteredData(filteredItem);
+    setSortedData(sorted);
+  }, [salaryDetails, selectedYear, userId]);
+
   if (status === 'loading') {
     return <Loading />;
   }
@@ -36,17 +47,6 @@ export default function SalaryListPage() {
   if (status === 'failed') {
     return <div>Error:{error}</div>;
   }
-
-  const salaryList = salaryDetails[userId] || [];
-
-  //목록에 활용되는 데이터
-  const filteredItem = salaryList.filter((item) => +item.payday.slice(0, 4) === +selectedYear);
-  const sortedData = [...filteredItem].sort((a, b) => b.id - a.id);
-
-  //카드에 활용되는 데이터
-  const latestSalaryList = [...salaryList].sort(
-    (a, b) => new Date(b.payday).getTime() - new Date(a.payday).getTime()
-  );
 
   function handleApplicationBtn(id: number) {
     if (salaryList.find((item) => item.id === id)) {
@@ -59,7 +59,7 @@ export default function SalaryListPage() {
   return (
     <Styled.Salary>
       <Heading title="급여정산" />
-      <NoticeCard salaryList={latestSalaryList} />
+      <NoticeCard salaryList={sortedData} />
       <Styled.YearSelect>
         <SelectBox
           labelId="SalaryYear"
