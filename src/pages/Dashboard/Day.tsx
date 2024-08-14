@@ -4,23 +4,33 @@ import { RootState, AppDispatch } from '../../store/store';
 import { fetchSchedules, ISchedule } from '../../slices/scheduleSlice';
 import { useEffect } from 'react';
 import { getFormatDate } from '../../utils/FormatDate';
+import { useErrorMessage } from './useErrorMessage';
 
-export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
-  const dispatch = useDispatch<AppDispatch>();
-  const { schedules, status } = useSelector((state: RootState) => state.schedules);
+// Day 컴포넌트의 props
+export interface DayProps {
+  day: 'today' | 'tomorrow';
+}
 
-  useEffect(() => {
-    void dispatch(fetchSchedules());
-  }, [dispatch]);
-
+// 해당 날짜의 Date 객체 반환
+// 오늘 날짜 또는 내일 날짜
+export const getTargetDate = ({ day }: DayProps) => {
   const date = new Date();
-  const targetDate = day === 'today' ? date : new Date(date.setDate(date.getDate() + 1));
-  const formattedDate = getFormatDate(targetDate);
+  return day === 'today' ? date : new Date(date.setDate(date.getDate() + 1));
+};
 
-  // 해당 날짜의 스케줄 필터
-  // (시작 날짜<현재 날짜<종료 날짜)
-  // 총 4개의 일정까지 표시
-  const daySchedules = schedules
+// 해당 날짜의 스케줄 필터
+// (시작 날짜<현재 날짜<종료 날짜)
+// 총 4개의 일정까지 표시
+export const filterDaySchedules = ({
+  schedules,
+  day,
+}: {
+  schedules: ISchedule[];
+  day: 'today' | 'tomorrow';
+}) => {
+  const targetDate = getTargetDate({ day });
+  const formattedDate = getFormatDate(targetDate);
+  return schedules
     .filter(
       (schedule: ISchedule) =>
         schedule.startDate <= formattedDate.dateString &&
@@ -28,33 +38,25 @@ export default function Day({ day }: { day: 'today' | 'tomorrow' }) {
     )
     .sort((a, b) => a.startTime.localeCompare(b.startTime))
     .slice(0, 4);
+};
 
-  if (status === 'loading' || daySchedules.length === 0) {
-    return (
-      <DayWrapper>
-        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
-        <ScheduleWrapper>
-          <ScheduleBox>일정 불러오는 중...</ScheduleBox>
-        </ScheduleWrapper>
-      </DayWrapper>
-    );
-  }
+export default function Day({ day }: DayProps) {
+  const dispatch = useDispatch<AppDispatch>();
+  const { schedules } = useSelector((state: RootState) => state.schedules);
 
-  if (status === 'failed') {
-    return (
-      <DayWrapper>
-        <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
-        <ScheduleWrapper>
-          <ScheduleBox>일정 불러오기 실패</ScheduleBox>
-        </ScheduleWrapper>
-      </DayWrapper>
-    );
-  }
+  useEffect(() => {
+    void dispatch(fetchSchedules());
+  }, [dispatch]);
+
+  const daySchedules = filterDaySchedules({ schedules, day });
+  const { message } = useErrorMessage({ day });
+  const formattedDayOfWeek = getFormatDate(getTargetDate({ day })).dayAndWeekday;
 
   return (
     <DayWrapper>
-      <DayText>오늘 일정 ({getFormatDate(targetDate).dayAndWeekday})</DayText>
+      <DayText>오늘 일정 {formattedDayOfWeek}</DayText>
       <ScheduleWrapper>
+        {<ScheduleBox>{message}</ScheduleBox>}
         {daySchedules.map((schedule) => (
           <ScheduleBox
             key={schedule.dateId}
