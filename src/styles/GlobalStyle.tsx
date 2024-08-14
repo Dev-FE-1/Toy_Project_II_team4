@@ -1,6 +1,6 @@
 import './reset.css';
 import { GlobalStyles } from '@mui/material';
-import './fonts.css';
+// import './fonts.css';
 
 export default function GlobalStyle() {
   return (
@@ -9,9 +9,11 @@ export default function GlobalStyle() {
         ':root': {
           /* Font system */
           '--font-family-primary': "'SUIT'",
+          '--font-weight-extra-bold': '800',
           '--font-weight-bold': '700',
           '--font-weight-semibold': '600',
           '--font-weight-medium': '500',
+          '--font-weight-regular': '400',
 
           /* Color system */
           '--color-pri': '#3282F6',
@@ -49,7 +51,7 @@ export default function GlobalStyle() {
           backgroundColor: 'var(--font-pri)',
         },
         body: {
-          fontWeight: 400,
+          fontWeight: 'var(--font-weight-regular)',
           maxWidth: '568px',
           margin: '0 auto',
           // backgroundColor: '#ecf5fe',

@@ -3,7 +3,7 @@ build
 coverage
 
 # Ignore all HTML files:
-**/*.html
+
 
 # node module
 node_modules

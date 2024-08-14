@@ -27,5 +27,5 @@ export const SalaryCardBox = styled(CardBox)`
 
 export const Orangetxt = styled.span`
   color: var(--color-pri);
-  font-weight: 800;
+  font-weight: var(--font-weight-extra-bold);
 `;

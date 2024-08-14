@@ -26,4 +26,9 @@ dist-ssr
 .env
 premissions.json
 stats.html
+
+
+.tmp
+
 *storybook.log
+
