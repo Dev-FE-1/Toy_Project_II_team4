@@ -4,6 +4,13 @@
 
 ![사조엔터](https://github.com/user-attachments/assets/7820e264-8a5a-4cac-a0f6-e5740ef70f62)
 
+
+
+
+## 배포 사이트 링크
+
+https://toy-project2-team4-fastcom4.web.app
+
 ## 팀 구성
 
 | name   | username                                         |
@@ -26,6 +33,10 @@
   - [프로젝트 관련 이동 링크](#프로젝트-관련-이동-링크)
 </div>
 </details>
+
+
+
+
 
 ## 📌 프로젝트 소개
 
