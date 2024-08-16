@@ -71,7 +71,8 @@ export default function LoginPage() {
           <Btn
             label={`${loading ? '로그인 중입니다..,' : '로그인'}`}
             type="submit"
-            className={isLoginButtonDisabled}
+            className={`${isLoginButtonDisabled}
+            login__button`}
           ></Btn>
         </form>
       </Styled.LoginPageContainer>
