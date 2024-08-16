@@ -43,7 +43,7 @@ export const LoginPageContainer = styled.div`
       height: 86px;
     }
 
-    & button.css-8fb7o1-JoyButton-root {
+    & .login__button {
       width: 100%;
       height: 50px;
       font-size: 16px;

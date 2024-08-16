@@ -51,7 +51,6 @@ export const filterDaySchedules = ({
 export default function Day({ day }: DayProps) {
   const dispatch = useDispatch<AppDispatch>();
   const { schedules } = useSelector((state: RootState) => state.schedules);
-
   useEffect(() => {
     void dispatch(fetchSchedules());
   }, [dispatch]);
@@ -64,7 +63,7 @@ export default function Day({ day }: DayProps) {
     <DayWrapper>
       <DayText>오늘 일정 {formattedDayOfWeek}</DayText>
       <ScheduleWrapper>
-        {<ScheduleBox>{message}</ScheduleBox>}
+        {message && <ScheduleBox>{message}</ScheduleBox>}
         {daySchedules.map((schedule) => (
           <ScheduleBox
             key={schedule.dateId}
