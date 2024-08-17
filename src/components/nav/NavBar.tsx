@@ -1,57 +1,55 @@
-import NavButton from './NavButton';
-import * as Styled from './NavBar.style';
-import { useNavBar } from '../../hooks/useNavbar';
 import HomeIcon from '@mui/icons-material/Home';
-import EditNoteIcon from '@mui/icons-material/EditNote';
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EditCalendarIcon from '@mui/icons-material/EditCalendar';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import PaymentsIcon from '@mui/icons-material/Payments';
+import PaidIcon from '@mui/icons-material/Paid';
+
+import BorderColorIcon from '@mui/icons-material/BorderColor';
+import * as Styled from './NavBar.style';
+import { NavLink } from 'react-router-dom';
+
 import { ROUTE_PATHS } from '../../router/paths';
 
 export const navbarItems = [
   {
     name: '홈',
-    icon: <HomeIcon />,
+    icon: <HomeIcon className="home-icon" />,
     link: ROUTE_PATHS.HOME,
   },
   {
     name: '급여정산',
-    icon: <PaymentsIcon />,
+    icon: <PaidIcon className="payments-icon" />,
     link: ROUTE_PATHS.PAYMENTS,
   },
   {
     name: '정정신청',
-    icon: <EditNoteIcon />,
+    icon: <BorderColorIcon className="edit-icon" />,
     link: ROUTE_PATHS.ADJUST_SALARY,
   },
   {
     name: '캘린더',
-    icon: <CalendarMonthIcon />,
+    icon: <EditCalendarIcon className="calendar-icon" />,
     link: ROUTE_PATHS.CALENDAR,
   },
   {
     name: '마이페이지',
-    icon: <AccountCircleIcon />,
+    icon: <AccountCircleIcon className="mypage-icon" />,
     link: ROUTE_PATHS.MY_PAGE,
   },
 ];
 
 export default function NavBar() {
-  const { selected } = useNavBar();
-
   return (
-    <Styled.NavBarWrapper>
-      <Styled.MyToolbar>
-        {navbarItems.map((navItem) => (
-          <NavButton
-            selected={selected}
-            key={navItem.name}
-            name={navItem.name}
-            Icon={navItem.icon}
-            link={navItem.link}
-          />
+    <Styled.NavBarContainer>
+      <ul className="navbar-ul-items">
+        {navbarItems.map(({ name, icon, link }) => (
+          <li className="navbar-li-item" key={name}>
+            <NavLink to={`${link}`} className={({ isActive }) => (isActive ? 'active' : undefined)}>
+              <div className="icon-box">{icon}</div>
+              <div className="text-box">{name}</div>
+            </NavLink>
+          </li>
         ))}
-      </Styled.MyToolbar>
-    </Styled.NavBarWrapper>
+      </ul>
+    </Styled.NavBarContainer>
   );
 }
