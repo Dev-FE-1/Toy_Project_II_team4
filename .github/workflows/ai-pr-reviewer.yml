@@ -28,6 +28,6 @@ jobs:
           debug: false
           review_simple_changes: false
           review_comment_lgtm: false
-          openai_light_model: gpt-3.5-turbo
-          openai_heavy_model: gpt-3.5-turbo
+          openai_light_model: gpt-4o-mini-2024-07-18
+          openai_heavy_model: gpt-4o-2024-08-06
           language: ko-KR
