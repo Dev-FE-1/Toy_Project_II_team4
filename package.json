@@ -10,7 +10,8 @@
     "preview": "vite preview",
     "lint:prettier": "prettier . --write --ignore-unknown",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "11.13.0",
